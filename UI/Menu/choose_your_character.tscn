@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2kbbnnkftmhj"]
+
+[ext_resource type="Script" uid="uid://yky82da5afym" path="res://UI/Menu/grid_container.gd" id="1_1lx55"]
+[ext_resource type="PackedScene" uid="uid://cc6qfhox5y31x" path="res://UI/Menu/card_2.tscn" id="2_1lx55"]
+
+[node name="ChooseYourCharacter" type="Control"]
+layout_mode = 3
+anchor_right = 1.674
+anchor_bottom = 1.687
+offset_left = -2.0
+offset_top = -1.0
+offset_right = -772.448
+offset_bottom = -452.176
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(500, 700)
+layout_direction = 1
+layout_mode = 1
+offset_left = 130.0
+offset_top = 57.0
+offset_right = 2121.0
+offset_bottom = 1555.0
+scale = Vector2(0.45, 0.45)
+theme_override_constants/h_separation = 539
+theme_override_constants/v_separation = 710
+columns = 4
+script = ExtResource("1_1lx55")
+
+[node name="Control" parent="GridContainer" instance=ExtResource("2_1lx55")]
+layout_mode = 2
+
+[node name="Control2" parent="GridContainer" instance=ExtResource("2_1lx55")]
+layout_mode = 2
+
+[node name="Control3" parent="GridContainer" instance=ExtResource("2_1lx55")]
+layout_mode = 2
+
+[node name="Control4" parent="GridContainer" instance=ExtResource("2_1lx55")]
+layout_mode = 2
+
+[node name="Control5" parent="GridContainer" instance=ExtResource("2_1lx55")]
+layout_mode = 2
+
+[node name="Control6" parent="GridContainer" instance=ExtResource("2_1lx55")]
+layout_mode = 2
+
+[node name="Control7" parent="GridContainer" instance=ExtResource("2_1lx55")]
+layout_mode = 2
+
+[node name="Control8" parent="GridContainer" instance=ExtResource("2_1lx55")]
+layout_mode = 2
