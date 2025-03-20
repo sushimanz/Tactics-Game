@@ -1,29 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://ycif7ms3qqiw"]
+[gd_scene load_steps=4 format=3 uid="uid://ycif7ms3qqiw"]
 
 [ext_resource type="Script" uid="uid://c5nhdajprlxyu" path="res://Game/Unit.gd" id="1_jf83v"]
+[ext_resource type="Texture2D" uid="uid://c84pt2pdd540m" path="res://Assets/KNIGHT_ICON.png" id="2_u1nqo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pl1pi"]
-radius = 7.0
+radius = 99.0202
 
-[sub_resource type="Gradient" id="Gradient_c58w5"]
-offsets = PackedFloat32Array(0.497268, 0.620219)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ypl2c"]
-gradient = SubResource("Gradient_c58w5")
-width = 16
-height = 16
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[node name="Unit" type="CharacterBody2D"]
-input_pickable = true
+[node name="Unit" type="Node2D"]
 script = ExtResource("1_jf83v")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
 shape = SubResource("CircleShape2D_pl1pi")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Collision"]
 modulate = Color(0, 1, 0, 1)
 texture_filter = 1
-texture = SubResource("GradientTexture2D_ypl2c")
+texture = ExtResource("2_u1nqo")
+
+[node name="Path" type="Line2D" parent="."]

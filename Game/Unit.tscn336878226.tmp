@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ycif7ms3qqiw"]
+
+[ext_resource type="Script" uid="uid://c5nhdajprlxyu" path="res://Game/Unit.gd" id="1_jf83v"]
+[ext_resource type="Texture2D" uid="uid://rrtp1jg6lylg" path="res://Assets/sr2990edc3778aws3_2_2.png" id="2_u1nqo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pl1pi"]
+radius = 18.0278
+
+[node name="Unit" type="CharacterBody2D"]
+input_pickable = true
+script = ExtResource("1_jf83v")
+Speed = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pl1pi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+texture_filter = 1
+texture = ExtResource("2_u1nqo")

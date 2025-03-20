@@ -1,6 +1,5 @@
 extends TileMapLayer
 
-class_name A_Star_2D
 
 var A_Star := AStarGrid2D.new()
 var Rect:Rect2 = Rect2i()
@@ -15,7 +14,7 @@ func _ready() -> void:
 	A_Star.cell_size = Tile_Size
 	A_Star.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	A_Star.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-	A_Star.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
+	A_Star.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	A_Star.update()
 	pass # Replace with function body.
 
