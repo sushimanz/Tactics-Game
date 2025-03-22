@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d4kmo72krbika"]
+[gd_scene load_steps=4 format=3 uid="uid://d4kmo72krbika"]
 
 [ext_resource type="Script" uid="uid://bbjmfs34j5om3" path="res://UI/Menu/main_menu.gd" id="1_06t4h"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
-bg_color = Color(1, 1, 1, 1)
+[ext_resource type="Texture2D" uid="uid://bvcd8mrho0fof" path="res://UI/Menu/button.png" id="2_7vrkn"]
+[ext_resource type="FontFile" uid="uid://ct23a3jot53y2" path="res://UI/Menu/JetBrainsMono-VariableFont_wght.ttf" id="3_fu7sn"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -14,118 +13,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_06t4h")
 
-[node name="StartButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -50.0
-offset_right = 100.0
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
-text = "Start Game"
-
-[node name="HostButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -511.0
-offset_top = -283.0
-offset_right = -311.0
-offset_bottom = -183.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
-text = "Host"
-
-[node name="CopyButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -513.0
-offset_top = -172.0
-offset_right = -313.0
-offset_bottom = -72.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
-text = "Copy OID
-"
-
-[node name="JoinButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 256.0
-offset_top = -301.0
-offset_right = 456.0
-offset_bottom = -201.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
-text = "Join
-"
-
-[node name="LineEdit" type="LineEdit" parent="JoinButton"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 110.0
-offset_right = 198.0
-offset_bottom = 152.0
-placeholder_text = "OID"
-
-[node name="SettingsButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -219.0
-offset_top = -237.0
-offset_right = -19.0
-offset_bottom = -137.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
-text = "Settings"
-
-[node name="ExitButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 19.0
-offset_top = -237.0
-offset_right = 219.0
-offset_bottom = -137.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
-text = "Exit"
-
 [node name="OIDText" type="Label" parent="."]
 layout_mode = 0
 offset_left = 306.0
@@ -133,9 +20,188 @@ offset_top = 100.0
 offset_right = 557.0
 offset_bottom = 135.0
 
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="CopyButton" to="." method="_on_copy_button_pressed"]
-[connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 877.0
+offset_top = 140.0
+offset_right = 1127.0
+offset_bottom = 180.0
+pivot_offset = Vector2(125, 20)
+placeholder_text = "OID"
+
+[node name="Buttons" type="Node" parent="."]
+
+[node name="CopyButton" type="TextureButton" parent="Buttons"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -551.0
+offset_top = -174.0
+offset_right = -251.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 50)
+texture_normal = ExtResource("2_7vrkn")
+
+[node name="CopyLabel" type="Label" parent="Buttons/CopyButton"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 275.0
+offset_bottom = 90.0
+pivot_offset = Vector2(125, 37)
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 40
+text = "Copy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="TextureButton" parent="Buttons"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -551.0
+offset_top = 76.0
+offset_right = -251.0
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 50)
+texture_normal = ExtResource("2_7vrkn")
+
+[node name="StartLabel" type="Label" parent="Buttons/StartButton"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 275.0
+offset_bottom = 90.0
+pivot_offset = Vector2(125, 37)
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 40
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HostButton" type="TextureButton" parent="Buttons"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -551.0
+offset_top = -294.0
+offset_right = -251.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 50)
+texture_normal = ExtResource("2_7vrkn")
+
+[node name="HostLabel" type="Label" parent="Buttons/HostButton"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 275.0
+offset_bottom = 90.0
+pivot_offset = Vector2(125, 37)
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 40
+text = "Host Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JoinButton" type="TextureButton" parent="Buttons"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 274.0
+offset_top = -309.0
+offset_right = 574.0
+offset_bottom = -209.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 50)
+texture_normal = ExtResource("2_7vrkn")
+
+[node name="JoinLabel" type="Label" parent="Buttons/JoinButton"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 275.0
+offset_bottom = 90.0
+pivot_offset = Vector2(125, 37)
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 40
+text = "Join Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsButton" type="TextureButton" parent="Buttons"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -551.0
+offset_top = -123.0
+offset_right = -251.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(150, 50)
+texture_normal = ExtResource("2_7vrkn")
+
+[node name="SettingsLabel" type="Label" parent="Buttons/SettingsButton"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 275.0
+offset_bottom = 90.0
+pivot_offset = Vector2(125, 37)
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="Buttons"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 274.0
+offset_top = -118.0
+offset_right = 574.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(150, 50)
+texture_normal = ExtResource("2_7vrkn")
+
+[node name="ExitLabel" type="Label" parent="Buttons/ExitButton"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 275.0
+offset_bottom = 90.0
+pivot_offset = Vector2(125, 37)
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 40
+text = "Exit Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Buttons/CopyButton" to="." method="_on_copy_button_pressed"]
+[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Buttons/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="Buttons/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_exit_button_pressed"]
