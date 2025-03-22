@@ -1,10 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://ycif7ms3qqiw"]
+[gd_scene load_steps=7 format=3 uid="uid://ycif7ms3qqiw"]
 
 [ext_resource type="Script" uid="uid://c5nhdajprlxyu" path="res://Game/Unit.gd" id="1_jf83v"]
+[ext_resource type="Shader" uid="uid://dabqirjru0uja" path="res://Game/skew.gdshader" id="2_0cvqy"]
 [ext_resource type="Texture2D" uid="uid://c84pt2pdd540m" path="res://Assets/KNIGHT_ICON.png" id="2_u1nqo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pl1pi"]
 radius = 99.0202
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gq3cw"]
+shader = ExtResource("2_0cvqy")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0cvqy"]
+properties/0/path = NodePath("Sprite2D:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Unit" type="Node2D"]
 script = ExtResource("1_jf83v")
@@ -14,9 +28,12 @@ script = ExtResource("1_jf83v")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
 shape = SubResource("CircleShape2D_pl1pi")
 
-[node name="Sprite2D" type="Sprite2D" parent="Collision"]
-modulate = Color(0, 1, 0, 1)
+[node name="Path" type="Line2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_gq3cw")
 texture = ExtResource("2_u1nqo")
 
-[node name="Path" type="Line2D" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0cvqy")

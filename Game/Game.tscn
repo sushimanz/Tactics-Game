@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=4 uid="uid://bcrxnk7kywhco"]
 
+[ext_resource type="Script" uid="uid://deaphabq1i41e" path="res://Game/game.gd" id="1_37esa"]
 [ext_resource type="Texture2D" uid="uid://l5tfrutfudm2" path="res://Assets/grid.png" id="1_iv3md"]
 [ext_resource type="Script" uid="uid://b4x5la0k7csjl" path="res://Game/A_Star_2D.gd" id="2_u44n3"]
-[ext_resource type="PackedScene" uid="uid://ycif7ms3qqiw" path="res://Game/Unit.tscn" id="2_xkndl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iv3md"]
 texture = ExtResource("1_iv3md")
@@ -14,6 +14,7 @@ tile_size = Vector2i(250, 250)
 sources/2 = SubResource("TileSetAtlasSource_iv3md")
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_37esa")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -26,7 +27,6 @@ script = ExtResource("2_u44n3")
 position = Vector2(1589, 916)
 zoom = Vector2(0.3, 0.3)
 
-[node name="Unit" parent="." node_paths=PackedStringArray("tileMap") instance=ExtResource("2_xkndl")]
-position = Vector2(130, 114)
-tileMap = NodePath("../TileMapLayer")
-Speed = 100.0
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://ycif7ms3qqiw")
+spawn_path = NodePath("../TileMapLayer")
