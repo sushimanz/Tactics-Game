@@ -8,6 +8,7 @@
 radius = 99.0202
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gq3cw"]
+resource_local_to_scene = true
 shader = ExtResource("2_0cvqy")
 shader_parameter/fov = 90.0
 shader_parameter/cull_back = true
