@@ -12,6 +12,7 @@ var Selected:bool
 var Mouse_On_Top:bool
 var grabbed: bool = false
 var movePath: Array = [Vector2.ZERO]
+@export var movePathBounds: Vector2 = Vector2(13, 7)
 var tarLoc: Vector2
 var skewV: Vector2 = Vector2.ZERO
 var playerID: int = 0
@@ -36,13 +37,9 @@ func _ready() -> void:
 
 func Mouse_In(State:bool) -> void:
 	
-	
 	Mouse_On_Top = State
 	#print(Mouse_On_Top)
 	pass
-
-
-
 
 func _process(delta: float) -> void:
 	#print(is_multiplayer_authority())
@@ -55,29 +52,36 @@ func _process(delta: float) -> void:
 			
 			#print(tileMap.get_cell_tile_data(tileMap.local_to_map(global_position)))
 			#print(tileMap.local_to_map(global_position))
-			if movePath.is_empty():
-				dist_moved = 0
-			if !movePath.has(currCoord) and (movePath.is_empty() or movePath[movePath.size()-1].distance_to(currCoord) == 1):
-				if dist_moved < max_dist:
-					if !movePath.is_empty():
-						dist_moved += 1
-					path.add_point(tileCenter)
-					movePath.append(currCoord)
-					print(movePath)
+			
+			#Keep the pathing within the map bounds
+			if (currCoord.x >= 0 and currCoord.y >= 0) and (currCoord.x < movePathBounds.x and currCoord.y < movePathBounds.y):
+				#Initialize distance moved from start position
+				if movePath.is_empty():
+					dist_moved = 0
+				
+				#Update the pathing
+				if !movePath.has(currCoord) and (movePath.is_empty() or movePath[movePath.size()-1].distance_to(currCoord) == 1):
+					if dist_moved < max_dist:
+						if !movePath.is_empty():
+							dist_moved += 1
+						path.add_point(tileCenter)
+						movePath.append(currCoord)
+						print(movePath)
+						print("Path Distance: ",dist_moved)
+					else:
+						#print("Over Troop Range Logic!")
+						pass
+				
+				#Remove pathing if backtracking
+				if movePath.size() >= 2 and currCoord == movePath[movePath.size()-2]:
+					path.remove_point(movePath.size()-1)
+					movePath.remove_at(movePath.size()-1)
+					dist_moved -= 1
 					print("Path Distance: ",dist_moved)
-				else:
-					#print("Over Troop Range!")
-					pass
-				
-			if movePath.size() >= 2 and currCoord == movePath[movePath.size()-2]:
-				path.remove_point(movePath.size()-1)
-				movePath.remove_at(movePath.size()-1)
-				dist_moved -= 1
-				print("Path Distance: ",dist_moved)
-			if movePath.has(currCoord) and currCoord == movePath[0]:
-				dist_moved = 0
-				
-			skewV = lerp(skewV, Input.get_last_mouse_velocity()/25, 0.1).clamp(Vector2.ONE * -25, Vector2.ONE * 25)
+					
+				skewV = lerp(skewV, Input.get_last_mouse_velocity()/25, 0.1).clamp(Vector2.ONE * -25, Vector2.ONE * 25)
+		
+		#Set skewV to 0 if not grabbed to avoid visual issues
 		else:
 			skewV = Vector2.ZERO
 		sprite.global_position = sprite.global_position.lerp(coll.global_position, 0.1)
