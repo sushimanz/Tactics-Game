@@ -19,7 +19,7 @@ var playerID: int = 0
 var dist_moved: int = 0
 
 #Need to update max_dist for each troop type's range
-var max_dist: int = 5
+@export var max_dist: int = 12
 
 func _ready() -> void:
 	if Multiplayer.is_host:
