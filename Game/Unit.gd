@@ -15,6 +15,10 @@ var movePath: Array = [Vector2.ZERO]
 var tarLoc: Vector2
 var skewV: Vector2 = Vector2.ZERO
 var playerID: int = 0
+var dist_moved: int = 0
+
+#Need to update max_dist for each troop type's range
+var max_dist: int = 5
 
 func _ready() -> void:
 	if Multiplayer.is_host:
@@ -51,14 +55,31 @@ func _process(delta: float) -> void:
 			
 			#print(tileMap.get_cell_tile_data(tileMap.local_to_map(global_position)))
 			#print(tileMap.local_to_map(global_position))
+			if movePath.is_empty():
+				dist_moved = 0
 			if !movePath.has(currCoord) and (movePath.is_empty() or movePath[movePath.size()-1].distance_to(currCoord) == 1):
-				path.add_point(tileCenter)
-				movePath.append(currCoord)
-				print(movePath)
+				if dist_moved < max_dist:
+					if !movePath.is_empty():
+						dist_moved += 1
+					path.add_point(tileCenter)
+					movePath.append(currCoord)
+					print(movePath)
+					print("Path Distance: ",dist_moved)
+				else:
+					#print("Over Troop Range!")
+					pass
+				
 			if movePath.size() >= 2 and currCoord == movePath[movePath.size()-2]:
 				path.remove_point(movePath.size()-1)
 				movePath.remove_at(movePath.size()-1)
+				dist_moved -= 1
+				print("Path Distance: ",dist_moved)
+			if movePath.has(currCoord) and currCoord == movePath[0]:
+				dist_moved = 0
+				
 			skewV = lerp(skewV, Input.get_last_mouse_velocity()/25, 0.1).clamp(Vector2.ONE * -25, Vector2.ONE * 25)
+		else:
+			skewV = Vector2.ZERO
 		sprite.global_position = sprite.global_position.lerp(coll.global_position, 0.1)
 	sprite.material.set_shader_parameter('y_rot', skewV.x)
 	sprite.material.set_shader_parameter('x_rot', -skewV.y)

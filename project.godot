@@ -21,6 +21,10 @@ Noray="*res://addons/netfox.noray/noray.gd"
 PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
 Multiplayer="*res://Game/multiplayer.gd"
 
+[dotnet]
+
+project/assembly_name="Tactics Game"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/netfox.internals/plugin.cfg", "res://addons/netfox.noray/plugin.cfg")
