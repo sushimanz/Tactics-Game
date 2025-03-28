@@ -18,8 +18,14 @@ var skewV: Vector2 = Vector2.ZERO
 var playerID: int = 0
 var dist_moved: int = 0
 
-#Need to update max_dist for each troop type's range
-@export var max_dist: int = 12
+#Troop values
+var troop_inst
+@export var in_troop_type: String = "troopname"
+@export var health: int = 100
+@export var max_moves: int = 12
+@export var dmg: int = 50
+@export var atk_range: int = 10
+@export var max_troops_hit: int = 5
 
 func _ready() -> void:
 	if Multiplayer.is_host:
@@ -34,6 +40,58 @@ func _ready() -> void:
 	
 	coll.mouse_entered.connect(Mouse_In.bind(true))
 	coll.mouse_exited.connect(Mouse_In.bind(false))
+	
+	set_troop_type(in_troop_type)
+	init_troop_values(troop_inst)
+
+func init_troop_values(troop) -> void:
+	if troop_inst:
+		if troop is Troop:
+			health = troop.health
+			max_moves = troop.max_moves
+			dmg = troop.dmg
+			atk_range = troop.atk_range
+			max_troops_hit = troop.max_troops_hit
+		else:
+			print("Troop initialization failed! Input: ", troop)
+			pass
+
+#Maybe implement into a dropdown selector for troop types in the future?
+func set_troop_type(troop: String) -> void:
+	match troop:
+		"archer":
+			troop_inst = load("res://Troops/archer.gd").new()
+		"baiter":
+			troop_inst = load("res://Troops/baiter.gd").new()
+		"cannon_wheels":
+			troop_inst = load("res://Troops/cannon_wheels.gd").new()
+		"demoman":
+			troop_inst = load("res://Troops/demoman.gd").new()
+		"engineer":
+			troop_inst = load("res://Troops/engineer.gd").new()
+		"heavy":
+			troop_inst = load("res://Troops/heavy.gd").new()
+		"knight":
+			troop_inst = load("res://Troops/knight.gd").new()
+		"medic":
+			troop_inst = load("res://Troops/medic.gd").new()
+		"pyro":
+			troop_inst = load("res://Troops/pyro.gd").new()
+		"scout":
+			troop_inst = load("res://Troops/scout.gd").new()
+		"sniper":
+			troop_inst = load("res://Troops/sniper.gd").new()
+		"soldier":
+			troop_inst = load("res://Troops/soldier.gd").new()
+		"spy":
+			troop_inst = load("res://Troops/spy.gd").new()
+		"tv_head":
+			troop_inst = load("res://Troops/tv_head.gd").new()
+		
+		#Set default to null (test values) if no match found
+		_:
+			troop_inst = null
+			print("No troop match found! Input: ", troop)
 
 func Mouse_In(State:bool) -> void:
 	
@@ -61,7 +119,7 @@ func _process(delta: float) -> void:
 				
 				#Update the pathing
 				if !movePath.has(currCoord) and (movePath.is_empty() or movePath[movePath.size()-1].distance_to(currCoord) == 1):
-					if dist_moved < max_dist:
+					if dist_moved < max_moves:
 						if !movePath.is_empty():
 							dist_moved += 1
 						path.add_point(tileCenter)
@@ -69,6 +127,7 @@ func _process(delta: float) -> void:
 						print(movePath)
 						print("Path Distance: ",dist_moved)
 					else:
+						#Maybe add some visual to know the troop is over the path range
 						#print("Over Troop Range Logic!")
 						pass
 				

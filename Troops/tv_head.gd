@@ -1,21 +1,19 @@
 extends Troop
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _init():
 	health = 125
-	moves = 2
+	max_moves = 2
 	dmg = 14
-	range = 5
+	atk_range = 5
 	max_troops_hit = 9
-	
-	pass # Replace with function body.
-	
+
 func stun():
 	pass
-	
+
 func recharge():
 	pass
-	
+
 func sudoku():
 	pass
 
