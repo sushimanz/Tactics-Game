@@ -3,16 +3,16 @@ extends TileMapLayer
 var tokens: Array = []
 var tick: int = 0
 @onready var tTimer = $"../TickTimer"
-@onready var readyInd = $"../UI/readyInd"
+@onready var p1ReadyInd = $"../UI/p1ReadyInd"
 
 
-@export var pReady: bool = false
+@export var p1Ready: bool = false
 	#set(val):
-		#P1Ready = val
+		#p1Ready = val
 		#readyCheck()
-@export var P2Ready: bool = false
+@export var p2Ready: bool = false
 	#set(val):
-		#P2Ready = val
+		#p2Ready = val
 		#readyCheck()
 
 #Troop Type Dropdown and Selector Logic
@@ -38,7 +38,7 @@ func startRound() -> void:
 @rpc("any_peer","call_remote","reliable")
 func readyCheck(remoteReady) -> void:
 	#print(multiplayer.get_unique_id())
-	if remoteReady and pReady:
+	if remoteReady and p1Ready:
 		print("Both players ready, Starting round")
 		startRound.rpc()
 		
@@ -60,12 +60,17 @@ func _on_troop_dropdown_type_selected(index: int) -> void:
 	for token in tokens:
 		token.set_troop_values(troopType)
 	
-	##Destroy dropdown and free the selector script when it works for multiple troops
+	##Destroy dropdown and free the selector script when it works for multiple troops, since it should only occur at the game start
 	#troopTypeDropdown.queue_free()
 	#troopTypeSelector = null
 
 
 func _on_button_pressed() -> void:
-	pReady = true
-	readyInd.visible = pReady
+	if !p1Ready:
+		p1Ready = true
+		p1ReadyInd.color = Color(0.0,1.0,0.0,1.0)
+	else:
+		p1Ready = false
+		p1ReadyInd.color = Color(1.0,0.0,0.0,1.0)
+	
 	readyCheck.rpc(ready)

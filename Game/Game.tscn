@@ -44,22 +44,51 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Button" type="Button" parent="UI"]
-layout_mode = 0
-offset_left = 1120.0
-offset_top = 1820.0
-offset_right = 2060.0
-offset_bottom = 1948.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1150.0
+offset_top = 1780.0
+offset_right = 2090.0
+offset_bottom = 1908.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = SubResource("Theme_iv3md")
 action_mode = 0
 text = "Start Round"
 
-[node name="readyInd" type="ColorRect" parent="UI"]
-visible = false
-offset_left = 1032.0
-offset_top = 1869.0
-offset_right = 1072.0
-offset_bottom = 1909.0
-color = Color(0.458824, 1, 0, 1)
+[node name="p1ReadyInd" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1080.0
+offset_top = 1830.0
+offset_right = 1120.0
+offset_bottom = 1870.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
+
+[node name="p2ReadyInd" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2130.0
+offset_top = 1830.0
+offset_right = 2170.0
+offset_bottom = 1870.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 1)
 
 [node name="TickTimer" type="Timer" parent="."]
 wait_time = 0.3
