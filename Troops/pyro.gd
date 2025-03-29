@@ -7,6 +7,7 @@ func _init():
 	dmg = 16
 	atk_range = 4
 	max_troops_hit = 1
+	icon = preload("res://Assets/PYRO_ICON.png")
 
 func set_on_fire():
 	pass

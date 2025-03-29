@@ -7,6 +7,7 @@ func _init():
 	dmg = 16
 	atk_range = 5
 	max_troops_hit = 2
+	icon = preload("res://Assets/CANNON_ICON.png")
 
 func build():
 	pass

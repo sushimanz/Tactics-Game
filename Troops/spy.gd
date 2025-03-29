@@ -7,6 +7,7 @@ func _init():
 	dmg = 8
 	atk_range = 6
 	max_troops_hit = 1
+	icon = preload("res://Assets/SPY_ICON.png")
 
 func invis():
 	pass

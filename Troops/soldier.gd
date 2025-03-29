@@ -7,6 +7,7 @@ func _init():
 	dmg = 18
 	atk_range = 6
 	max_troops_hit = 4
+	icon = preload("res://Assets/SOLDIER_ICON.png")
 
 func reload():
 	pass

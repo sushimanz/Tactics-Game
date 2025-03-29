@@ -7,13 +7,13 @@ func _init():
 	dmg = 13
 	atk_range = 6
 	max_troops_hit = 2
+	icon = preload("res://Assets/ARCHER_ICON.png")
 
 func knockback():
 	pass
 
 func headshot():
-	var dmg_multi = dmg
-	dmg_multi += 17
+	dmg = 30
 
 func _process(delta: float) -> void:
 	pass

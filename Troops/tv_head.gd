@@ -7,6 +7,7 @@ func _init():
 	dmg = 14
 	atk_range = 5
 	max_troops_hit = 9
+	icon = preload("res://Assets/TVHEAD_ICON.png")
 
 func stun():
 	pass

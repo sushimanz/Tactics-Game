@@ -7,6 +7,7 @@ func _init():
 	dmg = 11
 	atk_range = 6
 	max_troops_hit = 1
+	icon = preload("res://Assets/BAITER_ICON.png")
 
 func anchor_pull():
 	pass

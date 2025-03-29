@@ -7,6 +7,7 @@ func _init():
 	dmg = 18
 	atk_range = 3
 	max_troops_hit = 3
+	icon = preload("res://Assets/SCOUT_ICON.png")
 
 func tile_checker():
 	var dmg_drop_off = dmg

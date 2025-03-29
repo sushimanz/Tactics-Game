@@ -7,6 +7,7 @@ func _init():
 	dmg = 26
 	atk_range = 5
 	max_troops_hit = 1
+	icon = preload("res://Assets/HEAVY_ICON.png")
 
 func dmg_drop_off ():
 	pass

@@ -20,10 +20,10 @@ func _host_join() -> void:
 	$MultiplayerSpawner.spawn(multiplayer.get_unique_id())
 
 func add_player(pid):
-	var uni = Unit.instantiate()
-	uni.name = str(pid)
-	$TileMapLayer.add_child(uni)
+	var unit = Unit.instantiate()
+	unit.name = str(pid)
+	$TileMapLayer.add_child(unit)
 	#uni.global_position = $TileMapLayer.get_child(units.size()).global_position
-	units.append(uni)
+	units.append(unit)
 	
-	return uni
+	return unit

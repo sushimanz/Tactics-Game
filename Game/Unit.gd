@@ -18,14 +18,19 @@ var skewV: Vector2 = Vector2.ZERO
 var playerID: int = 0
 var dist_moved: int = 0
 
+#
+enum GAMESTATE {INIT, START, PLAN, ACTIVE, END}
+var game_state: GAMESTATE = GAMESTATE.INIT
+var turnStartCoord: Vector2 = Vector2.ZERO
+
 #Troop values
-var troop_inst
 @export var in_troop_type: String = "troopname"
 @export var health: int = 100
 @export var max_moves: int = 12
 @export var dmg: int = 50
 @export var atk_range: int = 10
 @export var max_troops_hit: int = 5
+@export var icon: CompressedTexture2D = preload("res://Assets/KNIGHT_ICON.png")
 
 func _ready() -> void:
 	if Multiplayer.is_host:
@@ -41,57 +46,32 @@ func _ready() -> void:
 	coll.mouse_entered.connect(Mouse_In.bind(true))
 	coll.mouse_exited.connect(Mouse_In.bind(false))
 	
-	set_troop_type(in_troop_type)
-	init_troop_values(troop_inst)
+	var startCoord = tileMap.local_to_map(coll.global_position)
 
-func init_troop_values(troop) -> void:
-	if troop_inst:
+func set_troop_values(troop: Troop) -> void:
+	#print("Troop initialization started!")
+	if troop:
 		if troop is Troop:
 			health = troop.health
 			max_moves = troop.max_moves
 			dmg = troop.dmg
 			atk_range = troop.atk_range
 			max_troops_hit = troop.max_troops_hit
-		else:
-			print("Troop initialization failed! Input: ", troop)
-			pass
-
-#Maybe implement into a dropdown selector for troop types in the future?
-func set_troop_type(troop: String) -> void:
-	match troop:
-		"archer":
-			troop_inst = load("res://Troops/archer.gd").new()
-		"baiter":
-			troop_inst = load("res://Troops/baiter.gd").new()
-		"cannon_wheels":
-			troop_inst = load("res://Troops/cannon_wheels.gd").new()
-		"demoman":
-			troop_inst = load("res://Troops/demoman.gd").new()
-		"engineer":
-			troop_inst = load("res://Troops/engineer.gd").new()
-		"heavy":
-			troop_inst = load("res://Troops/heavy.gd").new()
-		"knight":
-			troop_inst = load("res://Troops/knight.gd").new()
-		"medic":
-			troop_inst = load("res://Troops/medic.gd").new()
-		"pyro":
-			troop_inst = load("res://Troops/pyro.gd").new()
-		"scout":
-			troop_inst = load("res://Troops/scout.gd").new()
-		"sniper":
-			troop_inst = load("res://Troops/sniper.gd").new()
-		"soldier":
-			troop_inst = load("res://Troops/soldier.gd").new()
-		"spy":
-			troop_inst = load("res://Troops/spy.gd").new()
-		"tv_head":
-			troop_inst = load("res://Troops/tv_head.gd").new()
+			icon = troop.icon
+			sprite.texture = icon
 		
-		#Set default to null (test values) if no match found
-		_:
-			troop_inst = null
-			print("No troop match found! Input: ", troop)
+	else:
+		#Currently put in crazy values, get rid of this testing feature if there seem to be no to little bugs
+		health = 999
+		max_moves = 999
+		dmg = 100
+		atk_range = 99
+		max_troops_hit = 99
+		print("Troop initialization failed! Input: ", troop)
+	
+	#Reset path on troop initialization
+	path.clear_points()
+	movePath.clear()
 
 func Mouse_In(State:bool) -> void:
 	
@@ -99,8 +79,56 @@ func Mouse_In(State:bool) -> void:
 	#print(Mouse_On_Top)
 	pass
 
+#Do when a turn just started, mostly just to update troop starting location
+func _on_turn_started():
+	turnStartCoord = tileMap.local_to_map(coll.global_position)
+
+func _planning_phase():
+	edit_path()
+
+func _turn_in_progress():
+	#This is where troops move and attack
+	pass
+
+func _on_turn_ended():
+	#Not sure if this is really needed but good to keep in the loop for visual
+	pass
+
 func _process(delta: float) -> void:
-	#print(is_multiplayer_authority())
+	match game_state:
+		#Do ONLY at the start of the game, mostly for the troop selector and deployment at the start
+		GAMESTATE.INIT:
+			game_state = GAMESTATE.START
+		
+		#Do when a turn just started, mostly just to update troop starting location
+		GAMESTATE.START:
+			_on_turn_started()
+			game_state = GAMESTATE.PLAN
+		
+		#Do during the planning phase, there is player interaction here
+		GAMESTATE.PLAN:
+			_planning_phase()
+			
+			#Make an if statement to check the time; if timer runs out, then change gamestate
+			game_state = GAMESTATE.START
+		
+		#Do when a turn is in progress, there is NO player interaction here
+		GAMESTATE.ACTIVE:
+			_turn_in_progress()
+			
+			#Make an if statement to check if all turns have been completed, then change gamestate
+			game_state = GAMESTATE.END
+		
+		GAMESTATE.END:
+			_on_turn_ended()
+			game_state = GAMESTATE.START
+		
+		_:
+			print("No Gamestate, there is an issue here! Resetting game...")
+			game_state = GAMESTATE.INIT
+		
+
+func edit_path():
 	if is_multiplayer_authority():
 		if grabbed and Mouse_On_Top:
 			var currCoord = tileMap.local_to_map(coll.global_position)
@@ -124,7 +152,7 @@ func _process(delta: float) -> void:
 							dist_moved += 1
 						path.add_point(tileCenter)
 						movePath.append(currCoord)
-						print(movePath)
+						#print(movePath)
 						print("Path Distance: ",dist_moved)
 					else:
 						#Maybe add some visual to know the troop is over the path range
@@ -170,8 +198,6 @@ func _input(_event: InputEvent) -> void:
 			movePath.clear()
 			grabbed = true
 			
-			
-			
 			## old AStar code
 			#if Mouse_On_Top:
 				#Selected = true
@@ -186,7 +212,6 @@ func _input(_event: InputEvent) -> void:
 					#).slice(1)
 					#pass
 				#Selected = false
-		
 		
 		if _event.is_action_released("LClick"):
 			grabbed = false
