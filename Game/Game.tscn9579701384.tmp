@@ -53,14 +53,6 @@ theme = SubResource("Theme_iv3md")
 action_mode = 0
 text = "Start Round"
 
-[node name="readyInd" type="ColorRect" parent="UI"]
-visible = false
-offset_left = 1032.0
-offset_top = 1869.0
-offset_right = 1072.0
-offset_bottom = 1909.0
-color = Color(0.458824, 1, 0, 1)
-
 [node name="TickTimer" type="Timer" parent="."]
 wait_time = 0.3
 

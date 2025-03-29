@@ -3,6 +3,8 @@ extends Node2D
 const Unit = preload("res://Game/Unit.tscn")
 var units: Array = []
 @onready var mainTileMap = $TileMapLayer
+enum GAMESTATE {INIT, START, PLAN, ACTIVE, END}
+var P1Status
 
 func _ready() -> void:
 	if Multiplayer.is_host:
@@ -17,6 +19,7 @@ func _host_join() -> void:
 			$MultiplayerSpawner.spawn(pid)
 			mainTileMap.start()
 	)
+	
 	$MultiplayerSpawner.spawn(multiplayer.get_unique_id())
 
 func add_player(pid):

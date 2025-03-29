@@ -11,7 +11,7 @@ var Current_Path:Array[Vector2i]
 var Selected:bool
 var Mouse_On_Top:bool
 var grabbed: bool = false
-var movePath: Array = [Vector2.ZERO]
+@export var movePath: Array = [Vector2.ZERO]
 @export var movePathBounds: Vector2 = Vector2(13, 7)
 var tarLoc: Vector2
 var skewV: Vector2 = Vector2.ZERO
@@ -40,7 +40,7 @@ func _ready() -> void:
 	
 	tileMap = get_parent()
 	global_position += Vector2.ONE * 125
-	set_multiplayer_authority(name.to_int())
+	set_multiplayer_authority(name.to_int(), true)
 	
 	
 	coll.mouse_entered.connect(Mouse_In.bind(true))

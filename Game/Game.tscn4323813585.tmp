@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bcrxnk7kywhco"]
+[gd_scene load_steps=9 format=4 uid="uid://bcrxnk7kywhco"]
 
 [ext_resource type="Script" uid="uid://deaphabq1i41e" path="res://Game/game.gd" id="1_37esa"]
 [ext_resource type="Texture2D" uid="uid://l5tfrutfudm2" path="res://Assets/grid.png" id="1_iv3md"]
@@ -12,6 +12,14 @@ texture_region_size = Vector2i(250, 250)
 [sub_resource type="TileSet" id="TileSet_jxerj"]
 tile_size = Vector2i(250, 250)
 sources/2 = SubResource("TileSetAtlasSource_iv3md")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iv3md"]
+properties/0/path = NodePath("TileMapLayer:P1Ready")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("TileMapLayer:P2Ready")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [sub_resource type="Theme" id="Theme_iv3md"]
 default_font_size = 48
@@ -37,6 +45,9 @@ zoom = Vector2(0.3, 0.3)
 _spawnable_scenes = PackedStringArray("uid://ycif7ms3qqiw")
 spawn_path = NodePath("../TileMapLayer")
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_iv3md")
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -52,14 +63,6 @@ offset_bottom = 1948.0
 theme = SubResource("Theme_iv3md")
 action_mode = 0
 text = "Start Round"
-
-[node name="readyInd" type="ColorRect" parent="UI"]
-visible = false
-offset_left = 1032.0
-offset_top = 1869.0
-offset_right = 1072.0
-offset_bottom = 1909.0
-color = Color(0.458824, 1, 0, 1)
 
 [node name="TickTimer" type="Timer" parent="."]
 wait_time = 0.3

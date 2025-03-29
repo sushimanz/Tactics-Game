@@ -55,6 +55,7 @@ text = "Start Round"
 
 [node name="readyInd" type="ColorRect" parent="UI"]
 visible = false
+layout_mode = 0
 offset_left = 1032.0
 offset_top = 1869.0
 offset_right = 1072.0
