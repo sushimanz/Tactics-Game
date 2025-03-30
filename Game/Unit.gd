@@ -6,6 +6,7 @@ var tileMap : TileMapLayer
 @onready var path: Line2D = $Path
 @onready var coll: Area2D = $Collision
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var syncer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 var Current_Path:Array[Vector2i]
 
 var Selected:bool
@@ -171,7 +172,7 @@ func edit_path():
 		#Set skewV to 0 if not grabbed to avoid visual issues
 		else:
 			skewV = Vector2.ZERO
-		sprite.global_position = sprite.global_position.lerp(coll.global_position, 0.1)
+	sprite.global_position = sprite.global_position.lerp(coll.global_position, 0.1)
 	sprite.material.set_shader_parameter('y_rot', skewV.x)
 	sprite.material.set_shader_parameter('x_rot', -skewV.y)
 	
@@ -221,6 +222,7 @@ func _input(_event: InputEvent) -> void:
 				coll.global_position = tileMap.map_to_local(movePath[0])
 
 func tickUpdate(tick) -> bool:
+	syncer.update_visibility()
 	if !movePath.is_empty():
 		if tick >= movePath.size()-1:
 			return false

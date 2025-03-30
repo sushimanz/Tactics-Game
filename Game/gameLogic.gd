@@ -3,17 +3,12 @@ extends TileMapLayer
 var tokens: Array = []
 var tick: int = 0
 @onready var tTimer = $"../TickTimer"
-@onready var p1ReadyInd = $"../UI/p1ReadyInd"
+@onready var readyInd = $"../UI/p1ReadyInd"
+@onready var remoteReadyInd = $"../UI/p2ReadyInd"
 
 
-@export var p1Ready: bool = false
-	#set(val):
-		#p1Ready = val
-		#readyCheck()
-@export var p2Ready: bool = false
-	#set(val):
-		#p2Ready = val
-		#readyCheck()
+var localReady: bool = false
+var remoteReady: bool = false
 
 #Troop Type Dropdown and Selector Logic
 @onready var troopTypeDropdown = $"../TroopTypeSelectDropdown"
@@ -22,25 +17,41 @@ var tick: int = 0
 func _ready() -> void:
 	pass
 
+@rpc("any_peer","call_local","reliable")
 func start() -> void:
 	tokens = get_children()
 
 @rpc("any_peer","call_local", "reliable")
-func startRound() -> void:
+func roundTick() -> void:
 	var check: bool
 	for token in tokens:
 		var test = token.tickUpdate(tick)
-		if !test:
-			if !check:
-				check = test
+		if !check:
+			check = test
 	tick += 1
+	
+	## if all tokens dont have any moves left end the turn
+	if !check:
+		tTimer.stop()
+		tick = 0
+		remoteReadyInd.color = Color(1.0,0.0,0.0,1.0)
+		readyInd.color = Color(1.0,0.0,0.0,1.0)
+		localReady = false
+		remoteReady = false
+		print("round end")
 
 @rpc("any_peer","call_remote","reliable")
-func readyCheck(remoteReady) -> void:
+func readyCheck(inReady) -> void:
 	#print(multiplayer.get_unique_id())
-	if remoteReady and p1Ready:
+	remoteReady = inReady
+	if remoteReady:
+		remoteReadyInd.color = Color(0.0,1.0,0.0,1.0)
+	else:
+		remoteReadyInd.color = Color(1.0,0.0,0.0,1.0)
+	
+	if inReady and localReady:
 		print("Both players ready, Starting round")
-		startRound.rpc()
+		tTimer.start()
 		
 
 func _process(delta: float) -> void:
@@ -49,7 +60,7 @@ func _process(delta: float) -> void:
 		#print(p1.readyState, p2.readyState)
 
 func _on_tick_timer_timeout() -> void:
-	startRound()
+	roundTick.rpc()
 
 func _on_troop_dropdown_type_selected(index: int) -> void:
 	var selected_troopType = troopTypeDropdown.get_item_text(index)
@@ -66,11 +77,11 @@ func _on_troop_dropdown_type_selected(index: int) -> void:
 
 
 func _on_button_pressed() -> void:
-	if !p1Ready:
-		p1Ready = true
-		p1ReadyInd.color = Color(0.0,1.0,0.0,1.0)
+	if !localReady:
+		localReady = true
+		readyInd.color = Color(0.0,1.0,0.0,1.0)
 	else:
-		p1Ready = false
-		p1ReadyInd.color = Color(1.0,0.0,0.0,1.0)
+		localReady = false
+		readyInd.color = Color(1.0,0.0,0.0,1.0)
 	
-	readyCheck.rpc(ready)
+	readyCheck.rpc(localReady)
