@@ -3,6 +3,7 @@ extends Node2D
 const Unit = preload("res://Game/Unit.tscn")
 var units: Array = []
 @onready var mainTileMap = $TileMapLayer
+@onready var planTimer = $PlanningTimer
 enum GAMESTATE {INIT, START, PLAN, ACTIVE, END}
 var P1Status
 

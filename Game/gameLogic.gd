@@ -10,9 +10,8 @@ var tick: int = 0
 var localReady: bool = false
 var remoteReady: bool = false
 
-#Troop Type Dropdown and Selector Logic
+#Troop Type Dropdown node access
 @onready var troopTypeDropdown = $"../TroopTypeSelectDropdown"
-@onready var troopTypeSelector = load("res://Game/troopTypeSelector.gd").new()
 
 func _ready() -> void:
 	pass
@@ -25,6 +24,9 @@ func start() -> void:
 func roundTick() -> void:
 	var check: bool
 	for token in tokens:
+		#Check next tick for updates to the unit
+		token._check_for_next_tick()
+		
 		var test = token.tickUpdate(tick)
 		if !check:
 			check = test
@@ -44,6 +46,7 @@ func roundTick() -> void:
 func readyCheck(inReady) -> void:
 	#print(multiplayer.get_unique_id())
 	remoteReady = inReady
+	tTimer.start()
 	if remoteReady:
 		remoteReadyInd.color = Color(0.0,1.0,0.0,1.0)
 	else:
@@ -64,9 +67,9 @@ func _on_tick_timer_timeout() -> void:
 
 func _on_troop_dropdown_type_selected(index: int) -> void:
 	var selected_troopType = troopTypeDropdown.get_item_text(index)
-	var troopType = troopTypeSelector.get_troop_type(selected_troopType)
+	var troopType = TroopTypeSelector.get_troop_type(selected_troopType)
 	
-	#For now, sets all players as the same troop type. Need to get individual selection later
+	#For now, sets all players as the same troop type. Need to get individual selection later, maybe by making a troop array for each player
 	tokens = get_children()
 	for token in tokens:
 		token.set_troop_values(troopType)

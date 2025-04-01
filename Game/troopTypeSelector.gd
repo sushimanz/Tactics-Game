@@ -2,37 +2,37 @@ class_name TroopTypeSelector
 extends Node
 
 #Get the troop type based on string input
-func get_troop_type(troop: String) -> Troop:
+static func get_troop_type(troop: String) -> Troop:
 	print("Troop Selected: ", troop)
 	match troop:
 		"Archer":
-			return load("res://Troops/archer.gd").new()
+			return preload("res://Troops/archer.gd").new()
 		"Baiter":
-			return load("res://Troops/baiter.gd").new()
+			return preload("res://Troops/baiter.gd").new()
 		"Cannon Wheels":
-			return load("res://Troops/cannon_wheels.gd").new()
+			return preload("res://Troops/cannon_wheels.gd").new()
 		"Demoman":
-			return load("res://Troops/demoman.gd").new()
+			return preload("res://Troops/demoman.gd").new()
 		"Engineer":
-			return load("res://Troops/engineer.gd").new()
+			return preload("res://Troops/engineer.gd").new()
 		"Heavy":
-			return load("res://Troops/heavy.gd").new()
+			return preload("res://Troops/heavy.gd").new()
 		"Knight":
-			return load("res://Troops/knight.gd").new()
+			return preload("res://Troops/knight.gd").new()
 		"Medic":
-			return load("res://Troops/medic.gd").new()
+			return preload("res://Troops/medic.gd").new()
 		"Pyro":
-			return load("res://Troops/pyro.gd").new()
+			return preload("res://Troops/pyro.gd").new()
 		"Scout":
-			return load("res://Troops/scout.gd").new()
+			return preload("res://Troops/scout.gd").new()
 		"Sniper":
-			return load("res://Troops/sniper.gd").new()
+			return preload("res://Troops/sniper.gd").new()
 		"Soldier":
-			return load("res://Troops/soldier.gd").new()
+			return preload("res://Troops/soldier.gd").new()
 		"Spy":
-			return load("res://Troops/spy.gd").new()
+			return preload("res://Troops/spy.gd").new()
 		"TV Head":
-			return load("res://Troops/tv_head.gd").new()
+			return preload("res://Troops/tv_head.gd").new()
 		
 		#Set default to null (test values) if no match found
 		_:

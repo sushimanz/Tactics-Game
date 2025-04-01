@@ -1,38 +1,31 @@
-extends Node2D
+class_name Unit
+extends UnitLogic
 
+#Start timer (If doing a pre-plan stage before player interaction)
+@onready var startTimer = get_parent().get_parent().get_child(2)		#Gotta find a better way to get the planTimer (Or do the logic as part of the game)
+@export var start_end_time: int = 2		#Time in seconds
+var start_time_left: float = start_end_time
+var prev_start_time_left: int
 
-var tileMap : TileMapLayer
-@export var Speed: float = 1
-@onready var path: Line2D = $Path
-@onready var coll: Area2D = $Collision
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var syncer: MultiplayerSynchronizer = $MultiplayerSynchronizer
-var Current_Path:Array[Vector2i]
+#Plan Timer
+@onready var planTimer = get_parent().get_parent().get_child(3)		#Gotta find a better way to get the planTimer (Or do the logic as part of the game)
+@export var plan_end_time: int = 8		#Time in seconds
+var plan_time_left: float = plan_end_time
+var prev_plan_time_left: int
 
-var Selected:bool
-var Mouse_On_Top:bool
-var grabbed: bool = false
-@export var movePath: Array = [Vector2.ZERO]
-@export var movePathBounds: Vector2 = Vector2(13, 7)
-var tarLoc: Vector2
-var skewV: Vector2 = Vector2.ZERO
-var playerID: int = 0
-var dist_moved: int = 0
+#Turn Skipping/Prevention
+var check_next_tick: bool = false
+var steadfast: bool = false
+var skip_turn: bool = false
+var turns_to_skip: int = 0
+
+#Coordinate Management
+var turnStartCoord: Vector2i = Vector2i.ZERO
+var turnPreviousCoord: Vector2i = Vector2i.ZERO
+var turnCurrentCoord: Vector2i = Vector2i.ZERO
+var turnEndCoord: Vector2i = Vector2i(-1, -1)
 
 #
-enum GAMESTATE {INIT, START, PLAN, ACTIVE, END}
-var game_state: GAMESTATE = GAMESTATE.INIT
-var turnStartCoord: Vector2 = Vector2.ZERO
-
-#Troop values
-@export var in_troop_type: String = "troopname"
-@export var health: int = 100
-@export var max_moves: int = 12
-@export var dmg: int = 50
-@export var atk_range: int = 10
-@export var max_troops_hit: int = 5
-@export var icon: CompressedTexture2D = preload("res://Assets/KNIGHT_ICON.png")
-
 func _ready() -> void:
 	if Multiplayer.is_host:
 		playerID = 1
@@ -43,156 +36,143 @@ func _ready() -> void:
 	global_position += Vector2.ONE * 125
 	set_multiplayer_authority(name.to_int(), true)
 	
-	
 	coll.mouse_entered.connect(Mouse_In.bind(true))
 	coll.mouse_exited.connect(Mouse_In.bind(false))
 	
 	var startCoord = tileMap.local_to_map(coll.global_position)
 
-func set_troop_values(troop: Troop) -> void:
-	#print("Troop initialization started!")
-	if troop:
-		if troop is Troop:
-			health = troop.health
-			max_moves = troop.max_moves
-			dmg = troop.dmg
-			atk_range = troop.atk_range
-			max_troops_hit = troop.max_troops_hit
-			icon = troop.icon
-			sprite.texture = icon
-		
-	else:
-		#Currently put in crazy values, get rid of this testing feature if there seem to be no to little bugs
-		health = 999
-		max_moves = 999
-		dmg = 100
-		atk_range = 99
-		max_troops_hit = 99
-		print("Troop initialization failed! Input: ", troop)
+func _on_init():
+	print("GAMESTATE INITIALIZING")
+	startTimer.wait_time = start_end_time
+	prev_start_time_left = startTimer.wait_time
 	
-	#Reset path on troop initialization
-	path.clear_points()
-	movePath.clear()
+	planTimer.wait_time = plan_end_time
+	prev_plan_time_left = planTimer.wait_time
+	
+	startTimer.start()
 
-func Mouse_In(State:bool) -> void:
-	
-	Mouse_On_Top = State
-	#print(Mouse_On_Top)
-	pass
+func _pre_planning_phase():
+	start_time_left = int(floor(startTimer.time_left))
+	if prev_start_time_left > start_time_left:
+		print("Pre-Planning Time Left: ", prev_start_time_left)
+		prev_start_time_left = start_time_left
+		#Updates for every second
 
 #Do when a turn just started, mostly just to update troop starting location
 func _on_turn_started():
 	turnStartCoord = tileMap.local_to_map(coll.global_position)
+	turnEndCoord = Vector2i(-1, -1)
+	steadfast = false
+	print(turnStartCoord)
 
+#Where planning phase occurs and pathing is created
 func _planning_phase():
+	plan_time_left = int(floor(planTimer.time_left))
+	if prev_plan_time_left > plan_time_left:
+		print("Planning Time Left: ", prev_plan_time_left)
+		prev_plan_time_left = plan_time_left
+		#Updates for every second
+	
+	if turnPreviousCoord != turnStartCoord:
+		turnPreviousCoord = turnStartCoord
+	
 	edit_path()
 
+#This is where troops move and attack
 func _turn_in_progress():
-	#This is where troops move and attack
-	pass
+	turnCurrentCoord = tileMap.local_to_map(coll.global_position)
+	
+	##Logic for 2+ troops on one tile here?
+	#Whichever troop gets to the tile first during the tick gets priority;
+	#If both troops arrive at the same time, set skip_turn to true;
+	#Else the troop that does not have the 'taken' status will have skip_turn set to true
+	
+	if turnCurrentCoord == turnEndCoord:
+		if steadfast == false and skip_turn == false:
+			check_next_tick = true
+	
+	if !movePath.is_empty():
+		if turnEndCoord != movePath[-1]:
+			turnEndCoord = movePath[-1]
+			print("Update Turn End Coord")
+	
+	if turnCurrentCoord == turnPreviousCoord and (steadfast == false or skip_turn == false):
+		pass
+	else:
+		print("Current Tile Coordinate: ", turnCurrentCoord)
+		print("Previous Tile Coordinate: ", turnCurrentCoord)
+		turnPreviousCoord = turnCurrentCoord
 
+func _check_for_next_tick():
+	if check_next_tick == true and steadfast == false:
+		check_next_tick = false
+		steadfast = true
+		print("Troop is Steadfast")
+	elif steadfast == true:
+		check_next_tick = false
+
+#Not sure if this is really needed but good to keep in the loop for visual
 func _on_turn_ended():
-	#Not sure if this is really needed but good to keep in the loop for visual
-	pass
+	steadfast = false
+	startTimer.start()
+	
+	print("Troop End Coordinate: ", turnEndCoord)
 
+#Some of this logic should actually go into the gameStateLogic.gd instead, such as the timer
 func _process(delta: float) -> void:
 	match game_state:
 		#Do ONLY at the start of the game, mostly for the troop selector and deployment at the start
 		GAMESTATE.INIT:
+			_on_init()
+			
 			game_state = GAMESTATE.START
+			print("CHANGE GAMESTATE TO START")
 		
 		#Do when a turn just started, mostly just to update troop starting location
 		GAMESTATE.START:
-			_on_turn_started()
-			game_state = GAMESTATE.PLAN
+			if startTimer.time_left <= 0:
+				startTimer.stop()
+				prev_start_time_left = startTimer.wait_time
+				planTimer.start()
+				
+				_on_turn_started()
+				game_state = GAMESTATE.PLAN
+				print("CHANGE GAMESTATE TO PLAN")
+			else:
+				_pre_planning_phase()
 		
-		#Do during the planning phase, there is player interaction here
+		#Do during the planning phase, there is player troop interaction here
 		GAMESTATE.PLAN:
-			_planning_phase()
-			
-			#Make an if statement to check the time; if timer runs out, then change gamestate
-			game_state = GAMESTATE.START
+			if planTimer.time_left <= 0:
+				planTimer.stop()
+				prev_plan_time_left = planTimer.wait_time
+				game_state = GAMESTATE.ACTIVE
+				print("CHANGE GAMESTATE TO ACTIVE")
+			elif planTimer.time_left > 0 and not skip_turn:
+				_planning_phase()
 		
-		#Do when a turn is in progress, there is NO player interaction here
+		#Do when a turn is in progress, there is NO playert troop interaction here
 		GAMESTATE.ACTIVE:
-			_turn_in_progress()
-			
-			#Make an if statement to check if all turns have been completed, then change gamestate
-			game_state = GAMESTATE.END
+			#Temporary statement since gamestates are currently controlled inside the unit
+			if turnCurrentCoord == turnEndCoord:
+				game_state = GAMESTATE.END
+				print("CHANGE GAMESTATE TO END")
+			else:
+				_turn_in_progress()
 		
 		GAMESTATE.END:
 			_on_turn_ended()
+			
 			game_state = GAMESTATE.START
+			print("CHANGE GAMESTATE TO START")
 		
 		_:
-			print("No Gamestate, there is an issue here! Resetting game...")
+			print("No Gamestate, there is an issue here!")
 			game_state = GAMESTATE.INIT
-		
-
-func edit_path():
-	if is_multiplayer_authority():
-		if grabbed and Mouse_On_Top:
-			var currCoord = tileMap.local_to_map(coll.global_position)
-			var tileCenter = tileMap.map_to_local(currCoord) - Vector2(125,125)
-			var mospos = get_global_mouse_position()
-			coll.global_position = mospos
-			
-			#print(tileMap.get_cell_tile_data(tileMap.local_to_map(global_position)))
-			#print(tileMap.local_to_map(global_position))
-			
-			#Keep the pathing within the map bounds
-			if (currCoord.x >= 0 and currCoord.y >= 0) and (currCoord.x < movePathBounds.x and currCoord.y < movePathBounds.y):
-				#Initialize distance moved from start position
-				if movePath.is_empty():
-					dist_moved = 0
-				
-				#Update the pathing
-				if !movePath.has(currCoord) and (movePath.is_empty() or movePath[movePath.size()-1].distance_to(currCoord) == 1):
-					if dist_moved < max_moves:
-						if !movePath.is_empty():
-							dist_moved += 1
-						path.add_point(tileCenter)
-						movePath.append(currCoord)
-						#print(movePath)
-						print("Path Distance: ",dist_moved)
-					else:
-						#Maybe add some visual to know the troop is over the path range
-						#print("Over Troop Range Logic!")
-						pass
-				
-				#Remove pathing if backtracking
-				if movePath.size() >= 2 and currCoord == movePath[movePath.size()-2]:
-					path.remove_point(movePath.size()-1)
-					movePath.remove_at(movePath.size()-1)
-					dist_moved -= 1
-					print("Path Distance: ",dist_moved)
-					
-				skewV = lerp(skewV, Input.get_last_mouse_velocity()/25, 0.1).clamp(Vector2.ONE * -25, Vector2.ONE * 25)
-		
-		#Set skewV to 0 if not grabbed to avoid visual issues
-		else:
-			skewV = Vector2.ZERO
-	sprite.global_position = sprite.global_position.lerp(coll.global_position, 0.1)
-	sprite.material.set_shader_parameter('y_rot', skewV.x)
-	sprite.material.set_shader_parameter('x_rot', -skewV.y)
-	
-	## old AStar
-	#if Current_Path.is_empty():
-		#return
-	#else:
-		#var Target_Pos:Vector2 = Tile_Map.map_to_local(Current_Path.front())
-		#global_position = global_position.move_toward(Target_Pos,Speed * delta)
-		#
-		#if global_position == Target_Pos:
-			#Current_Path.pop_front()
-		#
-		#if Current_Path.is_empty():
-			##Arrived
-			#Tile_Map.A_Star.set_point_solid(Tile_Map.local_to_map(global_position))
-
+			print("INITIALIZE GAMESTATE")
 
 func _input(_event: InputEvent) -> void:
-	if Mouse_On_Top:
+	if Mouse_On_Top and game_state == GAMESTATE.PLAN:
 		if _event.is_action_pressed("LClick"):
 			print("yo")
 			path.clear_points()
@@ -220,15 +200,3 @@ func _input(_event: InputEvent) -> void:
 			sprite.material.set_shader_parameter('x_rot', 0)
 			if !movePath.is_empty():
 				coll.global_position = tileMap.map_to_local(movePath[0])
-
-func tickUpdate(tick) -> bool:
-	syncer.update_visibility()
-	if !movePath.is_empty():
-		if tick >= movePath.size()-1:
-			return false
-		var nextPos = tileMap.map_to_local(movePath[tick+1]) - Vector2(125,125)
-		var tween = get_tree().create_tween().parallel()
-		tween.tween_property(coll, "position", nextPos, 0.1)
-		#tween.tween_property(sprite, "position", nextPos, 1)
-		return true
-	return false

@@ -33,12 +33,6 @@ script = ExtResource("3_iv3md")
 position = Vector2(1589, 916)
 zoom = Vector2(0.3, 0.3)
 
-[node name="StartTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="PlanningTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://ycif7ms3qqiw")
 spawn_path = NodePath("../TileMapLayer")
