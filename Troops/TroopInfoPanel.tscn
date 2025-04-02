@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c8i0btgnjiisg"]
+
+[node name="Panel" type="Panel"]
+offset_right = 180.0
+offset_bottom = 480.0
+
+[node name="TitleBG" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 176.0
+offset_bottom = 28.0
+
+[node name="Label" type="Label" parent="TitleBG"]
+layout_mode = 0
+offset_right = 172.0
+offset_bottom = 24.0
+text = "TroopName Stats:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = 176.0
+offset_bottom = 476.0
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 168.0
+offset_bottom = 209.0
+text = "Health: x
+Moves: x
+Damage: x
+Range: x
+Attack Types:
+x, x, x, ...
+Extra Info:
+..."

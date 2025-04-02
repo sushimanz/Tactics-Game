@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddxn3dbfi6q6d"]
+
+[ext_resource type="Script" uid="uid://br2fpq3juqlmg" path="res://UI/Menu/drag_box.gd" id="1_b2jo0"]
+[ext_resource type="Texture2D" uid="uid://t2mcfdik3lun" path="res://Assets/ARCHER_ICON.png" id="2_qjpq4"]
+
+[node name="Troop_Box" type="TextureRect"]
+offset_right = 160.0
+offset_bottom = 160.0
+texture = ExtResource("2_qjpq4")
+expand_mode = 1
+script = ExtResource("1_b2jo0")
+texture_icon = ExtResource("2_qjpq4")
