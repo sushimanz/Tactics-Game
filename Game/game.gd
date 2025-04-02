@@ -18,7 +18,7 @@ func _host_join() -> void:
 		func(pid):
 			print("Peer " + str(pid) + " has joined the game!")
 			$MultiplayerSpawner.spawn(pid)
-			mainTileMap.start.rpc()
+			mainTileMap.initialize.rpc()
 	)
 	
 	$MultiplayerSpawner.spawn(multiplayer.get_unique_id())

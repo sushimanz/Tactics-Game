@@ -141,6 +141,8 @@ popup/item_14/id = 14
 popup/item_15/text = "Scrapyard Girl"
 popup/item_15/id = 15
 
+[connection signal="timeout" from="StartTimer" to="TileMapLayer" method="_on_start_timer_timeout"]
+[connection signal="timeout" from="PlanningTimer" to="TileMapLayer" method="_on_planning_timer_timeout"]
 [connection signal="pressed" from="UI/Button" to="TileMapLayer" method="_on_button_pressed"]
 [connection signal="timeout" from="TickTimer" to="TileMapLayer" method="_on_tick_timer_timeout"]
 [connection signal="item_selected" from="TroopTypeSelectDropdown" to="TileMapLayer" method="_on_troop_dropdown_type_selected"]

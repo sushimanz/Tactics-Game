@@ -16,7 +16,6 @@ var playerID: int = 0
 
 #Gamestates
 enum GAMESTATE {INIT, START, PLAN, ACTIVE, END}
-var game_state: GAMESTATE = GAMESTATE.INIT
 
 #Mouse Grab Logic
 var Selected:bool
@@ -64,11 +63,27 @@ func set_troop_values(troop: Troop) -> void:
 	path.clear_points()
 	movePath.clear()
 
-func Mouse_In(State:bool) -> void:
+func _ready() -> void:
+	if Multiplayer.is_host:
+		playerID = 1
+	else:
+		playerID = 2
 	
+	tileMap = get_parent()
+	global_position += Vector2.ONE * 125
+	set_multiplayer_authority(name.to_int(), true)
+	
+	coll.mouse_entered.connect(Mouse_In.bind(true))
+	coll.mouse_exited.connect(Mouse_In.bind(false))
+
+func _process(delta: float) -> void:
+	updateVisuals()
+	if Global.gameState == GAMESTATE.PLAN:
+		edit_path()
+
+func Mouse_In(State:bool) -> void:
 	Mouse_On_Top = State
 	#print(Mouse_On_Top)
-	pass
 
 func edit_path():
 	if is_multiplayer_authority():
@@ -109,30 +124,40 @@ func edit_path():
 					print("Path Distance: ",dist_moved)
 					
 				skewV = lerp(skewV, Input.get_last_mouse_velocity()/25, 0.1).clamp(Vector2.ONE * -25, Vector2.ONE * 25)
-		
-		#Set skewV to 0 if not grabbed to avoid visual issues
-		else:
-			skewV = Vector2.ZERO
+
+
+func on_start() -> void:
+	#Set skewV to 0 if not grabbed to avoid visual issues
+	skewV = Vector2.ZERO
+	
+	#sync values (movePath)
+	syncer.update_visibility()
+
+func on_end() -> void:
+	movePath.clear()
+	path.clear_points()
+
+
+func updateVisuals() -> void:
 	sprite.global_position = sprite.global_position.lerp(coll.global_position, 0.1)
 	sprite.material.set_shader_parameter('y_rot', skewV.x)
 	sprite.material.set_shader_parameter('x_rot', -skewV.y)
-	
-	## old AStar
-	#if Current_Path.is_empty():
-		#return
-	#else:
-		#var Target_Pos:Vector2 = Tile_Map.map_to_local(Current_Path.front())
-		#global_position = global_position.move_toward(Target_Pos,Speed * delta)
-		#
-		#if global_position == Target_Pos:
-			#Current_Path.pop_front()
-		#
-		#if Current_Path.is_empty():
-			##Arrived
-			#Tile_Map.A_Star.set_point_solid(Tile_Map.local_to_map(global_position))
+
+func _input(_event: InputEvent) -> void:
+	if Mouse_On_Top and Global.gameState == GAMESTATE.PLAN:
+		if _event.is_action_pressed("LClick"):
+			path.clear_points()
+			movePath.clear()
+			grabbed = true
+		
+		if _event.is_action_released("LClick"):
+			grabbed = false
+			sprite.material.set_shader_parameter('y_rot', 0)
+			sprite.material.set_shader_parameter('x_rot', 0)
+			if !movePath.is_empty():
+				coll.global_position = tileMap.map_to_local(movePath[0])
 
 func tickUpdate(tick) -> bool:
-	syncer.update_visibility()
 	if !movePath.is_empty():
 		if tick >= movePath.size()-1:
 			return false
