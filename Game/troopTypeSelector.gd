@@ -33,6 +33,8 @@ static func get_troop_type(troop: String) -> Troop:
 			return preload("res://Troops/spy.gd").new()
 		"TV Head":
 			return preload("res://Troops/tv_head.gd").new()
+		"Scrapyard Girl":
+			return preload("res://Troops/scrapyard_girl.gd").new()
 		
 		#Set default to null (test values) if no match found
 		_:

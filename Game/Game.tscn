@@ -107,7 +107,7 @@ theme = SubResource("Theme_37esa")
 theme_override_font_sizes/font_size = 36
 alignment = 1
 selected = 0
-item_count = 15
+item_count = 16
 popup/item_0/text = "Troop Select"
 popup/item_0/id = 0
 popup/item_1/text = "Archer"
@@ -138,6 +138,8 @@ popup/item_13/text = "Spy"
 popup/item_13/id = 13
 popup/item_14/text = "TV Head"
 popup/item_14/id = 14
+popup/item_15/text = "Scrapyard Girl"
+popup/item_15/id = 15
 
 [connection signal="pressed" from="UI/Button" to="TileMapLayer" method="_on_button_pressed"]
 [connection signal="timeout" from="TickTimer" to="TileMapLayer" method="_on_tick_timer_timeout"]
