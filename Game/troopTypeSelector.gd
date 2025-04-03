@@ -1,6 +1,8 @@
 class_name TroopTypeSelector
 extends Node
 
+static var troopTypes: Array = ["Archer", "Batier", "Cannon Wheels", "Demoman", "Engineer", "Heavy", "Knight", "Medic", "Pyro", "Scout", "Sniper", "Soldier", "Spy", "TV Head", "Scrapyard Girl"]
+
 #Get the troop type based on string input
 static func get_troop_type(troop: String) -> Troop:
 	#print("Troop Selected: ", troop)
@@ -40,3 +42,8 @@ static func get_troop_type(troop: String) -> Troop:
 		_:
 			print("No troop match found!")
 			return null
+
+static func random_troop() -> Troop:
+	var rand_troop = troopTypes[randi_range(0, len(troopTypes)-1)]
+	print("Random Troop is: ", rand_troop)
+	return get_troop_type(rand_troop)

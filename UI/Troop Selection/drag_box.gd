@@ -22,8 +22,6 @@ func _ready() -> void:
 	button.size = size
 	label.text = troop_str
 	
-	connect("updateInfo", _on_mouse_entered)
-	
 	if troop is Troop:
 		texture = troop.icon
 	else:
