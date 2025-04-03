@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://ycif7ms3qqiw"]
 
-[ext_resource type="Script" uid="uid://civ754pwjqjuk" path="res://Game/Unit.gd" id="1_jf83v"]
+[ext_resource type="Script" uid="uid://civ754pwjqjuk" path="res://Game/nit.gd" id="1_jf83v"]
 [ext_resource type="Shader" uid="uid://dabqirjru0uja" path="res://Game/skew.gdshader" id="2_0cvqy"]
 [ext_resource type="Texture2D" uid="uid://c84pt2pdd540m" path="res://Assets/KNIGHT_ICON.png" id="2_u1nqo"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pl1pi"]
 radius = 99.0202

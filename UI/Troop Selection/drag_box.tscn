@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddxn3dbfi6q6d"]
+[gd_scene load_steps=4 format=3 uid="uid://ddxn3dbfi6q6d"]
 
-[ext_resource type="Script" uid="uid://br2fpq3juqlmg" path="res://UI/Menu/drag_box.gd" id="1_b2jo0"]
+[ext_resource type="Script" uid="uid://br2fpq3juqlmg" path="res://UI/Troop Selection/drag_box.gd" id="1_b2jo0"]
 [ext_resource type="Texture2D" uid="uid://t2mcfdik3lun" path="res://Assets/ARCHER_ICON.png" id="2_qjpq4"]
-[ext_resource type="Script" uid="uid://dx17cb8bq8phe" path="res://UI/Menu/drag_box_bg.gd" id="3_qjpq4"]
-[ext_resource type="Theme" uid="uid://dr4q5gi12juqk" path="res://Troops/troop_name.tres" id="4_b8jov"]
+[ext_resource type="Theme" uid="uid://dr4q5gi12juqk" path="res://UI/Troop Selection/troop_name.tres" id="4_b8jov"]
 
 [node name="Troop_Box" type="TextureRect"]
 offset_right = 120.0
@@ -11,7 +10,6 @@ offset_bottom = 120.0
 texture = ExtResource("2_qjpq4")
 expand_mode = 1
 script = ExtResource("1_b2jo0")
-texture_icon = ExtResource("2_qjpq4")
 
 [node name="BackgroundButton" type="Button" parent="."]
 layout_mode = 0
@@ -19,7 +17,6 @@ offset_right = 120.0
 offset_bottom = 120.0
 mouse_filter = 1
 disabled = true
-script = ExtResource("3_qjpq4")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -34,3 +31,5 @@ vertical_alignment = 1
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 24.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

@@ -1,8 +1,11 @@
-[gd_scene format=3 uid="uid://c8i0btgnjiisg"]
+[gd_scene load_steps=2 format=3 uid="uid://c8i0btgnjiisg"]
+
+[ext_resource type="Script" uid="uid://ci0bvjoabwx07" path="res://UI/Troop Selection/troop_info_panel.gd" id="1_tci01"]
 
 [node name="Panel" type="Panel"]
 offset_right = 180.0
 offset_bottom = 480.0
+script = ExtResource("1_tci01")
 
 [node name="TitleBG" type="Panel" parent="."]
 layout_mode = 0

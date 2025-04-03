@@ -3,7 +3,7 @@ extends Node
 
 #Get the troop type based on string input
 static func get_troop_type(troop: String) -> Troop:
-	print("Troop Selected: ", troop)
+	#print("Troop Selected: ", troop)
 	match troop:
 		"Archer":
 			return preload("res://Troops/archer.gd").new()

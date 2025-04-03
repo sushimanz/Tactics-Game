@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvmdpbotx5ehk"]
+[gd_scene load_steps=5 format=3 uid="uid://cvmdpbotx5ehk"]
 
-[ext_resource type="PackedScene" uid="uid://ddxn3dbfi6q6d" path="res://UI/Menu/drag_box.tscn" id="1_xvp3e"]
-[ext_resource type="PackedScene" uid="uid://c8i0btgnjiisg" path="res://Troops/TroopInfoPanel.tscn" id="2_46d6p"]
+[ext_resource type="Script" uid="uid://deqwydk1ppeu6" path="res://UI/Troop Selection/troop_selector.gd" id="1_nmujj"]
+[ext_resource type="PackedScene" uid="uid://ddxn3dbfi6q6d" path="res://UI/Troop Selection/drag_box.tscn" id="1_xvp3e"]
+[ext_resource type="PackedScene" uid="uid://c8i0btgnjiisg" path="res://UI/Troop Selection/TroopInfoPanel.tscn" id="2_46d6p"]
 
 [sub_resource type="Theme" id="Theme_xvp3e"]
 default_font_size = 24
@@ -11,6 +12,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
+script = ExtResource("1_nmujj")
 
 [node name="Anchor" type="Control" parent="."]
 layout_mode = 1
@@ -194,7 +196,7 @@ texture_icon = null
 can_drag = false
 replace = true
 
-[node name="Label" type="Label" parent="Anchor"]
+[node name="ArmyLabel" type="Label" parent="Anchor"]
 layout_mode = 0
 offset_left = -60.0
 offset_top = -171.0
@@ -205,7 +207,7 @@ text = "Army"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" parent="Anchor" instance=ExtResource("2_46d6p")]
+[node name="TroopInfoPanel" parent="Anchor" instance=ExtResource("2_46d6p")]
 layout_mode = 0
 offset_left = 500.0
 offset_top = -240.0
