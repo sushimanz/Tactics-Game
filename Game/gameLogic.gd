@@ -165,7 +165,7 @@ func _on_tick_timer_timeout() -> void:
 
 func _on_troop_dropdown_type_selected(index: int) -> void:
 	var selected_troopType = troopTypeDropdown.get_item_text(index)
-	var troopType = TroopTypeSelector.get_troop_type(selected_troopType)
+	var troopType = TroopMatcher.get_troop_type(selected_troopType)
 	
 	#For now, sets all players as the same troop type. Need to get individual selection later, maybe by making a troop array for each player
 	units = get_children()

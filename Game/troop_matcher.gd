@@ -1,4 +1,4 @@
-class_name TroopTypeSelector
+class_name TroopMatcher
 extends Node
 
 static var troopTypes: Array = ["Archer", "Batier", "Cannon Wheels", "Demoman", "Engineer", "Heavy", "Knight", "Medic", "Pyro", "Scout", "Sniper", "Soldier", "Spy", "TV Head", "Scrapyard Girl"]

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://deaphabq1i41e" path="res://Game/game.gd" id="1_37esa"]
 [ext_resource type="Texture2D" uid="uid://l5tfrutfudm2" path="res://Assets/grid.png" id="1_iv3md"]
 [ext_resource type="Script" uid="uid://b7epxnor4sqyv" path="res://Game/gameLogic.gd" id="3_iv3md"]
+[ext_resource type="PackedScene" uid="uid://cvmdpbotx5ehk" path="res://UI/Troop Selection/TroopSelectMenu.tscn" id="4_37esa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iv3md"]
 texture = ExtResource("1_iv3md")
@@ -16,40 +17,42 @@ sources/2 = SubResource("TileSetAtlasSource_iv3md")
 [sub_resource type="Theme" id="Theme_iv3md"]
 default_font_size = 48
 
-[sub_resource type="Theme" id="Theme_37esa"]
-default_font_size = 12
-
 [node name="Game" type="Node2D"]
 script = ExtResource("1_37esa")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1589, 916)
+zoom = Vector2(0.3, 0.3)
+
+[node name="MainGameplay" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TileMapLayer" type="TileMapLayer" parent="MainGameplay"]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAABAAAAAgAAAAAAAAABAAEAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAMAAgAAAAAAAAABAAIAAgAAAAAAAAABAAMAAgAAAAAAAAAAAAQAAgAAAAAAAAAAAAUAAgAAAAAAAAABAAQAAgAAAAAAAAABAAUAAgAAAAAAAAAAAAYAAgAAAAAAAAABAAYAAgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAADAAAAAgAAAAAAAAADAAEAAgAAAAAAAAACAAIAAgAAAAAAAAACAAMAAgAAAAAAAAADAAIAAgAAAAAAAAADAAMAAgAAAAAAAAACAAQAAgAAAAAAAAACAAUAAgAAAAAAAAADAAQAAgAAAAAAAAADAAUAAgAAAAAAAAACAAYAAgAAAAAAAAADAAYAAgAAAAAAAAAEAAAAAgAAAAAAAAAEAAEAAgAAAAAAAAAFAAAAAgAAAAAAAAAFAAEAAgAAAAAAAAAEAAIAAgAAAAAAAAAEAAMAAgAAAAAAAAAFAAIAAgAAAAAAAAAFAAMAAgAAAAAAAAAEAAQAAgAAAAAAAAAEAAUAAgAAAAAAAAAFAAQAAgAAAAAAAAAFAAUAAgAAAAAAAAAEAAYAAgAAAAAAAAAFAAYAAgAAAAAAAAAGAAAAAgAAAAAAAAAGAAEAAgAAAAAAAAAHAAAAAgAAAAAAAAAHAAEAAgAAAAAAAAAGAAIAAgAAAAAAAAAGAAMAAgAAAAAAAAAHAAIAAgAAAAAAAAAHAAMAAgAAAAAAAAAGAAQAAgAAAAAAAAAGAAUAAgAAAAAAAAAHAAQAAgAAAAAAAAAHAAUAAgAAAAAAAAAGAAYAAgAAAAAAAAAHAAYAAgAAAAAAAAAIAAAAAgAAAAAAAAAIAAEAAgAAAAAAAAAJAAAAAgAAAAAAAAAJAAEAAgAAAAAAAAAIAAIAAgAAAAAAAAAIAAMAAgAAAAAAAAAJAAIAAgAAAAAAAAAJAAMAAgAAAAAAAAAIAAQAAgAAAAAAAAAIAAUAAgAAAAAAAAAJAAQAAgAAAAAAAAAJAAUAAgAAAAAAAAAIAAYAAgAAAAAAAAAJAAYAAgAAAAAAAAAKAAAAAgAAAAAAAAAKAAEAAgAAAAAAAAALAAAAAgAAAAAAAAALAAEAAgAAAAAAAAAKAAIAAgAAAAAAAAAKAAMAAgAAAAAAAAALAAIAAgAAAAAAAAALAAMAAgAAAAAAAAAKAAQAAgAAAAAAAAAKAAUAAgAAAAAAAAALAAQAAgAAAAAAAAALAAUAAgAAAAAAAAAKAAYAAgAAAAAAAAALAAYAAgAAAAAAAAAMAAAAAgAAAAAAAAAMAAEAAgAAAAAAAAAMAAIAAgAAAAAAAAAMAAMAAgAAAAAAAAAMAAQAAgAAAAAAAAAMAAUAAgAAAAAAAAAMAAYAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_jxerj")
 y_sort_origin = -1
 script = ExtResource("3_iv3md")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1589, 916)
-zoom = Vector2(0.3, 0.3)
-
-[node name="StartTimer" type="Timer" parent="."]
+[node name="StartTimer" type="Timer" parent="MainGameplay"]
 one_shot = true
 
-[node name="PlanningTimer" type="Timer" parent="."]
+[node name="PlanningTimer" type="Timer" parent="MainGameplay"]
 one_shot = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MainGameplay"]
 _spawnable_scenes = PackedStringArray("uid://ycif7ms3qqiw")
 spawn_path = NodePath("../TileMapLayer")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="MainGameplay"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button" type="Button" parent="UI"]
+[node name="Button" type="Button" parent="MainGameplay/UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -66,7 +69,7 @@ theme = SubResource("Theme_iv3md")
 action_mode = 0
 text = "Start Round"
 
-[node name="p1ReadyInd" type="ColorRect" parent="UI"]
+[node name="p1ReadyInd" type="ColorRect" parent="MainGameplay/UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -81,7 +84,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
 
-[node name="p2ReadyInd" type="ColorRect" parent="UI"]
+[node name="p2ReadyInd" type="ColorRect" parent="MainGameplay/UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -96,53 +99,17 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
 
-[node name="TickTimer" type="Timer" parent="."]
+[node name="TickTimer" type="Timer" parent="MainGameplay"]
 wait_time = 0.3
 
-[node name="TroopTypeSelectDropdown" type="OptionButton" parent="."]
-offset_left = -317.0
-offset_right = -16.0
-offset_bottom = 60.0
-theme = SubResource("Theme_37esa")
-theme_override_font_sizes/font_size = 36
-alignment = 1
-selected = 0
-item_count = 16
-popup/item_0/text = "Troop Select"
-popup/item_0/id = 0
-popup/item_1/text = "Archer"
-popup/item_1/id = 1
-popup/item_2/text = "Baiter"
-popup/item_2/id = 2
-popup/item_3/text = "Cannon Wheels"
-popup/item_3/id = 3
-popup/item_4/text = "Demoman"
-popup/item_4/id = 4
-popup/item_5/text = "Engineer"
-popup/item_5/id = 5
-popup/item_6/text = "Heavy"
-popup/item_6/id = 6
-popup/item_7/text = "Knight"
-popup/item_7/id = 7
-popup/item_8/text = "Medic"
-popup/item_8/id = 8
-popup/item_9/text = "Pyro"
-popup/item_9/id = 9
-popup/item_10/text = "Scout"
-popup/item_10/id = 10
-popup/item_11/text = "Sniper"
-popup/item_11/id = 11
-popup/item_12/text = "Soldier"
-popup/item_12/id = 12
-popup/item_13/text = "Spy"
-popup/item_13/id = 13
-popup/item_14/text = "TV Head"
-popup/item_14/id = 14
-popup/item_15/text = "Scrapyard Girl"
-popup/item_15/id = 15
+[node name="TroopSelector" parent="." instance=ExtResource("4_37esa")]
+offset_left = 1589.0
+offset_top = 916.0
+offset_right = 1589.0
+offset_bottom = 916.0
+scale = Vector2(3.333, 3.333)
 
-[connection signal="timeout" from="StartTimer" to="TileMapLayer" method="_on_start_timer_timeout"]
-[connection signal="timeout" from="PlanningTimer" to="TileMapLayer" method="_on_planning_timer_timeout"]
-[connection signal="pressed" from="UI/Button" to="TileMapLayer" method="_on_button_pressed"]
-[connection signal="timeout" from="TickTimer" to="TileMapLayer" method="_on_tick_timer_timeout"]
-[connection signal="item_selected" from="TroopTypeSelectDropdown" to="TileMapLayer" method="_on_troop_dropdown_type_selected"]
+[connection signal="timeout" from="MainGameplay/StartTimer" to="MainGameplay/TileMapLayer" method="_on_start_timer_timeout"]
+[connection signal="timeout" from="MainGameplay/PlanningTimer" to="MainGameplay/TileMapLayer" method="_on_planning_timer_timeout"]
+[connection signal="pressed" from="MainGameplay/UI/Button" to="MainGameplay/TileMapLayer" method="_on_button_pressed"]
+[connection signal="timeout" from="MainGameplay/TickTimer" to="MainGameplay/TileMapLayer" method="_on_tick_timer_timeout"]

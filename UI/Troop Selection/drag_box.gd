@@ -8,7 +8,7 @@ signal updateInfo(troop_str, troop)
 @onready var troop_str: String = ($".").name
 @onready var label = $Label
 @onready var button = $BackgroundButton
-@onready var troop = TroopTypeSelector.get_troop_type(troop_str)
+@onready var troop = TroopMatcher.get_troop_type(troop_str)
 
 @export var texture_icon: Texture2D
 @export var can_drag: bool = true
@@ -64,6 +64,6 @@ func _input(event: InputEvent) -> void:
 
 func _on_mouse_entered() -> void:
 	if !mouse_btn_pressed:
-		troop = TroopTypeSelector.get_troop_type(troop_str)
+		troop = TroopMatcher.get_troop_type(troop_str)
 		if troop is Troop:
 			emit_signal("updateInfo", troop_str, troop)
