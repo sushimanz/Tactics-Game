@@ -113,3 +113,4 @@ scale = Vector2(3.333, 3.333)
 [connection signal="timeout" from="MainGameplay/PlanningTimer" to="MainGameplay/TileMapLayer" method="_on_planning_timer_timeout"]
 [connection signal="pressed" from="MainGameplay/UI/Button" to="MainGameplay/TileMapLayer" method="_on_button_pressed"]
 [connection signal="timeout" from="MainGameplay/TickTimer" to="MainGameplay/TileMapLayer" method="_on_tick_timer_timeout"]
+[connection signal="selectionEnded" from="TroopSelector" to="." method="_on_troop_selector_selection_ended"]

@@ -40,7 +40,7 @@ func initialize() -> void:
 	prev_plan_time_left = plan_end_time
 	
 	units = get_children()
-	print("Second player joined, Starting game")
+	print("Starting game")
 	Global.gameState = GAMESTATE.START
 	startTimer.start()
 
