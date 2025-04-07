@@ -11,6 +11,3 @@ func _init():
 
 func build():
 	pass
-
-func _process(delta: float) -> void:
-	pass

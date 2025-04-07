@@ -35,6 +35,9 @@ tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAABAAAAAgAAAAAAAAABAAEAAgAAAAA
 tile_set = SubResource("TileSet_jxerj")
 y_sort_origin = -1
 script = ExtResource("3_iv3md")
+deploy_end_time = null
+start_end_time = null
+plan_end_time = null
 
 [node name="Host" type="Node2D" parent="MainGameplay/TileMapLayer"]
 

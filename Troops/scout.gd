@@ -12,6 +12,3 @@ func _init():
 func tile_checker():
 	var dmg_drop_off = dmg
 	dmg_drop_off -= 10
-
-func _process(delta: float) -> void:
-	pass

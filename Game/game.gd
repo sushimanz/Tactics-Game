@@ -5,51 +5,41 @@ extends Node2D
 @onready var mainGameplay = $MainGameplay
 @onready var troopSelector = $TroopSelector
 
+#Constants
+const troop_count: int = 5
+const HostUnit = preload("res://Game/HostUnit.tscn")
+#TODO create ClientUnit in the future when re introducing multiplayer
 
-const Unit = preload("res://Game/Unit.tscn")
-var units: Array = []
-enum GAMESTATE {INIT, START, PLAN, ACTIVE, END}
+#Get gamestate logic script
+@onready var gameState: GameStateLogic = preload("res://Game/gameStateLogic.gd").new()
+var in_gamestate: bool = false
 
-#To get troops, do:
-#troopSelector.squadTroops
-#This returns an array with the selected troops
-#TODO make sure to use TroopMatcher.random_troop() if no troop selected!
-#This means if the return is null to setting a troop, it should randomize it!!!
-
-
+##TODO Take in host_units and client_units from TroopSelector.tscn
+var host_units: Array = []
+var client_units: Array = []
 
 func _ready() -> void:
-	if Multiplayer.is_host:
-		_host_join()
+	gameState.deployTimer = $MainGameplay/DeploymentTimer
+	gameState.startTimer = $MainGameplay/StartTimer
+	gameState.planTimer = $MainGameplay/PlanningTimer
+	
+	for unit in host_units:
+		add_units(HostUnit)
 
 func _process(delta: float) -> void:
-	pass
+	if in_gamestate:
+		gameState.updateGameState()
+	#pass
 
-#TODO Need to rewrite logic for spawning troops
-#current setup cant easliy spawn multiple troops correctly
-func _host_join() -> void:
-	multiplayerSpawner.spawn_function = add_player
-	
-	multiplayer.peer_connected.connect(
-		func(pid):
-			print("Peer " + str(pid) + " has joined the game!")
-			multiplayerSpawner.spawn(pid)
-			troopSelector.player2Join.rpc()
-	)
-	
-	multiplayerSpawner.spawn(multiplayer.get_unique_id())
-
-func add_player(pid):
-	var unit = Unit.instantiate()
-	unit.name = str(pid)
+#OwnedUnit means HostUnit or ClientUnit
+func add_units(OwnedUnit):
+	var unit = OwnedUnit.instantiate()
 	mainTileMap.add_child(unit)
-	#uni.global_position = $TileMapLayer.get_child(units.size()).global_position
-	units.append(unit)
-	
-	return unit
-
+	HostUnit
 
 func _on_troop_selector_selection_ended() -> void:
 	troopSelector.visible = false
 	mainGameplay.visible = true
-	mainTileMap.initialize.rpc()
+	troopSelector.queue_free()
+	print("Initialize game")
+	in_gamestate = true

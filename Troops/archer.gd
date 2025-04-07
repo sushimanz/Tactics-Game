@@ -14,6 +14,3 @@ func knockback():
 
 func headshot():
 	dmg = 30
-
-func _process(delta: float) -> void:
-	pass

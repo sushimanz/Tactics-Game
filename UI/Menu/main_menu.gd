@@ -18,18 +18,13 @@ signal noray_connected
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	await  Multiplayer.noray_connected
-	oid_lbl.text = Noray.oid
+	#await  Multiplayer.noray_connected
+	#oid_lbl.text = Noray.oid
 
 	for button in buttons: # simple loop to bind the buttons to the functions
 		button.connect("mouse_entered", Callable(self, "_on_mouse_enter").bind(button))
 		button.connect("mouse_exited", Callable(self, "_on_mouse_exit").bind(button))
 		button.connect("pressed", Callable(self, "_on_mouse_press").bind(button))
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func _on_mouse_enter(button):
 	var tween = get_tree().create_tween()
@@ -57,7 +52,6 @@ func _on_start_button_pressed() -> void:
 	
 	get_tree().change_scene_to_file("res://Game/Game.tscn")
 
-
 # Added timeout in all the buttons else the animation won't even display
 
 func _on_settings_button_pressed() -> void:
@@ -69,25 +63,33 @@ func _on_settings_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	await get_tree().create_timer(0.4).timeout
-
 	
 	get_tree().quit()
 
 
 func _on_copy_button_pressed() -> void:
-	DisplayServer.clipboard_set(Noray.oid)
+	##Old multiplayer stuff
+	#DisplayServer.clipboard_set(Noray.oid)
+	pass
 
 
 func _on_join_button_pressed() -> void:
 	await get_tree().create_timer(0.4).timeout
 	
-	Multiplayer.join(oid_input.text)
+	##Old multiplayer stuff
+	#Multiplayer.join(oid_input.text)
+	
 	get_tree().change_scene_to_file("res://Game/Game.tscn")
 
 
 func _on_host_button_pressed() -> void:
 	await get_tree().create_timer(0.4).timeout
 	
-	Multiplayer.host()
+	##Old multiplayer stuff
+	#Multiplayer.host()
 	
 	get_tree().change_scene_to_file("res://Game/Game.tscn")
+
+
+func set_next_scene_multiplayer(new_scene, multi: bool = false):
+	new_scene.is_multiplayer = multi
