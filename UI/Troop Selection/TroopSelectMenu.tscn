@@ -222,7 +222,6 @@ offset_top = -319.0
 offset_right = 680.0
 offset_bottom = -271.0
 theme = SubResource("Theme_3tofy")
-disabled = true
 text = "Ready Up"
 
 [node name="p1Ready" type="ColorRect" parent="Anchor/ReadyToStartButton"]
@@ -251,6 +250,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="waitingText" type="Label" parent="Anchor"]
+visible = false
 layout_mode = 0
 offset_left = 506.0
 offset_top = -225.0

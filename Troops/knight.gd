@@ -1,3 +1,4 @@
+class_name Knight
 extends Troop
 
 # Called when the node enters the scene tree for the first time.
@@ -7,9 +8,12 @@ func _init():
 	dmg = 18
 	atk_range = 0
 	max_troops_hit = 2
+	
+	lives = 5
+	respawn_turns = 1
+	
 	icon = preload("res://Assets/KNIGHT_ICON.png")
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	
+	troop_type = "Knight"
+	attack_types = "Melee"
+	extra_info = "None"

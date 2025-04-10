@@ -4,6 +4,7 @@ extends Control
 @onready var squad = $Anchor/Squad
 @onready var info_panel = $Anchor/TroopInfoPanel
 
+@onready var rootNode = $"."
 @onready var timer = $SelectorTimer
 @onready var p1ReadyRect = $Anchor/ReadyToStartButton/p1Ready
 @onready var p2ReadyRect = $Anchor/ReadyToStartButton/p2Ready
@@ -11,25 +12,26 @@ extends Control
 @onready var waitingLabel = $Anchor/waitingText
 @onready var readyButton = $Anchor/ReadyToStartButton
 
-signal selectionEnded
+signal selectionEnded(troops)
 
 var localReady: bool = false
 var remoteReady: bool = false
 
 @export var wait_time: float = 10.0
-@export var cur_time: int = 10
-var prev_time: int = wait_time
-#var readyToStart: bool = false
+var cur_time: int = wait_time
+var prev_time: int = wait_time + 1
 var startSelectorTimer: bool = false
 
-var cur_troop: Troop
-var armyTroops: Array
-var squadTroops: Array
+var troopMatcher := TroopMatcher.new()
+var valid_troops = troopMatcher.troopTypes
 
-@rpc("any_peer","call_local","reliable")
-func player2Join() -> void:
-	readyButton.disabled = false
-	waitingLabel.visible = false
+var cur_troop: Troop
+var armyTroops: Array = []
+var squadTroops: Array = []
+var troops: Array = []
+
+#Multiplayer
+var readyToStart: bool = false
 
 func _ready() -> void:
 	timer.wait_time = wait_time
@@ -42,7 +44,7 @@ func _ready() -> void:
 	for troop in squadTroops:
 		troop.updateInfo.connect(_update_troop)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if startSelectorTimer:
 		var flt_time_left = timer.time_left
 		cur_time = int(flt_time_left)
@@ -51,48 +53,66 @@ func _process(delta: float) -> void:
 		if cur_time < prev_time:
 			prev_time = cur_time
 			timeLabel.text = str(cur_time+1)
+			#Update for every second
 
-
-func _update_troop(troop_str: String, troop: Troop) -> void:
-	if troop != cur_troop:
-		cur_troop = troop
-		info_panel._update_info(troop_str, troop)
-
-@rpc("any_peer","call_remote","reliable")
-func readyCheck(inReady) -> void:
-	remoteReady = inReady
-	if remoteReady:
-		p2ReadyRect.color = Color(0.0,1.0,0.0,1.0)
-	else:
-		p2ReadyRect.color = Color(1.0,0.0,0.0,1.0)
-	timerUpdate.rpc(remoteReady and localReady)
-	
-
-@rpc("any_peer","call_local","reliable")
-func timerUpdate(state: bool) -> void:
-	if state:
-		print("Both players ready, ending selection")
+func timer_reset() -> void:
+	if timer.is_stopped():
+		print("Ready Timer Started")
 		timer.start()
 		startSelectorTimer = true
 	else:
+		print("Ready Timer Stopped")
 		timer.stop()
 		timeLabel.text = ""
 		startSelectorTimer = false
 		prev_time = wait_time
 
+func _update_troop(troop: Troop) -> void:
+	if troop != cur_troop:
+		cur_troop = troop
+		info_panel._update_info(troop)
 
 func _on_ready_to_start_button_pressed() -> void:
 	if !localReady:
 		localReady = true
 		p1ReadyRect.color = Color(0.0,1.0,0.0,1.0)
+		p2ReadyRect.color = Color(0.0,1.0,0.0,1.0)
 	else:
 		localReady = false
 		p1ReadyRect.color = Color(1.0,0.0,0.0,1.0)
+		p2ReadyRect.color = Color(1.0,0.0,0.0,1.0)
 	
-	readyCheck.rpc(localReady)
-
-
+	timer_reset()
 
 func _on_selector_timer_timeout() -> void:
-		startSelectorTimer = false
-		emit_signal("selectionEnded")
+	startSelectorTimer = false
+	for troop in squadTroops:
+		if troop.troop_type not in valid_troops:
+			#print("Invalid Troop")
+			troop = troopMatcher.random_troop()
+		else:
+			#print("Valid Troop")
+			pass
+		
+		troops.append(troopMatcher.get_troop_type(troop.troop_type))
+	
+	transmit_info()
+	
+	self.queue_free()
+
+func transmit_info() -> void:
+	emit_signal("selectionEnded", troops)
+
+
+
+
+
+##OLD MULTIPLAYER STUFF
+
+#func remoteReadyCheck(inReady) -> void:
+	#remoteReady = inReady
+	#if remoteReady:
+		#p2ReadyRect.color = Color(0.0,1.0,0.0,1.0)
+	#else:
+		#p2ReadyRect.color = Color(1.0,0.0,0.0,1.0)
+	#timerStart.rpc(remoteReady and localReady)

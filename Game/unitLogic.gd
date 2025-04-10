@@ -14,9 +14,6 @@ var tarLoc: Vector2
 #Multiplayer
 var playerID: int = 0
 
-#Gamestates
-enum GAMESTATE {INIT, START, PLAN, ACTIVE, END}
-
 #Mouse Grab Logic
 var Selected:bool
 var Mouse_On_Top:bool
@@ -64,10 +61,10 @@ func set_troop_values(troop: Troop) -> void:
 	movePath.clear()
 
 func _ready() -> void:
-	if Multiplayer.is_host:
-		playerID = 1
-	else:
-		playerID = 2
+	#if Multiplayer.is_host:
+		#playerID = 1
+	#else:
+		#playerID = 2
 	
 	tileMap = get_parent()
 	global_position += Vector2.ONE * 125
@@ -78,52 +75,51 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	updateVisuals()
-	if Global.gameState == GAMESTATE.PLAN:
-		edit_path()
+	##TODO edit path on gameState PLAN
+	#edit_path()
 
 func Mouse_In(State:bool) -> void:
 	Mouse_On_Top = State
 	#print(Mouse_On_Top)
 
 func edit_path():
-	if is_multiplayer_authority():
-		if grabbed and Mouse_On_Top:
-			var currCoord = tileMap.local_to_map(coll.global_position)
-			var tileCenter = tileMap.map_to_local(currCoord) - Vector2(125,125)
-			var mospos = get_global_mouse_position()
-			coll.global_position = mospos
+	if grabbed and Mouse_On_Top:
+		var currCoord = tileMap.local_to_map(coll.global_position)
+		var tileCenter = tileMap.map_to_local(currCoord) - Vector2(125,125)
+		var mospos = get_global_mouse_position()
+		coll.global_position = mospos
+		
+		#print(tileMap.get_cell_tile_data(tileMap.local_to_map(global_position)))
+		#print(tileMap.local_to_map(global_position))
+		
+		#Keep the pathing within the map bounds
+		if (currCoord.x >= 0 and currCoord.y >= 0) and (currCoord.x < movePathBounds.x and currCoord.y < movePathBounds.y):
+			#Initialize distance moved from start position
+			if movePath.is_empty():
+				dist_moved = 0
 			
-			#print(tileMap.get_cell_tile_data(tileMap.local_to_map(global_position)))
-			#print(tileMap.local_to_map(global_position))
-			
-			#Keep the pathing within the map bounds
-			if (currCoord.x >= 0 and currCoord.y >= 0) and (currCoord.x < movePathBounds.x and currCoord.y < movePathBounds.y):
-				#Initialize distance moved from start position
-				if movePath.is_empty():
-					dist_moved = 0
-				
-				#Update the pathing
-				if !movePath.has(currCoord) and (movePath.is_empty() or movePath[movePath.size()-1].distance_to(currCoord) == 1):
-					if dist_moved < max_moves:
-						if !movePath.is_empty():
-							dist_moved += 1
-						path.add_point(tileCenter)
-						movePath.append(currCoord)
-						#print("Path End: ", movePath[-1])
-						print("Path Distance: ",dist_moved)
-					else:
-						#Maybe add some visual to know the troop is over the path range
-						#print("Over Troop Range Logic!")
-						pass
-				
-				#Remove pathing if backtracking
-				if movePath.size() >= 2 and currCoord == movePath[movePath.size()-2]:
-					path.remove_point(movePath.size()-1)
-					movePath.remove_at(movePath.size()-1)
-					dist_moved -= 1
+			#Update the pathing
+			if !movePath.has(currCoord) and (movePath.is_empty() or movePath[movePath.size()-1].distance_to(currCoord) == 1):
+				if dist_moved < max_moves:
+					if !movePath.is_empty():
+						dist_moved += 1
+					path.add_point(tileCenter)
+					movePath.append(currCoord)
+					#print("Path End: ", movePath[-1])
 					print("Path Distance: ",dist_moved)
-					
-				skewV = lerp(skewV, Input.get_last_mouse_velocity()/25, 0.1).clamp(Vector2.ONE * -25, Vector2.ONE * 25)
+				else:
+					#Maybe add some visual to know the troop is over the path range
+					#print("Over Troop Range Logic!")
+					pass
+			
+			#Remove pathing if backtracking
+			if movePath.size() >= 2 and currCoord == movePath[movePath.size()-2]:
+				path.remove_point(movePath.size()-1)
+				movePath.remove_at(movePath.size()-1)
+				dist_moved -= 1
+				print("Path Distance: ",dist_moved)
+				
+			skewV = lerp(skewV, Input.get_last_mouse_velocity()/25, 0.1).clamp(Vector2.ONE * -25, Vector2.ONE * 25)
 
 
 func on_start() -> void:
@@ -144,7 +140,8 @@ func updateVisuals() -> void:
 	sprite.material.set_shader_parameter('x_rot', -skewV.y)
 
 func _input(_event: InputEvent) -> void:
-	if Mouse_On_Top and Global.gameState == GAMESTATE.PLAN:
+	#TODO implement drag only on plan state
+	if Mouse_On_Top:# and gameState == GAMESTATE.PLAN:
 		if _event.is_action_pressed("LClick"):
 			path.clear_points()
 			movePath.clear()
