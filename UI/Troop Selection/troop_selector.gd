@@ -12,7 +12,7 @@ extends Control
 @onready var waitingLabel = $Anchor/waitingText
 @onready var readyButton = $Anchor/ReadyToStartButton
 
-signal selectionEnded
+signal selectionEnded(troops)
 
 var localReady: bool = false
 var remoteReady: bool = false
@@ -22,9 +22,13 @@ var cur_time: int = wait_time
 var prev_time: int = wait_time + 1
 var startSelectorTimer: bool = false
 
+var troopMatcher := TroopMatcher.new()
+var valid_troops = troopMatcher.troopTypes
+
 var cur_troop: Troop
-var armyTroops: Array
-var squadTroops: Array
+var armyTroops: Array = []
+var squadTroops: Array = []
+var troops: Array = []
 
 #Multiplayer
 var readyToStart: bool = false
@@ -63,10 +67,10 @@ func timer_reset() -> void:
 		startSelectorTimer = false
 		prev_time = wait_time
 
-func _update_troop(troop_str: String, troop: Troop) -> void:
+func _update_troop(troop: Troop) -> void:
 	if troop != cur_troop:
 		cur_troop = troop
-		info_panel._update_info(troop_str, troop)
+		info_panel._update_info(troop)
 
 func _on_ready_to_start_button_pressed() -> void:
 	if !localReady:
@@ -82,12 +86,22 @@ func _on_ready_to_start_button_pressed() -> void:
 
 func _on_selector_timer_timeout() -> void:
 	startSelectorTimer = false
+	for troop in squadTroops:
+		if troop.troop_type not in valid_troops:
+			#print("Invalid Troop")
+			troop = troopMatcher.random_troop()
+		else:
+			#print("Valid Troop")
+			pass
+		
+		troops.append(troopMatcher.get_troop_type(troop.troop_type))
+	
 	transmit_info()
 	
 	self.queue_free()
 
 func transmit_info() -> void:
-	emit_signal("selectionEnded")
+	emit_signal("selectionEnded", troops)
 
 
 

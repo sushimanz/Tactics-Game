@@ -15,6 +15,11 @@ run/main_scene="uid://d4kmo72krbika"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Noray="*res://addons/netfox.noray/noray.gd"
+PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
+
 [dotnet]
 
 project/assembly_name="Tactics Game"

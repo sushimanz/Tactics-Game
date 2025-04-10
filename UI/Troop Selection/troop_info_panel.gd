@@ -27,9 +27,9 @@ func _ready() -> void:
 		+ "\nExtra Info: \n" \
 		+ extra_info
 
-func _update_info(troop_str: String, troop: Troop) -> void:
+func _update_info(troop: Troop) -> void:
 	if troop is Troop:
-		troop_type = troop_str
+		troop_type = troop.troop_type
 		health = str(troop.health)
 		max_moves = str(troop.max_moves)
 		damage = str(troop.dmg)

@@ -1,3 +1,4 @@
+class_name Pyro
 extends Troop
 
 # Called when the node enters the scene tree for the first time.
@@ -7,7 +8,18 @@ func _init():
 	dmg = 16
 	atk_range = 4
 	max_troops_hit = 1
+	
+	lives = 5
+	respawn_turns = 1
+	
 	icon = preload("res://Assets/PYRO_ICON.png")
+	
+	troop_type = "Pyro"
+	attack_types = "Set on Fire, Put Fire Out, Immune Fire, Air Blast"
+	extra_info = "Set on Fire does X" \
+	+ "Put Fire Out does Y" \
+	+ "Immune Fire Out does Z" \
+	+ "Air Blast does A"
 
 func set_on_fire():
 	pass

@@ -1,3 +1,4 @@
+class_name TVHead
 extends Troop
 
 # Called when the node enters the scene tree for the first time.
@@ -7,7 +8,17 @@ func _init():
 	dmg = 14
 	atk_range = 5
 	max_troops_hit = 9
+	
+	lives = 5
+	respawn_turns = 1
+	
 	icon = preload("res://Assets/TVHEAD_ICON.png")
+	
+	troop_type = "TV Head"
+	attack_types = "Stun, Recharge, Kamikaze"
+	extra_info = "Stun does X" \
+	+ "Recharge does Y" \
+	+ "Kamikaze does Z"
 
 func stun():
 	pass
@@ -15,5 +26,5 @@ func stun():
 func recharge():
 	pass
 
-func sudoku():
+func kamikaze():
 	pass
