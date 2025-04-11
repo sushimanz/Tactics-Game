@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://bcrxnk7kywhco"]
+[gd_scene load_steps=10 format=4 uid="uid://bcrxnk7kywhco"]
 
 [ext_resource type="Script" uid="uid://deaphabq1i41e" path="res://Game/game.gd" id="1_37esa"]
 [ext_resource type="Texture2D" uid="uid://l5tfrutfudm2" path="res://Assets/grid.png" id="1_iv3md"]
+[ext_resource type="Script" uid="uid://crrg1tao3ygca" path="res://Audio/Music/music_manager.gd" id="2_ghvq8"]
 [ext_resource type="Script" uid="uid://b7epxnor4sqyv" path="res://Game/gameLogic.gd" id="3_iv3md"]
 [ext_resource type="PackedScene" uid="uid://cvmdpbotx5ehk" path="res://UI/Troop Selection/TroopSelectMenu.tscn" id="4_37esa"]
 [ext_resource type="PackedScene" uid="uid://ddxn3dbfi6q6d" path="res://UI/Troop Selection/drag_box.tscn" id="4_jxerj"]
@@ -20,6 +21,10 @@ default_font_size = 48
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_37esa")
+
+[node name="MusicManager" type="AudioStreamPlayer" parent="."]
+script = ExtResource("2_ghvq8")
+metadata/_custom_type_script = "uid://crrg1tao3ygca"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1920, 1080)

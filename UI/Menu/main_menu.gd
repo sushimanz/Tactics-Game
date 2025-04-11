@@ -5,6 +5,7 @@ signal noray_connected
 @onready var multi_id 
 @onready var oid_lbl = $OIDText
 @onready var oid_input = $LineEdit
+@onready var musicManager = $MusicManager
 
 @onready var buttons := [
 	$Buttons/StartButton,
@@ -17,6 +18,7 @@ signal noray_connected
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	musicManager.play_track(musicManager.intro[0])
 	
 	#await  Multiplayer.noray_connected
 	#oid_lbl.text = Noray.oid
