@@ -4,6 +4,7 @@ extends Node2D
 @onready var multiplayerSpawner = $MainGameplay/MultiplayerSpawner
 @onready var mainGameplay = $MainGameplay
 @onready var troopSelector = $TroopSelector
+@onready var musicManager = $MusicManager
 @onready var deployBoxes = $MainGameplay/TroopDeployBoxes
 
 #Constants
@@ -24,6 +25,8 @@ var set_to_troops: Array = []
 var cur_troop: Troop
 
 func _ready() -> void:
+	musicManager.play_track(musicManager.select[randi_range(0, (len(musicManager.select)-1))])
+	
 	gameState.deployTimer = $MainGameplay/DeploymentTimer
 	gameState.startTimer = $MainGameplay/StartTimer
 	gameState.planTimer = $MainGameplay/PlanningTimer
@@ -63,6 +66,8 @@ func add_units(OwnedUnit):
 	mainTileMap.add_child(unit)
 
 func _on_troop_selector_selection_ended(troops) -> void:
+	#musicManager.play_track(musicManager.gameplay_music_name[randi_range(0, (len(musicManager.gameplay_music_name)-1))])
+	
 	troopSelector.visible = false
 	mainGameplay.visible = true
 	var i = 0
