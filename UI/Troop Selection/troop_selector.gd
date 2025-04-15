@@ -55,8 +55,9 @@ func _process(_delta: float) -> void:
 			timeLabel.text = str(cur_time+1)
 			#Update for every second
 
-func timer_reset() -> void:
-	if timer.is_stopped():
+@rpc("any_peer","call_local","reliable")
+func timer_reset(inReady) -> void:
+	if timer.is_stopped() and inReady:
 		print("Ready Timer Started")
 		timer.start()
 		startSelectorTimer = true
@@ -76,13 +77,16 @@ func _on_ready_to_start_button_pressed() -> void:
 	if !localReady:
 		localReady = true
 		p1ReadyRect.color = Color(0.0,1.0,0.0,1.0)
-		p2ReadyRect.color = Color(0.0,1.0,0.0,1.0)
+		#p2ReadyRect.color = Color(0.0,1.0,0.0,1.0)
 	else:
 		localReady = false
 		p1ReadyRect.color = Color(1.0,0.0,0.0,1.0)
-		p2ReadyRect.color = Color(1.0,0.0,0.0,1.0)
+		#p2ReadyRect.color = Color(1.0,0.0,0.0,1.0)
 	
-	timer_reset()
+	if Multiplayer.is_multi:
+		remoteReadyCheck.rpc(localReady)
+	else:
+		timer_reset(localReady)
 
 func _on_selector_timer_timeout() -> void:
 	startSelectorTimer = false
@@ -105,11 +109,11 @@ func transmit_info() -> void:
 
 
 ##OLD MULTIPLAYER STUFF
-
-#func remoteReadyCheck(inReady) -> void:
-	#remoteReady = inReady
-	#if remoteReady:
-		#p2ReadyRect.color = Color(0.0,1.0,0.0,1.0)
-	#else:
-		#p2ReadyRect.color = Color(1.0,0.0,0.0,1.0)
-	#timerStart.rpc(remoteReady and localReady)
+@rpc("any_peer","call_remote","reliable")
+func remoteReadyCheck(inReady) -> void:
+	remoteReady = inReady
+	if remoteReady:
+		p2ReadyRect.color = Color(0.0,1.0,0.0,1.0)
+	else:
+		p2ReadyRect.color = Color(1.0,0.0,0.0,1.0)
+	timer_reset.rpc(remoteReady and localReady)

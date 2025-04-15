@@ -27,6 +27,21 @@ var set_to_troops: Array = []
 var cur_troop: Troop
 
 func _ready() -> void:
+		#multiplayer Logic
+	if Multiplayer.is_host:
+		Multiplayer.is_multi = true
+	
+	multiplayer.peer_connected.connect(
+		func(pid):
+			print("Peer " + str(pid) + " has joined the game!")
+			Multiplayer.is_multi = true
+	)
+	
+	if Multiplayer.is_multi:
+		print("GAME INITIALIZING / Waiting for other player")
+	else:
+		print("Initializing test / singleplayer game")
+	
 	musicManager.play_track(musicManager.select[randi_range(0, (len(musicManager.select)-1))])
 	
 	gameState.deployTimer = $MainGameplay/DeploymentTimer

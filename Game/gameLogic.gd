@@ -8,15 +8,12 @@ var tick: int = 0
 @onready var remoteReadyInd = $"../UI/p2ReadyInd"
 
 #Multiplayer
-var is_multiplayer: bool = false
+#var is_multiplayer: bool = false
 var localReady: bool = false
 var remoteReady: bool = false
 
 func _ready() -> void:
-	if is_multiplayer:
-		print("GAME INITIALIZING / Waiting for other player")
-	else:
-		print("Initializing test / singleplayer game")
+	pass
 
 
 #@rpc("any_peer","call_local", "reliable")
@@ -57,7 +54,8 @@ func _on_button_pressed() -> void:
 		readyInd.color = Color(1.0,0.0,0.0,1.0)
 	
 	##Old multiplayer stuff
-	#remoteReadyCheck.rpc(localReady)
+	if Multiplayer.is_multi:
+		remoteReadyCheck.rpc(localReady)
 
 
 
@@ -78,18 +76,19 @@ func _on_button_pressed() -> void:
 
 
 ##Old multiplayer stuff
-#@rpc("any_peer","call_remote","reliable")
-#func remoteReadyCheck(inReady) -> void:
-	##print(multiplayer.get_unique_id())
-	#remoteReady = inReady
-	#if remoteReady:
-		#remoteReadyInd.color = Color(0.0,1.0,0.0,1.0)
-	#else:
-		#remoteReadyInd.color = Color(1.0,0.0,0.0,1.0)
-	#
-	#if is_multiplayer:
-		#if inReady and localReady:
-			#print("Both players ready, Starting round")
+@rpc("any_peer","call_remote","reliable")
+func remoteReadyCheck(inReady) -> void:
+	#print(multiplayer.get_unique_id())
+	remoteReady = inReady
+	if remoteReady:
+		remoteReadyInd.color = Color(0.0,1.0,0.0,1.0)
+	else:
+		remoteReadyInd.color = Color(1.0,0.0,0.0,1.0)
+	
+	if Multiplayer.is_multi:
+		if inReady and localReady:
+			print("Both players ready, Starting round")
 			#startRound.rpc()
-	#else:
+	else:
+		pass
 		#startRound.rpc()

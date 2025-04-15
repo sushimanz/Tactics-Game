@@ -20,8 +20,8 @@ signal noray_connected
 func _ready() -> void:
 	musicManager.play_track(musicManager.intro[0])
 	
-	#await  Multiplayer.noray_connected
-	#oid_lbl.text = Noray.oid
+	await  Multiplayer.noray_connected
+	oid_lbl.text = Noray.oid
 
 	for button in buttons: # simple loop to bind the buttons to the functions
 		button.connect("mouse_entered", Callable(self, "_on_mouse_enter").bind(button))
@@ -71,7 +71,7 @@ func _on_exit_button_pressed() -> void:
 
 func _on_copy_button_pressed() -> void:
 	##Old multiplayer stuff
-	#DisplayServer.clipboard_set(Noray.oid)
+	DisplayServer.clipboard_set(Noray.oid)
 	pass
 
 
@@ -79,7 +79,7 @@ func _on_join_button_pressed() -> void:
 	await get_tree().create_timer(0.4).timeout
 	
 	##Old multiplayer stuff
-	#Multiplayer.join(oid_input.text)
+	Multiplayer.join(oid_input.text)
 	
 	get_tree().change_scene_to_file("res://Game/Game.tscn")
 
@@ -88,7 +88,7 @@ func _on_host_button_pressed() -> void:
 	await get_tree().create_timer(0.4).timeout
 	
 	##Old multiplayer stuff
-	#Multiplayer.host()
+	Multiplayer.host()
 	
 	get_tree().change_scene_to_file("res://Game/Game.tscn")
 
