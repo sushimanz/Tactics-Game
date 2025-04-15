@@ -30,7 +30,7 @@ func _ready() -> void:
 func _update_info(troop: Troop) -> void:
 	if troop is Troop:
 		troop_type = troop.troop_type
-		health = str(troop.health)
+		health = str(troop.max_health)
 		max_moves = str(troop.max_moves)
 		damage = str(troop.dmg)
 		atk_range = str(troop.atk_range)

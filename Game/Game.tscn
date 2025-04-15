@@ -51,7 +51,7 @@ script = ExtResource("3_iv3md")
 
 [node name="Host" type="Node2D" parent="MainGameplay/TileMapLayer"]
 
-[node name="Clients" type="Node2D" parent="MainGameplay/TileMapLayer"]
+[node name="Client" type="Node2D" parent="MainGameplay/TileMapLayer"]
 
 [node name="TroopDeployBoxes" type="Control" parent="MainGameplay"]
 layout_mode = 3
@@ -115,7 +115,7 @@ one_shot = true
 one_shot = true
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MainGameplay"]
-spawn_path = NodePath("../TileMapLayer")
+spawn_path = NodePath("../TileMapLayer/Client")
 
 [node name="GL_Button" type="Control" parent="MainGameplay"]
 anchors_preset = 0

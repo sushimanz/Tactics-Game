@@ -1,4 +1,4 @@
-class_name UnitLogic
+#class_name OldUnitLogic
 extends Node2D
 
 var tileMap : TileMapLayer

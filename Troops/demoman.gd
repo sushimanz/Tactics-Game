@@ -3,14 +3,15 @@ extends Troop
 
 # Called when the node enters the scene tree for the first time.
 func _init():
-	health = 150
+	max_health = 150
 	max_moves = 2
+	max_attacks = 1
 	dmg = 21
 	atk_range = 4
 	max_troops_hit = 3
 	
-	lives = 5
-	respawn_turns = 1
+	reinforcements = 5
+	reinforce_turns = 1
 	
 	icon = preload("res://Assets/DEMOMAN_ICON.png")
 	

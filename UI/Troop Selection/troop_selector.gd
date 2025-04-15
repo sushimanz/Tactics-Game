@@ -28,7 +28,7 @@ var valid_troops = troopMatcher.troopTypes
 var cur_troop: Troop
 var armyTroops: Array = []
 var squadTroops: Array = []
-var troops: Array = []
+var troops = {}
 
 #Multiplayer
 var readyToStart: bool = false
@@ -87,17 +87,14 @@ func _on_ready_to_start_button_pressed() -> void:
 func _on_selector_timer_timeout() -> void:
 	startSelectorTimer = false
 	for troop in squadTroops:
+		var set_to_troop = troop
 		if troop.troop_type not in valid_troops:
 			#print("Invalid Troop")
-			troop = troopMatcher.random_troop()
-		else:
-			#print("Valid Troop")
-			pass
+			set_to_troop = troopMatcher.random_troop()
 		
-		troops.append(troopMatcher.get_troop_type(troop.troop_type))
+		troops[troop.name] = (troopMatcher.get_troop_type(set_to_troop.troop_type))
 	
 	transmit_info()
-	
 	self.queue_free()
 
 func transmit_info() -> void:

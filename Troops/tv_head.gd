@@ -3,14 +3,15 @@ extends Troop
 
 # Called when the node enters the scene tree for the first time.
 func _init():
-	health = 125
+	max_health = 125
 	max_moves = 2
+	max_attacks = 1
 	dmg = 14
 	atk_range = 5
 	max_troops_hit = 9
 	
-	lives = 5
-	respawn_turns = 1
+	reinforcements = 5
+	reinforce_turns = 1
 	
 	icon = preload("res://Assets/TVHEAD_ICON.png")
 	

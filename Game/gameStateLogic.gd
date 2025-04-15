@@ -44,7 +44,7 @@ func _game_init():
 	
 	#Go to deploy after initializing game
 	gameState = GAMESTATE.DEPLOY
-	prev_time_left = deployTimer.wait_time
+	prev_time_left = float(deployTimer.wait_time)
 	deployTimer.start()
 	print("CHANGE GAMESTATE TO: DEPLOY ", gameState)
 

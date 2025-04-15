@@ -45,5 +45,5 @@ static func get_troop_type(troop: String) -> Troop:
 
 static func random_troop() -> Troop:
 	var rand_troop = troopTypes[randi_range(0, len(troopTypes)-1)]
-	print("Random Troop is: ", rand_troop)
+	#print("Random Troop is: ", rand_troop)
 	return get_troop_type(rand_troop)

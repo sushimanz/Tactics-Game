@@ -1,11 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ycif7ms3qqiw"]
+[gd_scene load_steps=6 format=3 uid="uid://ycif7ms3qqiw"]
 
-[ext_resource type="Script" uid="uid://civ754pwjqjuk" path="res://Game/unit.gd" id="1_jf83v"]
+[ext_resource type="Script" uid="uid://c5nhdajprlxyu" path="res://Game/unit.gd" id="1_jf83v"]
 [ext_resource type="Shader" uid="uid://dabqirjru0uja" path="res://Game/skew.gdshader" id="2_0cvqy"]
 [ext_resource type="Texture2D" uid="uid://c84pt2pdd540m" path="res://Assets/KNIGHT_ICON.png" id="2_u1nqo"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_pl1pi"]
-radius = 99.0202
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gq3cw"]
 resource_local_to_scene = true
@@ -23,11 +20,6 @@ properties/0/replication_mode = 1
 
 [node name="Unit" type="Node2D"]
 script = ExtResource("1_jf83v")
-
-[node name="Collision" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
-shape = SubResource("CircleShape2D_pl1pi")
 
 [node name="Path" type="Line2D" parent="."]
 

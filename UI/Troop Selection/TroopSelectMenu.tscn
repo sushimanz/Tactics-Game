@@ -177,21 +177,21 @@ texture = null
 can_drag = false
 replace = true
 
-[node name="Troop5" parent="Anchor/Squad" instance=ExtResource("2_yvun3")]
-layout_mode = 0
-offset_left = 268.0
-offset_top = -295.0
-offset_right = 388.0
-offset_bottom = -175.0
-texture = null
-can_drag = false
-replace = true
-
 [node name="Troop4" parent="Anchor/Squad" instance=ExtResource("2_yvun3")]
 layout_mode = 0
 offset_left = 104.0
 offset_top = -295.0
 offset_right = 224.0
+offset_bottom = -175.0
+texture = null
+can_drag = false
+replace = true
+
+[node name="Troop5" parent="Anchor/Squad" instance=ExtResource("2_yvun3")]
+layout_mode = 0
+offset_left = 268.0
+offset_top = -295.0
+offset_right = 388.0
 offset_bottom = -175.0
 texture = null
 can_drag = false

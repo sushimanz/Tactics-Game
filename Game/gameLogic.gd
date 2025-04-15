@@ -12,16 +12,12 @@ var is_multiplayer: bool = false
 var localReady: bool = false
 var remoteReady: bool = false
 
-#Troop Type Dropdown node access
-@onready var troopTypeDropdown = $"../TroopTypeSelectDropdown"
-
 func _ready() -> void:
 	if is_multiplayer:
 		print("GAME INITIALIZING / Waiting for other player")
 	else:
 		print("Initializing test / singleplayer game")
-	#Uncommment the line below if you want to test the game without second player (some functions dont work with only one player)
-	#Global.gameState = GAMESTATE.START
+
 
 #@rpc("any_peer","call_local", "reliable")
 func roundTick() -> void:

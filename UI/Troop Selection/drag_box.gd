@@ -5,7 +5,7 @@ static var texture_size: Vector2 = Vector2(120, 120)
 
 signal updateInfo(troop)
 
-@onready var troop_type: String = ($".").name
+@onready var troop_type: String = name
 @onready var texture_box = $"."
 @onready var label = $Label
 @onready var button = $BackgroundButton
@@ -65,7 +65,9 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 	if deployable:
 		if troop is Troop:
 			emit_signal("updateInfo", troop)
-			self.queue_free()
+			#can_drag = false
+			#replace = false
+			#deployable = false
 	else:
 		if replace:
 			troop_type = data[0]
