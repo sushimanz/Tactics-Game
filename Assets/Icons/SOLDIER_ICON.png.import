@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4byao0j5b11g"
-path="res://.godot/imported/SNIPER_ICON.png-b6c5ac38d513afa24078eeeea075501a.ctex"
+uid="uid://bbhylgn5t7rgu"
+path="res://.godot/imported/SOLDIER_ICON.png-b369f4d92e5f3c4078e09e71d06d75d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/SNIPER_ICON.png"
-dest_files=["res://.godot/imported/SNIPER_ICON.png-b6c5ac38d513afa24078eeeea075501a.ctex"]
+source_file="res://Assets/Icons/SOLDIER_ICON.png"
+dest_files=["res://.godot/imported/SOLDIER_ICON.png-b369f4d92e5f3c4078e09e71d06d75d7.ctex"]
 
 [params]
 

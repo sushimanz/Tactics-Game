@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0w612fq3g8tx"
-path="res://.godot/imported/SCRAPYARD_GIRL_ICON.png-44059c43d4d1f963867a2dd4fba515fd.ctex"
+uid="uid://dki6v434stkvi"
+path="res://.godot/imported/MEDIC_ICON.png-ab0056bdccb1fb7e2bb8c5b4c8844c56.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/SCRAPYARD_GIRL_ICON.png"
-dest_files=["res://.godot/imported/SCRAPYARD_GIRL_ICON.png-44059c43d4d1f963867a2dd4fba515fd.ctex"]
+source_file="res://Assets/Icons/MEDIC_ICON.png"
+dest_files=["res://.godot/imported/MEDIC_ICON.png-ab0056bdccb1fb7e2bb8c5b4c8844c56.ctex"]
 
 [params]
 

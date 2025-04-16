@@ -4,12 +4,13 @@ extends TextureRect
 static var texture_size: Vector2 = Vector2(120, 120)
 
 signal updateInfo(troop)
+signal deployTroop(troop, name)
 
-@onready var troop_type: String = name
 @onready var texture_box = $"."
 @onready var label = $Label
 @onready var button = $BackgroundButton
-@onready var troop = TroopMatcher.get_troop_type(troop_type)
+@onready var troop = TroopMatcher.get_troop_type(name)
+var troop_type = name
 
 @export var texture_icon: Texture2D
 @export var can_drag: bool = true
@@ -17,6 +18,8 @@ signal updateInfo(troop)
 @export var deployable: bool = false
 
 var l_mouse_btn_held: bool = false
+var dragging: bool = false
+var disabled: bool = false
 
 ##TODO
 #See if you can spawn a unit on a tile
@@ -25,11 +28,18 @@ var l_mouse_btn_held: bool = false
 #spawn unit						<-- I think Unit.new()? Not sure
 #unit.value = troop.value		<-- Replace value with actual value name
 
+func _disable():
+	disabled = true
+	can_drag = false
+	replace = false
+	deployable = false
+	dragging = false
+
 func _ready() -> void:
 	#print(troop_type, " Loaded")
 	size = texture_size
 	button.size = size
-	label.text = troop_type
+	label.text = name
 	
 	if troop is Troop:
 		texture = troop.icon
@@ -37,52 +47,68 @@ func _ready() -> void:
 		texture = texture_icon
 
 func _get_drag_data(at_position: Vector2) -> Variant:
-	if can_drag:
-		var preview_texture = TextureRect.new()
+	if not disabled:
+		#print("Get Troop ", name)
+		if deployable:
+			if l_mouse_btn_held:
+				dragging = true
 		
-		preview_texture.texture = texture
-		preview_texture.expand_mode = 1
-		preview_texture.size = texture_size
-		preview_texture.set_self_modulate(Color(1.0, 1.0, 1.0, 0.5))
-		
-		var preview = Control.new()
-		preview.add_child(preview_texture)
-		set_drag_preview(preview)
-		
-		if replace:
-			texture = null
-			texture_icon = preview_texture.texture
-			return [troop_type, preview_texture.texture]
-		else:
-			return [troop_type, texture]
+		if can_drag:
+			var preview_texture = TextureRect.new()
+			
+			preview_texture.texture = texture
+			preview_texture.expand_mode = 1
+			preview_texture.size = texture_size
+			preview_texture.set_self_modulate(Color(1.0, 1.0, 1.0, 0.5))
+			
+			var preview = Control.new()
+			preview.add_child(preview_texture)
+			set_drag_preview(preview)
+			
+			if replace:
+				texture = null
+				texture_icon = preview_texture.texture
+			return troop
+	
 	return
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
-	return true
+	if not disabled:
+		return data is Troop
+	
+	return false
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
-	#This needs to happen if dropped on the map, not sure how to do yet
-	if deployable:
-		if troop is Troop:
-			emit_signal("updateInfo", troop)
-			#can_drag = false
-			#replace = false
-			#deployable = false
-	else:
+	if not disabled:
+		#print("Data dropped into ", name)
+		
+		#This needs to happen if dropped on the map, not sure how to do yet
 		if replace:
-			troop_type = data[0]
-			texture = data[1]
-			label.text = troop_type
+			troop = data
+			troop_type = troop.troop_type
+			texture = troop.icon
+			label.text = troop.troop_type
+		
+		#print(name, " is now ", troop.troop_type)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.is_pressed():
-			l_mouse_btn_held = true
-		else:
-			l_mouse_btn_held = false
+	if not disabled:
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				if event.pressed:
+					l_mouse_btn_held = true
+				else:
+					l_mouse_btn_held = false
+					if dragging:
+						dragging = false
+						#This needs to happen if dropped on the map, not sure how to do yet
+						if deployable:
+							#print(name, " is deployable")
+							if troop is Troop:
+								#print(name, " is a troop")
+								emit_signal("deployTroop", troop, name)
 
 func _on_mouse_entered() -> void:
 	if !l_mouse_btn_held:
-		troop = TroopMatcher.get_troop_type(troop_type)
 		if troop is Troop:
 			emit_signal("updateInfo", troop)

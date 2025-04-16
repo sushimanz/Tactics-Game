@@ -18,7 +18,7 @@ signal noray_connected
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	musicManager.play_track(musicManager.intro[0])
+	musicManager.play_track(musicManager.intro[randi_range(0, (len(musicManager.intro)-1))])
 	
 	await  Multiplayer.noray_connected
 	oid_lbl.text = Noray.oid

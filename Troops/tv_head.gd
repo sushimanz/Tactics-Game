@@ -13,7 +13,7 @@ func _init():
 	reinforcements = 5
 	reinforce_turns = 1
 	
-	icon = preload("res://Assets/TVHEAD_ICON.png")
+	icon = preload("res://Assets/Icons/TVHEAD_ICON.png")
 	
 	troop_type = "TV Head"
 	attack_types = "Stun, Recharge, Kamikaze"

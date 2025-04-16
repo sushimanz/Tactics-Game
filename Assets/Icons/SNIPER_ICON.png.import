@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbgqm3p1ctccv"
-path="res://.godot/imported/ENGINEER_ICON.png-24673916e1ac54f431c769762c47168f.ctex"
+uid="uid://d4byao0j5b11g"
+path="res://.godot/imported/SNIPER_ICON.png-0a86ea73dccfc75380bbef8043ed90b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ENGINEER_ICON.png"
-dest_files=["res://.godot/imported/ENGINEER_ICON.png-24673916e1ac54f431c769762c47168f.ctex"]
+source_file="res://Assets/Icons/SNIPER_ICON.png"
+dest_files=["res://.godot/imported/SNIPER_ICON.png-0a86ea73dccfc75380bbef8043ed90b6.ctex"]
 
 [params]
 

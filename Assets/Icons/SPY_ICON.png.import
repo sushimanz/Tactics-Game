@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by4nlrd1aocg6"
-path="res://.godot/imported/DEMOMAN_ICON.png-bb1c4d49e064689bb80111a7f0d93c38.ctex"
+uid="uid://c1ahle51bam56"
+path="res://.godot/imported/SPY_ICON.png-2b0d8a715c20dfacb4ee5a4159df51a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/DEMOMAN_ICON.png"
-dest_files=["res://.godot/imported/DEMOMAN_ICON.png-bb1c4d49e064689bb80111a7f0d93c38.ctex"]
+source_file="res://Assets/Icons/SPY_ICON.png"
+dest_files=["res://.godot/imported/SPY_ICON.png-2b0d8a715c20dfacb4ee5a4159df51a4.ctex"]
 
 [params]
 

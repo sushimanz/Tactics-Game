@@ -15,7 +15,6 @@ grow_vertical = 2
 script = ExtResource("1_wrubb")
 
 [node name="MusicManager" type="AudioStreamPlayer" parent="."]
-mix_target = 1
 script = ExtResource("2_t0n6y")
 metadata/_custom_type_script = "uid://crrg1tao3ygca"
 

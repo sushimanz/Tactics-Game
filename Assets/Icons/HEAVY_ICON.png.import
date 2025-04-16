@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t2mcfdik3lun"
-path="res://.godot/imported/ARCHER_ICON.png-48aca64021822742fd46403fbe16eb10.ctex"
+uid="uid://cafytmymbtunf"
+path="res://.godot/imported/HEAVY_ICON.png-d82ead7dd48b05e1b34c4f5b6f138482.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ARCHER_ICON.png"
-dest_files=["res://.godot/imported/ARCHER_ICON.png-48aca64021822742fd46403fbe16eb10.ctex"]
+source_file="res://Assets/Icons/HEAVY_ICON.png"
+dest_files=["res://.godot/imported/HEAVY_ICON.png-d82ead7dd48b05e1b34c4f5b6f138482.ctex"]
 
 [params]
 

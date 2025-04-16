@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c84pt2pdd540m"
-path="res://.godot/imported/KNIGHT_ICON.png-78a1e78e2012d781c25b1acfc81a5283.ctex"
+uid="uid://botwi0ii4jqd6"
+path="res://.godot/imported/PYRO_ICON.png-6406532273211592a78c0b6d872712af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/KNIGHT_ICON.png"
-dest_files=["res://.godot/imported/KNIGHT_ICON.png-78a1e78e2012d781c25b1acfc81a5283.ctex"]
+source_file="res://Assets/Icons/PYRO_ICON.png"
+dest_files=["res://.godot/imported/PYRO_ICON.png-6406532273211592a78c0b6d872712af.ctex"]
 
 [params]
 
