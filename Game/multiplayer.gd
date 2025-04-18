@@ -55,6 +55,7 @@ func connect_to_server(address, port):
 	if !is_host:
 		var udp = PacketPeerUDP.new()
 		udp.bind(Noray.local_port)
+		print("TEST - ", Noray.local_port)
 		udp.set_dest_address(address, port)
 		
 		err = await PacketHandshake.over_packet_peer(udp)
@@ -63,6 +64,7 @@ func connect_to_server(address, port):
 		if err != OK:
 			if err != ERR_BUSY:
 				print("Handshake failed")
+				print(err)
 				return err
 		else:
 			print("Handshake success")
