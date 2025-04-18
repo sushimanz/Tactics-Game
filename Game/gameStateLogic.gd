@@ -23,7 +23,7 @@ func updateTimer(timer: Timer) -> bool:
 	var time_left = int(floor(timer.time_left))
 	
 	if prev_time_left > time_left:
-		print(timer.name, " Time Left: ", prev_time_left)
+		#print(timer.name, " Time Left: ", prev_time_left)
 		prev_time_left = time_left
 		#Updates for every second
 	

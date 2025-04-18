@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8nvpvowu07x"
-path="res://.godot/imported/BAITER_ICON.png-7c6c25580edc2072f37e762afcb982fd.ctex"
+uid="uid://c84pt2pdd540m"
+path="res://.godot/imported/KNIGHT_ICON.png-e96d7c2a6e061ee723ebba6b63a5589f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/BAITER_ICON.png"
-dest_files=["res://.godot/imported/BAITER_ICON.png-7c6c25580edc2072f37e762afcb982fd.ctex"]
+source_file="res://Assets/Icons/KNIGHT_ICON.png"
+dest_files=["res://.godot/imported/KNIGHT_ICON.png-e96d7c2a6e061ee723ebba6b63a5589f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cafytmymbtunf"
-path="res://.godot/imported/HEAVY_ICON.png-bdef6538bd34a32b9314558879bea375.ctex"
+uid="uid://cbgqm3p1ctccv"
+path="res://.godot/imported/ENGINEER_ICON.png-cbe8a76961143f958b7f8a2792124ea5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HEAVY_ICON.png"
-dest_files=["res://.godot/imported/HEAVY_ICON.png-bdef6538bd34a32b9314558879bea375.ctex"]
+source_file="res://Assets/Icons/ENGINEER_ICON.png"
+dest_files=["res://.godot/imported/ENGINEER_ICON.png-cbe8a76961143f958b7f8a2792124ea5.ctex"]
 
 [params]
 

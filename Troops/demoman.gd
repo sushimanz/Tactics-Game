@@ -13,7 +13,7 @@ func _init():
 	reinforcements = 5
 	reinforce_turns = 1
 	
-	icon = preload("res://Assets/DEMOMAN_ICON.png")
+	icon = preload("res://Assets/Icons/DEMOMAN_ICON.png")
 	
 	troop_type = "Demoman"
 	attack_types = "Melee, Explosion thing"

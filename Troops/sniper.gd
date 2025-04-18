@@ -13,7 +13,7 @@ func _init():
 	reinforcements = 5
 	reinforce_turns = 1
 	
-	icon = preload("res://Assets/SNIPER_ICON.png")
+	icon = preload("res://Assets/Icons/SNIPER_ICON.png")
 	
 	troop_type = "Sniper"
 	attack_types = "Melee, Ranged"

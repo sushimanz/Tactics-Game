@@ -25,7 +25,7 @@ var playerID: int = 0
 @export var dmg: int = 50
 @export var atk_range: int = 10
 @export var max_troops_hit: int = 5
-@export var icon: CompressedTexture2D = preload("res://Assets/KNIGHT_ICON.png")
+@export var icon: CompressedTexture2D = preload("res://Assets/Icons/KNIGHT_ICON.png")
 
 #Current Values
 var health: int = max_health
@@ -59,8 +59,8 @@ func set_troop_values(troop: Troop) -> void:
 #Reset actions and clear path
 func _reset_unit():
 	planned_actions.clear()
-	unitPlanning.path.clear_points()
-	unitPlanning.movePath.clear()
+	#unitPlanning.path.clear_points()
+	#unitPlanning.movePath.clear()
 
 #Do when spawning a unit (Reinforce = respawn)
 func _spawn_unit():

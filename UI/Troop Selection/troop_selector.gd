@@ -17,7 +17,7 @@ signal selectionEnded(troops)
 var localReady: bool = false
 var remoteReady: bool = false
 
-@export var wait_time: float = 10.0
+@export var wait_time: float = 1.0
 var cur_time: int = wait_time
 var prev_time: int = wait_time + 1
 var startSelectorTimer: bool = false
@@ -91,20 +91,17 @@ func _on_ready_to_start_button_pressed() -> void:
 func _on_selector_timer_timeout() -> void:
 	startSelectorTimer = false
 	for troop in squadTroops:
-		var set_to_troop = troop
 		if troop.troop_type not in valid_troops:
-			#print("Invalid Troop")
-			set_to_troop = troopMatcher.random_troop()
-		
-		troops[troop.name] = (troopMatcher.get_troop_type(set_to_troop.troop_type))
+			troops[troop.name] = troopMatcher.random_troop()
+			#print(troop.troop_type, " is an invalid troop. Randomizing to ", troops[troop.name].troop_type)
+		else:
+			troops[troop.name] = (troopMatcher.get_troop_type(troop.troop_type))
 	
 	transmit_info()
 	self.queue_free()
 
 func transmit_info() -> void:
 	emit_signal("selectionEnded", troops)
-
-
 
 
 

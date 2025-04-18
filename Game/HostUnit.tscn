@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c5nhdajprlxyu" path="res://Game/unit.gd" id="1_jf83v"]
 [ext_resource type="Shader" uid="uid://dabqirjru0uja" path="res://Game/skew.gdshader" id="2_0cvqy"]
-[ext_resource type="Texture2D" uid="uid://c84pt2pdd540m" path="res://Assets/KNIGHT_ICON.png" id="2_u1nqo"]
+[ext_resource type="Texture2D" uid="uid://c84pt2pdd540m" path="res://Assets/Icons/KNIGHT_ICON.png" id="2_u1nqo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gq3cw"]
 resource_local_to_scene = true

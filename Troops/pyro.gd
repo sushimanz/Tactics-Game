@@ -13,7 +13,7 @@ func _init():
 	reinforcements = 5
 	reinforce_turns = 1
 	
-	icon = preload("res://Assets/PYRO_ICON.png")
+	icon = preload("res://Assets/Icons/PYRO_ICON.png")
 	
 	troop_type = "Pyro"
 	attack_types = "Set on Fire, Put Fire Out, Immune Fire, Air Blast"

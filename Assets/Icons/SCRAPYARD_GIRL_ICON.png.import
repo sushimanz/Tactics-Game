@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1ahle51bam56"
-path="res://.godot/imported/SPY_ICON.png-29d1e90cf786676da7645febf5a2fa55.ctex"
+uid="uid://d0w612fq3g8tx"
+path="res://.godot/imported/SCRAPYARD_GIRL_ICON.png-c0793107397c199087a2d3f713e751dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/SPY_ICON.png"
-dest_files=["res://.godot/imported/SPY_ICON.png-29d1e90cf786676da7645febf5a2fa55.ctex"]
+source_file="res://Assets/Icons/SCRAPYARD_GIRL_ICON.png"
+dest_files=["res://.godot/imported/SCRAPYARD_GIRL_ICON.png-c0793107397c199087a2d3f713e751dd.ctex"]
 
 [params]
 

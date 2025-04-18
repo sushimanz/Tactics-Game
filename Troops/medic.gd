@@ -13,7 +13,7 @@ func _init():
 	reinforcements = 5
 	reinforce_turns = 1
 	
-	icon = preload("res://Assets/MEDIC_ICON.png")
+	icon = preload("res://Assets/Icons/MEDIC_ICON.png")
 	
 	troop_type = "Medic"
 	attack_types = "Ubercharge, Heal"

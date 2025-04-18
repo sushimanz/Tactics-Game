@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dki6v434stkvi"
-path="res://.godot/imported/MEDIC_ICON.png-7a232620e79179228fa0bd89d9f83640.ctex"
+uid="uid://by4nlrd1aocg6"
+path="res://.godot/imported/DEMOMAN_ICON.png-da042d73842eddd17f05c0ae30361c54.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/MEDIC_ICON.png"
-dest_files=["res://.godot/imported/MEDIC_ICON.png-7a232620e79179228fa0bd89d9f83640.ctex"]
+source_file="res://Assets/Icons/DEMOMAN_ICON.png"
+dest_files=["res://.godot/imported/DEMOMAN_ICON.png-da042d73842eddd17f05c0ae30361c54.ctex"]
 
 [params]
 

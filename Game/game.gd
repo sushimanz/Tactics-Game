@@ -4,8 +4,6 @@ extends Node2D
 @onready var multiplayerSpawner = $MainGameplay/MultiplayerSpawner
 @onready var mainGameplay = $MainGameplay
 @onready var troopSelector = $TroopSelector
-@onready var hostUnits = $MainGameplay/TileMapLayer/Host
-@onready var clientUnits = $MainGameplay/TileMapLayer/Client
 @onready var musicManager = $MusicManager
 @onready var deployBoxes = $MainGameplay/TroopDeployBoxes
 
@@ -27,7 +25,9 @@ var set_to_troops: Array = []
 var cur_troop: Troop
 
 func _ready() -> void:
-		#multiplayer Logic
+	musicManager.play_track(musicManager.select[randi_range(0, (len(musicManager.select)-1))])
+	
+	#multiplayer Logic
 	if Multiplayer.is_host:
 		Multiplayer.is_multi = true
 	
@@ -42,8 +42,6 @@ func _ready() -> void:
 	else:
 		print("Initializing test / singleplayer game")
 	
-	musicManager.play_track(musicManager.select[randi_range(0, (len(musicManager.select)-1))])
-	
 	gameState.deployTimer = $MainGameplay/DeploymentTimer
 	gameState.startTimer = $MainGameplay/StartTimer
 	gameState.planTimer = $MainGameplay/PlanningTimer
@@ -57,23 +55,12 @@ func _process(delta: float) -> void:
 	if in_gamestate:
 		gameState.updateGameState()
 
-func add_units():
-	var created_unit
-	for unit in hostUnits.get_children():
-		created_unit = unit.instantiate()
-		hostUnits.add_child(created_unit)
-	
-	for unit in clientUnits.get_children():
-		created_unit = unit.instantiate()
-		clientUnits.add_child(created_unit)
-
 func _update_troop(troop: Troop, idx: int) -> void:
 	#print("index ",idx)
 	if cur_troop != troop:
 		cur_troop = troop
 		deployables[idx].troop = cur_troop
 		deployables[idx].texture = cur_troop.icon
-		deployables[idx].troop_type = cur_troop.troop_type
 		deployables[idx].label.text = cur_troop.troop_type
 
 func _on_troop_selector_selection_ended(in_troops) -> void:
