@@ -16,8 +16,8 @@ func _init():
 	icon = preload("res://Assets/Icons/CANNON_ICON.png")
 	
 	troop_type = "Cannon Wheels"
-	attack_types = "Build"
-	extra_info = "Can build things I guess?"
+	attack_types = "Ranged"
+	extra_info = "Ranged"
 
 func build():
 	pass
