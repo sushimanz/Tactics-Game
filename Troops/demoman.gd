@@ -16,8 +16,8 @@ func _init():
 	icon = preload("res://Assets/Icons/DEMOMAN_ICON.png")
 	
 	troop_type = "Demoman"
-	attack_types = "Melee, Explosion thing"
-	extra_info = "Idk, gotta update"
+	attack_types = "Ranged"
+	extra_info = "Area explosion damage"
 
 func splash_damage():
 	pass
