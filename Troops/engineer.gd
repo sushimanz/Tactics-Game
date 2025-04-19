@@ -16,5 +16,5 @@ func _init():
 	icon = preload("res://Assets/Icons/ENGINEER_ICON.png")
 	
 	troop_type = "Engineer"
-	attack_types = "Melee"
-	extra_info = "None"
+	attack_types = "Melee, Ranged"
+	extra_info = "Can build a sentry and a dispenser"
