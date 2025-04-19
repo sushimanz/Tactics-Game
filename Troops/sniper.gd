@@ -16,7 +16,7 @@ func _init():
 	icon = preload("res://Assets/Icons/SNIPER_ICON.png")
 	
 	troop_type = "Sniper"
-	attack_types = "Melee, Ranged"
+	attack_types = "Ranged"
 	extra_info = "None"
 
 func ready_shoot():
