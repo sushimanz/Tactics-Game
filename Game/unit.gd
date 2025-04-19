@@ -1,11 +1,23 @@
 class_name Unit
 extends Node2D
 
+#signals
+signal locationUpdated
+
 #Get unit logic
 var unitPlanning = UnitPlanning.new()
 
 #
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var coll: Area2D = $Collision
+@onready var tilemap: GameLogic = $".."
+
+#Mouse
+var mouseHovering : bool = false
+var mouseHeld : bool = false
+var dragging : bool = false
+
+var tempLoc : Vector2
 
 #Actions
 var selected:bool
@@ -32,6 +44,9 @@ var health: int = max_health
 var moves: int = max_moves
 var attacks: int = max_attacks
 var reinforcements: int = max_reinforcements
+
+#Location
+var coords: Vector2i
 
 func set_troop_values(troop: Troop) -> void:
 	print(troop.troop_type," initialized.")
@@ -68,11 +83,43 @@ func _spawn_unit():
 	moves = max_moves
 	attacks = max_attacks
 	reinforcements= max_reinforcements
+	locationUpdated.connect(tilemap._locUpdate)
 	
 	_reset_unit()
+
+#called via signal from area2d
+func _mouseUpdate(status) -> void:
+	mouseHovering = status
+	var tween = get_tree().create_tween()
+	if !mouseHeld:
+		if status:
+			tween.tween_property(sprite, "scale", Vector2(1.11,1.11), 0.1)
+		else:
+			tween.tween_property(sprite, "scale", Vector2(1,1), 0.1)
 
 func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
 	pass
+	#WIP troop drag and drop
+	if dragging:
+		coll.global_position = get_global_mouse_position()
+	sprite.global_position = lerp(sprite.global_position,coll.global_position, 0.1)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("LClick"):
+		mouseHeld = true
+		if mouseHovering:
+			dragging = true
+			tempLoc = coll.position
+	elif event.is_action_released("LClick"):
+		if dragging:
+			#check location and place
+			if tilemap.checkLocation(coll.position):
+				coll.position = tilemap.map_to_local(tilemap.local_to_map(coll.position))
+				locationUpdated.emit(coll.position, tempLoc)
+			else:
+				coll.position = tempLoc
+		mouseHeld = false
+		dragging = false

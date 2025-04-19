@@ -10,8 +10,8 @@ var tick: int = 0
 
 var hostUnit = load("res://Game/HostUnit.tscn")
 #var clientUnit = load("res://Game/ClientUnit.tscn")
-@onready var hosts = $Host
-@onready var clients = $Client
+#@onready var hosts = $Host
+#@onready var clients = $Client
 
 var deploy_location = Vector2i.ZERO
 var can_deploy: bool = false
@@ -36,17 +36,17 @@ func _ready() -> void:
 
 func deploy_unit(troop):
 	var created_unit = hostUnit.instantiate()
-	created_unit.global_position = map_to_local(deploy_location) #+ Vector2(125, 125)
 	
-	hosts.add_child(created_unit)
+	add_child(created_unit)
+	created_unit.coll.position = map_to_local(deploy_location)
 	created_unit.set_troop_values(troop)
 
 
 func add_units():
 	var created_unit
-	for unit in hosts.get_children():
+	for unit in get_children():
 		created_unit = unit.instantiate()
-		hosts.add_child(created_unit)
+		add_child(created_unit)
 	
 	#for unit in clients.get_children():
 		#created_unit = unit.instantiate()
@@ -98,6 +98,13 @@ func roundTick() -> void:
 		localReady = false
 		remoteReady = false
 		print("round end")
+
+func checkLocation(locIn : Vector2) -> bool:
+	return obstructed[local_to_map(locIn)] == false
+
+func _locUpdate(locIn : Vector2, oldLoc: Vector2) -> void:
+	obstructed[local_to_map(locIn)] = true
+	obstructed[local_to_map(oldLoc)] = false
 
 func _process(delta: float) -> void:
 	pass

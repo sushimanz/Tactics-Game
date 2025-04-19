@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ycif7ms3qqiw"]
 
-[ext_resource type="Script" uid="uid://c5nhdajprlxyu" path="res://Game/unit.gd" id="1_jf83v"]
+[ext_resource type="Script" uid="uid://civ754pwjqjuk" path="res://Game/unit.gd" id="1_jf83v"]
 [ext_resource type="Shader" uid="uid://dabqirjru0uja" path="res://Game/skew.gdshader" id="2_0cvqy"]
 [ext_resource type="Texture2D" uid="uid://c84pt2pdd540m" path="res://Assets/Icons/KNIGHT_ICON.png" id="2_u1nqo"]
 
@@ -13,10 +13,8 @@ shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0cvqy"]
-properties/0/path = NodePath(".:movePath")
-properties/0/spawn = true
-properties/0/replication_mode = 1
+[sub_resource type="CircleShape2D" id="CircleShape2D_khw2h"]
+radius = 97.0824
 
 [node name="Unit" type="Node2D"]
 script = ExtResource("1_jf83v")
@@ -28,6 +26,10 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_gq3cw")
 texture = ExtResource("2_u1nqo")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_0cvqy")
-visibility_update_mode = 2
+[node name="Collision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+shape = SubResource("CircleShape2D_khw2h")
+
+[connection signal="mouse_entered" from="Collision" to="." method="_mouseUpdate" binds= [true]]
+[connection signal="mouse_exited" from="Collision" to="." method="_mouseUpdate" binds= [false]]
