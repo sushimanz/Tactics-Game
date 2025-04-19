@@ -16,8 +16,8 @@ func _init():
 	icon = preload("res://Assets/Icons/SOLDIER_ICON.png")
 	
 	troop_type = "Soldier"
-	attack_types = "Melee"
-	extra_info = "Gotta update"
+	attack_types = "Ranged"
+	extra_info = "Splash area damage"
 
 func reload():
 	pass
