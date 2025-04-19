@@ -16,8 +16,8 @@ func _init():
 	icon = preload("res://Assets/Icons/ARCHER_ICON.png")
 	
 	troop_type = "Archer"
-	attack_types = "Melee, Ranged"
-	extra_info = "Ranged attack has knockback?"
+	attack_types = "Ranged"
+	extra_info = "Ranged attack has knockback"
 
 func knockback():
 	pass
