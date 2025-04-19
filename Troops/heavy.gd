@@ -16,7 +16,7 @@ func _init():
 	icon = preload("res://Assets/Icons/HEAVY_ICON.png")
 	
 	troop_type = "Heavy"
-	attack_types = "Melee"
+	attack_types = "Melee, Ranged"
 	extra_info = "Has damage dropoff"
 
 func dmg_drop_off ():
