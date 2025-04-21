@@ -104,6 +104,36 @@ func _rand_deploy():
 	#else:
 		#print("Can't deploy troop here! Location is obstructed.")
 
+func _rand_deploy():
+	for deployable_troop in deployables:
+		if deployable_troop.deployable:
+			print("Randomly deploy ", deployable_troop.name)
+
+#func spawn_rand_troop(troopBox):
+	##print(deployable_troop.name)
+	#for x in randi_range(map_bounds[0].x, map_bounds[1].x):
+		#for y in randi_range(map_bounds[0].y, map_bounds[1].y):
+			#
+			#
+	#var is_valid_x = rand_loc.x >= map_bounds[0].x and rand_loc.x < map_bounds[1].x
+	#var is_valid_y = rand_loc.y >= map_bounds[0].y and rand_loc.y < map_bounds[1].y
+	#
+	##Only do deploy at a valid location
+	#if is_valid_x and is_valid_y:
+		#can_deploy = true
+		#deploy_location = rand_temp
+		##print(deploy_location)
+	#else:
+		#can_deploy = false
+	#
+	#if can_deploy and (obstructed[deploy_location] == false):
+		#print("Can Randomly Deploy ", troopBox.name," the ", troopBox.troop.troop_type, " at ", deploy_location)
+		#obstructed[deploy_location] = true
+		#deploy_unit(troopBox.troop)
+		#troopBox._disable()
+	#else:
+		#print("Can't deploy troop here! Location is obstructed.")
+
 #@rpc("any_peer","call_local", "reliable")
 func roundTick() -> void:
 	var check: bool
@@ -146,6 +176,7 @@ func _on_button_pressed() -> void:
 
 	##Old multiplayer stuff
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	#remoteReadyCheck.rpc(localReady)
 
 
@@ -167,6 +198,10 @@ func _on_button_pressed() -> void:
 	#if Multiplayer.is_multi:
 		#remoteReadyCheck.rpc(localReady)
 >>>>>>> Stashed changes
+=======
+	#if Multiplayer.is_multi:
+		#remoteReadyCheck.rpc(localReady)
+>>>>>>> Stashed changes
 
 
 
@@ -181,6 +216,7 @@ func _on_button_pressed() -> void:
 		#remoteReadyInd.color = Color(1.0,0.0,0.0,1.0)
 	#
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	#if is_multiplayer:
 		#if inReady and localReady:
 			#print("Both players ready, Starting round")
@@ -188,6 +224,8 @@ func _on_button_pressed() -> void:
 	#else:
 		#startRound.rpc()
 =======
+=======
+>>>>>>> Stashed changes
 	#if Multiplayer.is_multi:
 		#if inReady and localReady:
 			#print("Both players ready, Starting round")
@@ -195,4 +233,7 @@ func _on_button_pressed() -> void:
 	#else:
 		#pass
 		##startRound.rpc()
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes

@@ -7,6 +7,12 @@ extends Node2D
 @onready var musicManager = $MusicManager
 @onready var deployBoxes = $MainGameplay/TroopDeployBoxes
 @onready var gamestateTimerLabel = $MainGameplay/UI/Label
+<<<<<<< Updated upstream
+=======
+
+#Troops
+var troops = {}
+>>>>>>> Stashed changes
 
 #Constants
 const troop_count: int = 5
@@ -44,6 +50,7 @@ func _process(delta: float) -> void:
 	if in_gamestate:
 		gameState.updateGameState()
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	#pass
 
 ##NOTE: deployables[idx].troop is how you get the troop class values 
@@ -53,6 +60,9 @@ func _process(delta: float) -> void:
 #Use the troop var in there, just do something like:
 #spawn unit						<-- I think Unit.new()? Not sure
 #unit.value = troop.value		<-- Replace value with actual value name
+=======
+		gamestateTimerLabel.text = str(gameState.GAMESTATE.keys()[gameState.gameState]) + " Time Left: " + str(gameState.prev_time_left)
+>>>>>>> Stashed changes
 =======
 		gamestateTimerLabel.text = str(gameState.GAMESTATE.keys()[gameState.gameState]) + " Time Left: " + str(gameState.prev_time_left)
 >>>>>>> Stashed changes
