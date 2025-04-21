@@ -6,6 +6,7 @@ extends Node2D
 @onready var troopSelector = $TroopSelector
 @onready var musicManager = $MusicManager
 @onready var deployBoxes = $MainGameplay/TroopDeployBoxes
+@onready var gamestateTimerLabel = $MainGameplay/UI/Label
 
 #Constants
 const troop_count: int = 5
@@ -42,6 +43,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if in_gamestate:
 		gameState.updateGameState()
+<<<<<<< Updated upstream
 	#pass
 
 ##NOTE: deployables[idx].troop is how you get the troop class values 
@@ -51,6 +53,9 @@ func _process(delta: float) -> void:
 #Use the troop var in there, just do something like:
 #spawn unit						<-- I think Unit.new()? Not sure
 #unit.value = troop.value		<-- Replace value with actual value name
+=======
+		gamestateTimerLabel.text = str(gameState.GAMESTATE.keys()[gameState.gameState]) + " Time Left: " + str(gameState.prev_time_left)
+>>>>>>> Stashed changes
 
 func _update_troop(troop: Troop, idx: int) -> void:
 	if troop != cur_troop:
@@ -77,3 +82,15 @@ func _on_troop_selector_selection_ended(troops) -> void:
 	troopSelector.queue_free()
 	print("Initialize game")
 	in_gamestate = true
+
+
+func _on_button_pressed() -> void:
+	gameState.gameState = gameState.gameState + 1
+
+
+func _on_change_to_plan_button_pressed() -> void:
+	mainTileMap._rand_deploy()
+	gameState.gameState = gameState.GAMESTATE.PLAN
+	gameState.prev_time_left = gameState.plan_end_time
+	gameState.planTimer.wait_time = gameState.plan_end_time
+	gameState.planTimer.start()

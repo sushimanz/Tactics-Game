@@ -3,15 +3,13 @@
 [ext_resource type="Script" uid="uid://deqwydk1ppeu6" path="res://UI/Troop Selection/troop_selector.gd" id="1_3tofy"]
 [ext_resource type="PackedScene" uid="uid://ddxn3dbfi6q6d" path="res://UI/Troop Selection/drag_box.tscn" id="2_yvun3"]
 [ext_resource type="PackedScene" uid="uid://c8i0btgnjiisg" path="res://UI/Troop Selection/TroopInfoPanel.tscn" id="3_b8fni"]
+[ext_resource type="Theme" uid="uid://1qdnok32lvj0" path="res://UI/Troop Selection/timer.tres" id="4_yvun3"]
 
 [sub_resource type="Theme" id="Theme_xvp3e"]
 default_font_size = 24
 
 [sub_resource type="Theme" id="Theme_3tofy"]
 default_font_size = 24
-
-[sub_resource type="Theme" id="Theme_yvun3"]
-default_font_size = 48
 
 [node name="TroopSelector" type="Control"]
 layout_mode = 3
@@ -245,7 +243,7 @@ layout_mode = 0
 offset_top = 52.0
 offset_right = 180.0
 offset_bottom = 124.0
-theme = SubResource("Theme_yvun3")
+theme = ExtResource("4_yvun3")
 horizontal_alignment = 1
 vertical_alignment = 1
 

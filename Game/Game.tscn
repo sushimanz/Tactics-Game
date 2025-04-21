@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bcrxnk7kywhco"]
+[gd_scene load_steps=11 format=4 uid="uid://bcrxnk7kywhco"]
 
 [ext_resource type="Script" uid="uid://deaphabq1i41e" path="res://Game/game.gd" id="1_37esa"]
 [ext_resource type="Texture2D" uid="uid://l5tfrutfudm2" path="res://Assets/grid.png" id="1_iv3md"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://b7epxnor4sqyv" path="res://Game/gameLogic.gd" id="3_iv3md"]
 [ext_resource type="PackedScene" uid="uid://cvmdpbotx5ehk" path="res://UI/Troop Selection/TroopSelectMenu.tscn" id="4_37esa"]
 [ext_resource type="PackedScene" uid="uid://ddxn3dbfi6q6d" path="res://UI/Troop Selection/drag_box.tscn" id="4_jxerj"]
+[ext_resource type="Theme" uid="uid://1qdnok32lvj0" path="res://UI/Troop Selection/timer.tres" id="6_fuqhk"]
+[ext_resource type="Theme" uid="uid://1c7dqofpegxq" path="res://Game/button.tres" id="6_oscxy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iv3md"]
 texture = ExtResource("1_iv3md")
@@ -15,9 +17,6 @@ texture_region_size = Vector2i(250, 250)
 [sub_resource type="TileSet" id="TileSet_jxerj"]
 tile_size = Vector2i(250, 250)
 sources/2 = SubResource("TileSetAtlasSource_iv3md")
-
-[sub_resource type="Theme" id="Theme_iv3md"]
-default_font_size = 48
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_37esa")
@@ -117,14 +116,14 @@ one_shot = true
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="MainGameplay"]
 spawn_path = NodePath("../TileMapLayer")
 
-[node name="GL_Button" type="Control" parent="MainGameplay"]
+[node name="UI" type="Control" parent="MainGameplay"]
 anchors_preset = 0
 offset_left = 1920.0
 offset_top = 1080.0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="Button" type="Button" parent="MainGameplay/GL_Button"]
+[node name="RoundStartButton" type="Button" parent="MainGameplay/UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -137,11 +136,11 @@ offset_right = 470.0
 offset_bottom = 1042.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_iv3md")
+theme = ExtResource("6_oscxy")
 action_mode = 0
 text = "Start Round"
 
-[node name="p1ReadyInd" type="ColorRect" parent="MainGameplay/GL_Button"]
+[node name="p1ReadyInd" type="ColorRect" parent="MainGameplay/UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -156,7 +155,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
 
-[node name="p2ReadyInd" type="ColorRect" parent="MainGameplay/GL_Button"]
+[node name="p2ReadyInd" type="ColorRect" parent="MainGameplay/UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,6 +169,26 @@ offset_bottom = 998.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
+
+[node name="Label" type="Label" parent="MainGameplay/UI"]
+layout_mode = 0
+offset_left = -280.0
+offset_top = -1040.0
+offset_right = 280.0
+offset_bottom = -920.0
+theme = ExtResource("6_fuqhk")
+text = "GAMESTATE TIME: 60"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChangeToPLANButton" type="Button" parent="MainGameplay/UI"]
+layout_mode = 0
+offset_left = -1484.0
+offset_top = 914.0
+offset_right = -764.0
+offset_bottom = 1042.0
+theme = ExtResource("6_oscxy")
+text = "GO TO PLAN GAMESTATE"
 
 [node name="TickTimer" type="Timer" parent="MainGameplay"]
 wait_time = 0.3
@@ -185,6 +204,8 @@ metadata/_edit_use_anchors_ = true
 [connection signal="timeout" from="MainGameplay/DeploymentTimer" to="MainGameplay/TileMapLayer" method="_on_deployment_timer_timeout"]
 [connection signal="timeout" from="MainGameplay/StartTimer" to="MainGameplay/TileMapLayer" method="_on_start_timer_timeout"]
 [connection signal="timeout" from="MainGameplay/PlanningTimer" to="MainGameplay/TileMapLayer" method="_on_planning_timer_timeout"]
-[connection signal="pressed" from="MainGameplay/GL_Button/Button" to="MainGameplay/TileMapLayer" method="_on_button_pressed"]
+[connection signal="pressed" from="MainGameplay/UI/RoundStartButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MainGameplay/UI/RoundStartButton" to="MainGameplay/TileMapLayer" method="_on_button_pressed"]
+[connection signal="pressed" from="MainGameplay/UI/ChangeToPLANButton" to="." method="_on_change_to_plan_button_pressed"]
 [connection signal="timeout" from="MainGameplay/TickTimer" to="MainGameplay/TileMapLayer" method="_on_tick_timer_timeout"]
 [connection signal="selectionEnded" from="TroopSelector" to="." method="_on_troop_selector_selection_ended"]

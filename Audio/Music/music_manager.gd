@@ -21,6 +21,7 @@ func play_track(track_url: String):
 func stop_track():
 	self.stop()
 
+#Not sure why but it will not freaking loop the music
 func _on_finished() -> void:
 	if is_loop:
 		self.play()

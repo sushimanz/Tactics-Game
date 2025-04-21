@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crrg1tao3ygca" path="res://Audio/Music/music_manager.gd" id="1_x5vvp"]
 
-[node name="musicManager" type="AudioStreamPlayer2D"]
+[node name="musicManager" type="AudioStreamPlayer"]
 script = ExtResource("1_x5vvp")
 
 [connection signal="finished" from="." to="." method="_on_finished"]

@@ -32,6 +32,7 @@ func updateTimer(timer: Timer) -> bool:
 	else:
 		return true
 
+
 ##NOTE INIT GAMESTATE
 func _game_init():
 	print("INITIALIZING ON GAMESTATE INIT ", gameState)
@@ -78,7 +79,6 @@ func _round_start() -> bool:
 		prev_time_left = planTimer.wait_time
 		planTimer.start()
 		return false
-	
 
 
 ##NOTE PLAN GAMESTATE
