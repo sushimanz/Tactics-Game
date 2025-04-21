@@ -38,8 +38,9 @@ func deploy_unit(troop):
 	var created_unit = hostUnit.instantiate()
 	
 	add_child(created_unit)
-	created_unit.coll.position = map_to_local(deploy_location)
-	created_unit.set_troop_values(troop)
+	# Temporarily commented out to try and get it running  -Jakobre
+	created_unit.position = map_to_local(deploy_location)
+	#created_unit.set_troop_values(troop)
 
 
 func add_units():

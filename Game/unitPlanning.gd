@@ -2,11 +2,21 @@ class_name UnitPlanning
 extends Node2D
 
 #Pathing
-@onready var path: Path2D = $Path
+# Temporarily assigning type of path to Line2D instead of Path2D to avoid crash -Jakobre
+@onready var path: Line2D = $Path
 @export var movePath: Array = [Vector2.ZERO]
 @export var movePathBounds: Vector2 = Vector2(13, 7)
 var dist_moved: int = 0
 var Current_Path:Array[Vector2i]
+
+# Dictionary and Array to keep track of command actions and their order
+enum CommandAction
+{
+	MOVE,
+	ATTACK,
+	NONE
+}
+static var commandActionsQueue: Array[CommandAction]
 
 #
 var tileMap : TileMapLayer
@@ -25,7 +35,11 @@ var turnEndCoord: Vector2i = Vector2i(-1, -1)
 
 #
 func _ready() -> void:
-	var startCoord = tileMap.local_to_map(self.global_position)
+	# Put temporary if statement to avoid crashing because it is null on start. 
+	# Might be able to set it in process func -Jakobre
+	var startCoord
+	if startCoord != null:
+		startCoord = tileMap.local_to_map(self.global_position)
 
 
 #This is where troops move and attack
