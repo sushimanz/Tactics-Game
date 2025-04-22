@@ -97,11 +97,7 @@ func _mouseUpdate(status) -> void:
 		else:
 			tween.tween_property(sprite, "scale", Vector2(1,1), 0.1)
 
-func _ready() -> void:
-	pass
-
 func _process(_delta: float) -> void:
-	pass
 	#WIP troop drag and drop
 	if dragging:
 		coll.global_position = get_global_mouse_position()

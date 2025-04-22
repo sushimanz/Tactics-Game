@@ -33,15 +33,6 @@ var turnPreviousCoord: Vector2i = Vector2i.ZERO
 var turnCurrentCoord: Vector2i = Vector2i.ZERO
 var turnEndCoord: Vector2i = Vector2i(-1, -1)
 
-#
-func _ready() -> void:
-	# Put temporary if statement to avoid crashing because it is null on start. 
-	# Might be able to set it in process func -Jakobre
-	var startCoord
-	if startCoord != null:
-		startCoord = tileMap.local_to_map(self.global_position)
-
-
 #This is where troops move and attack
 func _turn_in_progress():
 	turnCurrentCoord = tileMap.local_to_map(self.global_position)

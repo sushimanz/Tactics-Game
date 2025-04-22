@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ycif7ms3qqiw"]
 
-[ext_resource type="Script" uid="uid://civ754pwjqjuk" path="res://Game/unitPlanning.gd" id="1_jf83v"]
+[ext_resource type="Script" uid="uid://civ754pwjqjuk" path="res://Game/unit.gd" id="1_jf83v"]
 [ext_resource type="Shader" uid="uid://dabqirjru0uja" path="res://Game/skew.gdshader" id="2_0cvqy"]
 [ext_resource type="Texture2D" uid="uid://c84pt2pdd540m" path="res://Assets/Icons/KNIGHT_ICON.png" id="2_u1nqo"]
 [ext_resource type="Script" uid="uid://bqept3d6top13" path="res://Game/attackAction.gd" id="4_u75go"]

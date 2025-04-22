@@ -38,10 +38,8 @@ func deploy_unit(troop):
 	var created_unit = hostUnit.instantiate()
 	
 	add_child(created_unit)
-	# Temporarily commented out to try and get it running  -Jakobre
 	created_unit.position = map_to_local(deploy_location)
-	#created_unit.set_troop_values(troop)
-
+	created_unit.set_troop_values(troop)
 
 func add_units():
 	var created_unit
@@ -53,8 +51,7 @@ func add_units():
 		#created_unit = unit.instantiate()
 		#clients.add_child(created_unit)
 
-
-func _try_to_deploy(troop, troopID):
+func _try_to_deploy(troop: Troop, troopID: String):
 	for deployable_troop in deployables:
 		if deployable_troop.name == troopID:
 			#print(deployable_troop.name)
