@@ -8,6 +8,7 @@ signal locationUpdated
 var unitPlanning = UnitPlanning.new()
 
 #
+@onready var path: Line2D = $Path
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var coll: Area2D = $Collision
 @onready var tilemap: GameLogic = $".."
@@ -74,8 +75,8 @@ func set_troop_values(troop: Troop) -> void:
 #Reset actions and clear path
 func _reset_unit():
 	planned_actions.clear()
-	#unitPlanning.path.clear_points()
-	#unitPlanning.movePath.clear()
+	unitPlanning.path.clear_points()
+	unitPlanning.movePath.clear()
 
 #Do when spawning a unit (Reinforce = respawn)
 func _spawn_unit():
@@ -85,6 +86,7 @@ func _spawn_unit():
 	reinforcements= max_reinforcements
 	locationUpdated.connect(tilemap._locUpdate)
 	
+	unitPlanning.path = path
 	_reset_unit()
 
 #called via signal from area2d

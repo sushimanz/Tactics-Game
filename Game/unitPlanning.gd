@@ -2,8 +2,7 @@ class_name UnitPlanning
 extends Node2D
 
 #Pathing
-# Temporarily assigning type of path to Line2D instead of Path2D to avoid crash -Jakobre
-@onready var path: Line2D = $Path
+var path: Line2D
 @export var movePath: Array = [Vector2.ZERO]
 @export var movePathBounds: Vector2 = Vector2(13, 7)
 var dist_moved: int = 0
