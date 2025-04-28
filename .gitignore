@@ -1,4 +1,5 @@
 # Build and Release Folders
+.godot\
 .godot/
 
 # UID and Import from Godot
