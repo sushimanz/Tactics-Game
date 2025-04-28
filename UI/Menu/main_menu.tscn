@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4kmo72krbika"]
 
-[ext_resource type="Script" uid="uid://bbjmfs34j5om3" path="res://UI/Menu/main_menu.gd" id="1_wrubb"]
-[ext_resource type="Texture2D" uid="uid://bvcd8mrho0fof" path="res://UI/Menu/button.png" id="2_fmybh"]
-[ext_resource type="Script" uid="uid://crrg1tao3ygca" path="res://Audio/Music/music_manager.gd" id="2_t0n6y"]
-[ext_resource type="FontFile" uid="uid://ct23a3jot53y2" path="res://UI/Menu/JetBrainsMono-VariableFont_wght.ttf" id="3_t0n6y"]
+[ext_resource type="Script" uid="uid://cqnut7djwrtir" path="res://UI/Menu/main_menu.gd" id="1_wrubb"]
+[ext_resource type="Texture2D" uid="uid://dbtpe0tg48su1" path="res://UI/Menu/button.png" id="2_fmybh"]
+[ext_resource type="Script" uid="uid://cjqiem0xqk5g4" path="res://Audio/Music/music_manager.gd" id="2_t0n6y"]
+[ext_resource type="FontFile" uid="uid://cmnjulxtmhiix" path="res://UI/Menu/JetBrainsMono-VariableFont_wght.ttf" id="3_t0n6y"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -16,7 +16,6 @@ script = ExtResource("1_wrubb")
 
 [node name="MusicManager" type="AudioStreamPlayer" parent="."]
 script = ExtResource("2_t0n6y")
-metadata/_custom_type_script = "uid://crrg1tao3ygca"
 
 [node name="OIDText" type="Label" parent="."]
 layout_mode = 0
