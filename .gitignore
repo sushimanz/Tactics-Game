@@ -1,14 +1,14 @@
 # Build and Release Folders
+.godot/
 
+# UID and Import from Godot
+*.uid
+*.import
 
 # Other files and folders
 uid_cache.bin
 ide_massaging_meta.txt
 filesystem_cache10
-
-# UID and Import from Godot
-*.uid
-*.import
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
