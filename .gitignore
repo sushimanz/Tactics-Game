@@ -3,6 +3,8 @@
 
 # Other files and folders
 uid_cache.bin
+ide_massaging_meta.txt
+filesystem_cache10
 
 # UID and Import from Godot
 *.uid
