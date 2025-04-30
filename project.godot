@@ -11,15 +11,14 @@ config_version=5
 [application]
 
 config/name="Tactics Game"
-run/main_scene="uid://d4kmo72krbika"
+run/main_scene="uid://c21q1tpjrcpo3"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dd5xhx3pvq1h0"
 
-[autoload]
+[display]
 
-Noray="*res://addons/netfox.noray/noray.gd"
-PacketHandshake="*res://addons/netfox.noray/packet-handshake.gd"
-Multiplayer="*res://Game/multiplayer.gd"
+window/size/viewport_width=640
+window/size/viewport_height=360
 
 [dotnet]
 
@@ -27,7 +26,17 @@ project/assembly_name="Tactics Game"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/netfox.internals/plugin.cfg", "res://addons/netfox.noray/plugin.cfg")
+enabled=PackedStringArray()
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "red",
+"res://Audio/": "orange",
+"res://Resources_Data/": "yellow",
+"res://UI/": "teal",
+"res://devlog_stuff/": "green"
+}
 
 [input]
 
@@ -36,3 +45,9 @@ LClick={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

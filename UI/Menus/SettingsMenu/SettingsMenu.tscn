@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://beh0ed0xg38wx"]
+
+[ext_resource type="Script" uid="uid://cmbhy7j2ydcbg" path="res://UI/Menus/SettingsMenu/settingsMenu.gd" id="1_6mk0j"]
+[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKMenuButton.tscn" id="2_ub34k"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6mk0j")
+
+[node name="MenuLabel" type="RichTextLabel" parent="."]
+offset_left = -220.0
+offset_top = -180.0
+offset_right = 220.0
+offset_bottom = -80.0
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = 220.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+vertical = true
+
+[node name="VideoButton" parent="Buttons" instance=ExtResource("2_ub34k")]
+layout_mode = 2
+text = "Video"
+
+[node name="AudioButton" parent="Buttons" instance=ExtResource("2_ub34k")]
+layout_mode = 2
+text = "Audio"
+
+[node name="BackButton" parent="Buttons" instance=ExtResource("2_ub34k")]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="Buttons/VideoButton" to="." method="_on_video_button_pressed"]
+[connection signal="pressed" from="Buttons/AudioButton" to="." method="_on_audio_button_pressed"]
+[connection signal="pressed" from="Buttons/BackButton" to="." method="_on_back_button_pressed"]

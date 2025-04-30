@@ -1,0 +1,89 @@
+[gd_scene load_steps=4 format=3 uid="uid://eokrkecfwex5"]
+
+[ext_resource type="Script" uid="uid://cdumobkoo7hs6" path="res://UI/Menus/MainMenu/mainMenu.gd" id="1_gexx5"]
+[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKMenuButton.tscn" id="1_oa788"]
+[ext_resource type="Texture2D" uid="uid://dd5xhx3pvq1h0" path="res://Assets/UI/Logos/GameLogoConceptRed.png" id="2_iloxp"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gexx5")
+is_root_ui = true
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -320.0
+offset_top = -180.0
+offset_right = -220.0
+offset_bottom = -80.0
+texture = ExtResource("2_iloxp")
+
+[node name="MenuLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -220.0
+offset_top = -180.0
+offset_right = 220.0
+offset_bottom = -80.0
+text = "PATHKILLERS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsLeft" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = -320.0
+offset_top = -80.0
+offset_right = -220.0
+offset_bottom = 180.0
+alignment = 2
+vertical = true
+
+[node name="HostButton" parent="ButtonsLeft" instance=ExtResource("1_oa788")]
+layout_mode = 2
+text = "Host"
+
+[node name="CopyButton" parent="ButtonsLeft" instance=ExtResource("1_oa788")]
+layout_mode = 2
+text = "Copy"
+
+[node name="JoinButton" parent="ButtonsLeft" instance=ExtResource("1_oa788")]
+layout_mode = 2
+text = "Join"
+
+[node name="PlayButton" parent="ButtonsLeft" instance=ExtResource("1_oa788")]
+layout_mode = 2
+text = "Play"
+
+[node name="CreditsButton" parent="ButtonsLeft" instance=ExtResource("1_oa788")]
+layout_mode = 2
+text = "Credits"
+
+[node name="ButtonsRight" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = 220.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+alignment = 2
+vertical = true
+
+[node name="SettingsButton" parent="ButtonsRight" instance=ExtResource("1_oa788")]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitButton" parent="ButtonsRight" instance=ExtResource("1_oa788")]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="ButtonsLeft/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="ButtonsLeft/CopyButton" to="." method="_on_copy_button_pressed"]
+[connection signal="pressed" from="ButtonsLeft/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="ButtonsLeft/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ButtonsLeft/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="ButtonsRight/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="ButtonsRight/QuitButton" to="." method="_on_quit_button_pressed"]
