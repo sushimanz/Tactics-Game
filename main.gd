@@ -28,6 +28,7 @@ enum MAINSTATE {
 	EXIT
 	}
 
+var current_mainstate: MAINSTATE = MAINSTATE.ENTER_BOOT
 
 func _ready() -> void:
 	#Go to menu since nothing to boot yet
@@ -38,22 +39,42 @@ func _ready() -> void:
 func update_mainstate(mainstate: MAINSTATE) -> void:
 	match mainstate:
 		MAINSTATE.ENTER_BOOT:
-			pass
+			current_mainstate = MAINSTATE.ENTER_BOOT
+			print("\nENTER_BOOT")
+			
 		MAINSTATE.EXIT_BOOT:
-			pass
+			current_mainstate = MAINSTATE.EXIT_BOOT
+			print("\nEXIT_BOOT")
+			
 		MAINSTATE.ENTER_TITLE:
+			current_mainstate = MAINSTATE.ENTER_TITLE
+			print("\nENTER_TITLE")
+			inst_menu_manager._clean_menus()
 			inst_menu_manager._goto_menu(MenuData.main_menu)
+			
 		MAINSTATE.EXIT_TITLE:
 			#What to do when the title/main menu is exited, to game or full exit
-			pass
+			current_mainstate = MAINSTATE.EXIT_TITLE
+			print("\nEXIT_TITLE")
+			
 		MAINSTATE.ENTER_GAME:
-			pass
+			current_mainstate = MAINSTATE.ENTER_GAME
+			print("\nENTER_GAME")
+			inst_menu_manager._clean_menus()
+			inst_menu_manager._goto_menu(MenuData.game_menu)
+			
 		MAINSTATE.EXIT_GAME:
 			#What to do when the game is exited, to menu or full exit
-			pass
+			current_mainstate = MAINSTATE.EXIT_GAME
+			print("\nEXIT_GAME")
+			
 		MAINSTATE.CONFIG_USER:
 			#Save data, load data, etc
-			pass
+			current_mainstate = MAINSTATE.CONFIG_USER
+			print("\nCONFIG_USER")
+			
 		MAINSTATE.EXIT:
+			current_mainstate = MAINSTATE.EXIT
+			print("\nEXIT")
 			#Call anything else before fully quitting
 			get_tree().quit()

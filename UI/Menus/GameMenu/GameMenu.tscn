@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://cvme16csi6jl4"]
+[gd_scene load_steps=4 format=3 uid="uid://cvme16csi6jl4"]
+
+[ext_resource type="Script" uid="uid://css488vnm6yfr" path="res://UI/Menus/GameMenu/gameMenu.gd" id="1_kxotb"]
+[ext_resource type="Script" uid="uid://cdstw086tml7t" path="res://UI/Menus/GameMenu/selectedGameMode.gd" id="2_ewow0"]
+[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKMenuButton.tscn" id="2_wqp38"]
 
 [node name="GameMenu" type="Control"]
 layout_mode = 3
@@ -9,3 +13,69 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kxotb")
+is_root_ui = true
+
+[node name="MenuLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -220.0
+offset_top = -180.0
+offset_right = 220.0
+offset_bottom = -80.0
+text = "GAME MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GamemodeButtons" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = -320.0
+offset_top = -80.0
+offset_right = 320.0
+offset_bottom = -34.0
+alignment = 1
+script = ExtResource("2_ewow0")
+
+[node name="DMButton" parent="GamemodeButtons" instance=ExtResource("2_wqp38")]
+custom_minimum_size = Vector2(140, 46)
+layout_mode = 2
+text = "Deathmatch"
+is_selection_button = true
+
+[node name="KothButton" parent="GamemodeButtons" instance=ExtResource("2_wqp38")]
+custom_minimum_size = Vector2(140, 46)
+layout_mode = 2
+text = "King of the Hill"
+is_selection_button = true
+
+[node name="NexusButton" parent="GamemodeButtons" instance=ExtResource("2_wqp38")]
+custom_minimum_size = Vector2(140, 46)
+layout_mode = 2
+text = "Nexus"
+is_selection_button = true
+
+[node name="NextButton" parent="." instance=ExtResource("2_wqp38")]
+layout_mode = 2
+offset_left = -320.0
+offset_top = 134.0
+offset_right = -225.0
+offset_bottom = 180.0
+text = "Next"
+
+[node name="BackButton" parent="." instance=ExtResource("2_wqp38")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 220.0
+offset_top = 134.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 0
+text = "Back
+"
+
+[connection signal="pressed" from="GamemodeButtons/DMButton" to="GamemodeButtons" method="_on_dm_button_pressed"]
+[connection signal="pressed" from="GamemodeButtons/KothButton" to="GamemodeButtons" method="_on_koth_button_pressed"]
+[connection signal="pressed" from="GamemodeButtons/NexusButton" to="GamemodeButtons" method="_on_nexus_button_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

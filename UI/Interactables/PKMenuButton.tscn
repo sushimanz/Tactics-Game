@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bxcv3pa7mtr31" path="res://UI/Interactables/pkMenuButton.gd" id="2_mroji"]
 
 [node name="PKMenuButton" type="Button"]
-custom_minimum_size = Vector2(95, 46)
+custom_minimum_size = Vector2(100, 46)
 offset_right = 95.0
 offset_bottom = 46.0
 theme = ExtResource("1_2tvu2")

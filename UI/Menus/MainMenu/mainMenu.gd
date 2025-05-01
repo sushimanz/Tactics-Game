@@ -11,6 +11,7 @@ func _on_join_button_pressed() -> void:
 
 func _on_play_button_pressed() -> void:
 	print("Play Button Pressed")
+	main.update_mainstate(main.MAINSTATE.ENTER_GAME)
 
 func _on_credits_button_pressed() -> void:
 	print("Credits Button Pressed")

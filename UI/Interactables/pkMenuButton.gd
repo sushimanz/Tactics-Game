@@ -1,11 +1,8 @@
 class_name PKMenuButton
-extends Button
+extends PKButton
 
-@export var normal_brightness: float = 1.0
-@export var pressed_brightness: float = 0.7
-@export var hover_brightness: float = 1.3
-@export var disabled_brightness: float = 0.5
-var focused_brightness: float = hover_brightness
+@export var is_selection_button: bool = false
+var is_selected: bool = false
 
 func _init() -> void:
 	if disabled:
@@ -19,22 +16,31 @@ func set_brightness_percent_to(light_percent: float) -> void:
 
 
 func _on_button_down() -> void:
-	set_brightness_percent_to(pressed_brightness)
+	if !is_selection_button:
+		set_brightness_percent_to(pressed_brightness)
+	else:
+		is_selected = true
+		set_brightness_percent_to(selected_brightness)
 
 func _on_pressed() -> void:
 	#Set to hover brightness, since when it is pressed that means it is up again
-	set_brightness_percent_to(hover_brightness)
+	if !is_selected:
+		set_brightness_percent_to(hover_brightness)
 
 
 func _on_mouse_entered() -> void:
-	set_brightness_percent_to(hover_brightness)
+	if !is_selected:
+		set_brightness_percent_to(hover_brightness)
 
 func _on_mouse_exited() -> void:
-	set_brightness_percent_to(normal_brightness)
+	if !is_selected:
+		set_brightness_percent_to(normal_brightness)
 
 
 func _on_focus_entered() -> void:
-	set_brightness_percent_to(focused_brightness)
+	if !is_selected:
+		set_brightness_percent_to(focused_brightness)
 
 func _on_focus_exited() -> void:
-	set_brightness_percent_to(normal_brightness)
+	if !is_selected:
+		set_brightness_percent_to(normal_brightness)
