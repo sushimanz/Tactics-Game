@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://beh0ed0xg38wx"]
 
 [ext_resource type="Script" uid="uid://cmbhy7j2ydcbg" path="res://UI/Menus/SettingsMenu/settingsMenu.gd" id="1_6mk0j"]
-[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKMenuButton.tscn" id="2_ub34k"]
+[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKButton/PKMenuButton.tscn" id="2_ub34k"]
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://css488vnm6yfr" path="res://UI/Menus/GameMenu/gameMenu.gd" id="1_kxotb"]
 [ext_resource type="Script" uid="uid://cdstw086tml7t" path="res://UI/Menus/GameMenu/selectedGameMode.gd" id="2_ewow0"]
-[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKMenuButton.tscn" id="2_wqp38"]
+[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKButton/PKMenuButton.tscn" id="2_wqp38"]
 
 [node name="GameMenu" type="Control"]
 layout_mode = 3

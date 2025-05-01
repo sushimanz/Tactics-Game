@@ -1,8 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
-.godot/editor
-.godot/imported
-
 
 # Godot-specific ignores
 .import/

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://eokrkecfwex5"]
 
 [ext_resource type="Script" uid="uid://cdumobkoo7hs6" path="res://UI/Menus/MainMenu/mainMenu.gd" id="1_gexx5"]
-[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKMenuButton.tscn" id="1_oa788"]
+[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKButton/PKMenuButton.tscn" id="1_oa788"]
 [ext_resource type="Texture2D" uid="uid://dd5xhx3pvq1h0" path="res://Assets/UI/Logos/GameLogoConceptRed.png" id="2_iloxp"]
 
 [node name="MainMenu" type="Control"]

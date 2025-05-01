@@ -36,7 +36,7 @@ func _go_back() -> void:
 		
 		else:
 			print(
-				"\n*** MenuManager _go_back() call ***" +
+				"\n*** MenuManager _go_back() call ***",
 				"\n\tInvalid ", cur_menu.name, " free attempt",
 				"\n\tThis menu is a root UI!\n"
 			)
@@ -52,7 +52,7 @@ func _goto_menu(next_scene: PackedScene) -> void:
 		#print("Menu Array (_goto_menu): ", menu_arr)
 	else:
 		print(
-			"\n*** MenuManager _goto_menu() call ***" +
+			"\n*** MenuManager _goto_menu() call ***",
 			"\n\tInvalid Menu: ", next_menu.name,
 			"\n\tCheck if it extends Menu!\n"
 		)

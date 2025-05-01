@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dui1jxsyw8sok"]
 
-[ext_resource type="Theme" uid="uid://dpjbivqud5dm7" path="res://UI/Interactables/menuButton.tres" id="1_2tvu2"]
-[ext_resource type="Script" uid="uid://bxcv3pa7mtr31" path="res://UI/Interactables/pkMenuButton.gd" id="2_mroji"]
+[ext_resource type="Theme" uid="uid://dpjbivqud5dm7" path="res://UI/Interactables/PKButton/menuButton.tres" id="1_2tvu2"]
+[ext_resource type="Script" uid="uid://bxcv3pa7mtr31" path="res://UI/Interactables/PKButton/pkMenuButton.gd" id="2_mroji"]
 
 [node name="PKMenuButton" type="Button"]
 custom_minimum_size = Vector2(100, 46)
