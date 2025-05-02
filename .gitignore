@@ -20,10 +20,10 @@ data_*/
 mono_crash.*.json
 
 # Other files and folders
-uid_cache.bin
-ide_massaging_meta.txt
-filesystem_cache10
-script_editor_cache.cfg
+*/uid_cache.bin
+*/ide_messaging_meta.txt
+*/filesystem_cache10
+*/script_editor_cache.cfg
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
