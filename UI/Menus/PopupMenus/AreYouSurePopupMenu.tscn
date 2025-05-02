@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsa4jklr4bfag"]
+
+[ext_resource type="Script" uid="uid://kcau658xr3vv" path="res://UI/Menus/PopupMenus/areYouSurePopupMenu.gd" id="1_jtwxs"]
+[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKButton/PKMenuButton.tscn" id="2_fe36s"]
+
+[node name="AreYouSurePopupMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jtwxs")
+
+[node name="DarkenBG" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.196078)
+
+[node name="PopupBG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -50.0
+offset_right = 112.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.391185, 0.391185, 0.391185, 1)
+
+[node name="Label" type="Label" parent="PopupBG"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.0
+offset_top = 10.0
+offset_right = 112.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Are You Sure?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="BoxContainer" parent="PopupBG"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -102.0
+offset_top = -46.0
+offset_right = 102.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="YesButton" parent="PopupBG/Buttons" instance=ExtResource("2_fe36s")]
+layout_mode = 2
+text = "Yes"
+
+[node name="NoButton" parent="PopupBG/Buttons" instance=ExtResource("2_fe36s")]
+layout_mode = 2
+text = "No"
+
+[connection signal="pressed" from="PopupBG/Buttons/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="PopupBG/Buttons/NoButton" to="." method="_on_no_button_pressed"]

@@ -17,7 +17,7 @@ func _on_nexus_button_pressed() -> void:
 func _selected(button: Node) -> void:
 	button.is_selected = true
 	button.set_brightness_percent_to(button.selected_brightness)
-	print(button.name, " is selected")
+	print(button.text, " is selected")
 	
 	for btn in buttons:
 		if btn.name != button.name:

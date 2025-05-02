@@ -3,6 +3,9 @@ extends Menu
 
 var menu_arr: Array[Menu]
 
+#Not sure if it will be used, since there might be a better way to push what mainstate is going to happen next
+var in_mainstate: Main.MAINSTATE
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
 		#Maybe do something when left button pressed? Idk
@@ -31,15 +34,16 @@ func _go_back() -> void:
 					print(prev_menu.name, " is now in focus")
 			
 		#Will need to change this in the future but for now just goes to main menu by pressing ESC
-		elif main.current_mainstate != main.MAINSTATE.ENTER_TITLE:
-			main.update_mainstate(main.MAINSTATE.ENTER_TITLE)
+		#elif main.current_mainstate != Main.MAINSTATE.ENTER_TITLE:
+			#main.update_mainstate(Main.MAINSTATE.ENTER_TITLE)
 		
 		else:
-			print(
-				"\n*** MenuManager _go_back() call ***",
-				"\n\tInvalid ", cur_menu.name, " free attempt",
-				"\n\tThis menu is a root UI!\n"
-			)
+			_goto_menu(MenuData.are_you_sure_popup_menu)
+			#print(
+				#"\n*** MenuManager _go_back() call ***",
+				#"\n\tInvalid ", cur_menu.name, " free attempt",
+				#"\n\tThis menu is a root UI!\n"
+			#)
 
 func _goto_menu(next_scene: PackedScene) -> void:
 	var next_menu = next_scene.instantiate()
@@ -48,7 +52,8 @@ func _goto_menu(next_scene: PackedScene) -> void:
 		menu_arr.append(next_menu)
 		add_child(next_menu)
 		if len(menu_arr) > 1:
-			menu_arr[-2].visible = false
+			if next_menu is not PKPopupMenu:
+				menu_arr[-2].visible = false
 		#print("Menu Array (_goto_menu): ", menu_arr)
 	else:
 		print(
