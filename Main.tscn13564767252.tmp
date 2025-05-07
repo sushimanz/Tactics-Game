@@ -8,5 +8,6 @@
 script = ExtResource("1_glv2v")
 
 [node name="MenuManager" parent="." instance=ExtResource("2_r0du0")]
+is_root_ui = null
 
 [node name="musicManager" parent="." instance=ExtResource("3_cm0pq")]

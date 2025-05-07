@@ -10,10 +10,8 @@ extends Node
 ##If there is a problem with the input, check the calls in this script, or the data scripts
 
 #Managers and their instance references
-@export var menu_manager: PackedScene = load("res://UI/Menus/MenuManager.tscn")
-@onready var inst_menu_manager: Node = menu_manager.instantiate()
-@export var music_manager: PackedScene = load("res://Audio/Music/MusicManager.tscn")
-@onready var inst_music_manager: Node = music_manager.instantiate()
+@onready var inst_menu_manager: Node = $MenuManager
+@onready var inst_music_manager: Node = $musicManager
 
 enum MAINSTATE {
 	#Boot
@@ -38,17 +36,24 @@ enum MAINSTATE {
 
 var current_mainstate: MAINSTATE = MAINSTATE.ENTER_BOOT
 var previous_mainstate: MAINSTATE = MAINSTATE.ENTER_BOOT
-var popup_mainstate: MAINSTATE = MAINSTATE.ENTER_TITLE
+static var popup_mainstate: MAINSTATE = MAINSTATE.ENTER_TITLE
 
 func _ready() -> void:
 	#Go to menu since nothing to boot yet
-	#Add all managers here 	<-- Is it better to do this, or should it all just be in the main menu already?
-	add_child(inst_menu_manager)
-	add_child(inst_music_manager)
 	update_mainstate(MAINSTATE.ENTER_TITLE)
+	inst_menu_manager._update_mainstate.connect(update_mainstate)
 
 func update_mainstate(next_mainstate: MAINSTATE) -> void:
-	if next_mainstate != current_mainstate:
+	if next_mainstate == current_mainstate:
+		var mainstate_keys = MAINSTATE.keys()
+		
+		print(
+			"\n*** Main update_mainstate() call ***",
+			"\n\tInvalid next_mainstate: ", mainstate_keys[next_mainstate],
+			"\n\tThis is the same mainstate as the current mainstate!\n"
+		)
+	
+	else:
 		match next_mainstate:
 			MAINSTATE.ENTER_BOOT:
 				print("\nENTER_BOOT")
@@ -59,27 +64,27 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 			MAINSTATE.ENTER_TITLE:
 				print("\nENTER_TITLE")
 				popup_mainstate = MAINSTATE.EXIT
-				inst_menu_manager._clean_menus()
-				inst_menu_manager._goto_menu(MenuData.main_menu)
+				inst_menu_manager.clean_menus()
+				inst_menu_manager.goto_menu(MenuData.main_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_intros)
 				
 			MAINSTATE.EXIT_TITLE:
 				#What to do when the title/main menu is exited (Not when going into the game)
 				print("\nEXIT_TITLE")
-				inst_menu_manager._goto_menu(MenuData.are_you_sure_popup_menu)
+				inst_menu_manager.goto_menu(MenuData.are_you_sure_popup_menu)
 				#Need to pass in the next mainstate (In this case only EXIT)
 				
 			MAINSTATE.ENTER_GAME:
 				print("\nENTER_GAME")
 				popup_mainstate = MAINSTATE.ENTER_TITLE
-				inst_menu_manager._clean_menus()
-				inst_menu_manager._goto_menu(MenuData.game_menu)
+				inst_menu_manager.clean_menus()
+				inst_menu_manager.goto_menu(MenuData.game_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
 				
 			MAINSTATE.START_GAME:
 				print("\nSTART_GAME")
-				inst_menu_manager._clean_menus()
-				inst_menu_manager._goto_menu(MenuData.troop_selection_menu)
+				inst_menu_manager.clean_menus()
+				inst_menu_manager.goto_menu(MenuData.troop_selection_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
 				
 			MAINSTATE.EXIT_GAME:
@@ -99,12 +104,3 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 		
 		previous_mainstate = current_mainstate
 		current_mainstate = next_mainstate
-	
-	else:
-		var mainstate_keys = MAINSTATE.keys()
-		
-		print(
-			"\n*** Main update_mainstate() call ***",
-			"\n\tInvalid next_mainstate: ", mainstate_keys[next_mainstate],
-			"\n\tThis is the same as the current_mainstate!\n"
-		)
