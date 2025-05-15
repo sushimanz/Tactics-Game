@@ -13,7 +13,7 @@ func _on_join_button_pressed() -> void:
 
 func _on_play_button_pressed() -> void:
 	print("Play Button Pressed")
-	_update_mainstate.emit(Main.MAINSTATE.ENTER_GAME)
+	_update_mainstate(Main.MAINSTATE.ENTER_GAME)
 
 #Self-explanatory buttons
 func _on_credits_button_pressed() -> void:
@@ -31,7 +31,7 @@ func _on_credits_button_pressed() -> void:
 	#menuManager._goto_menu(MenuData.credits_menu)
 
 func _on_settings_button_pressed() -> void:
-	_goto_menu.emit(MenuData.settings_menu)
+	_goto_menu(MenuData.settings_menu)
 
 func _on_quit_button_pressed() -> void:
-	_update_mainstate.emit(Main.MAINSTATE.EXIT)
+	_update_mainstate(Main.MAINSTATE.EXIT)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://n2l10vvkwm8j"]
+
+[ext_resource type="Script" uid="uid://cvqepx4gx853t" path="res://Game/game.gd" id="1_hqwdr"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hqwdr")
+
+[node name="Grid" type="Control" parent="."]
+anchors_preset = 0

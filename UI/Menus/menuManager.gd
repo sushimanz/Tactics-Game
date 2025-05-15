@@ -1,5 +1,5 @@
 class_name MenuManager
-extends Control
+extends CanvasLayer
 
 signal _update_mainstate(next_state: Main.MAINSTATE)
 
@@ -46,6 +46,11 @@ func go_back() -> void:
 				#"\n\tInvalid ", cur_menu.name, " free attempt",
 				#"\n\tThis menu is a root UI!\n"
 			#)
+	else:
+		goto_menu(MenuData.are_you_sure_popup_menu)
+		#If there are no open menus, open up the game menu
+		#This should show the options to quit game or go to desktop and such
+		#update_mainstate(Main.MAINSTATE.EXIT_GAME)
 
 func goto_menu(next_scene: PackedScene) -> void:
 	var next_menu = next_scene.instantiate()
@@ -59,9 +64,9 @@ func goto_menu(next_scene: PackedScene) -> void:
 		#print("Menu Array (goto_menu): ", menu_arr)
 		
 		#Can figure out how to make this better later
-		next_menu._update_mainstate.connect(update_ms)
-		next_menu._go_back.connect(go_back)
-		next_menu._goto_menu.connect(goto_menu)
+		next_menu.update_mainstate.connect(update_mainstate)
+		next_menu.go_back.connect(go_back)
+		next_menu.goto_menu.connect(goto_menu)
 		
 	else:
 		print(
@@ -73,7 +78,7 @@ func goto_menu(next_scene: PackedScene) -> void:
 		next_menu = null
 
 #Can figure out how to make this better later
-func update_ms(next_mainstate: Main.MAINSTATE):
+func update_mainstate(next_mainstate: Main.MAINSTATE):
 	_update_mainstate.emit(next_mainstate)
 
 func clean_menus() -> void:

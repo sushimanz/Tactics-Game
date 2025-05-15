@@ -1,5 +1,5 @@
 class_name Main
-extends Node
+extends Control
 
 ##NOTE: Main Class is the "root" for the whole game
 
@@ -10,9 +10,12 @@ extends Node
 ##If there is a problem with the input, check the calls in this script, or the data scripts
 
 #Managers and their instance references
+@onready var inst_game_cam: Node = $GameCamera
+@onready var inst_game: Node = $Game
 @onready var inst_menu_manager: Node = $MenuManager
-@onready var inst_music_manager: Node = $musicManager
+@onready var inst_music_manager: Node = $MusicManager
 
+##NOTE: This stuff works for now but might want to change a couple names or something else, idk
 enum MAINSTATE {
 	#Boot
 	ENTER_BOOT, 
@@ -22,9 +25,14 @@ enum MAINSTATE {
 	ENTER_TITLE, 
 	EXIT_TITLE, 
 	
-	#Game
+	#Game - might want to ren ame some of these
+	#ENTER_GAME - happens when you are selecting a match type - this only happens the first time you open or on rematch
 	ENTER_GAME,
+	#START_GAME - happens directly after ENTER_GAME, and you select your troops here... Just call TROOP_SELECT?
 	START_GAME,
+	#PLAY_GAME - happens directly after START_GAME, troops are selected
+	PLAY_GAME,
+	#EXIT_GAME - happens directly after the game is exited (so that Game becomes invisible)
 	EXIT_GAME,
 	
 	#User Settings
@@ -36,6 +44,8 @@ enum MAINSTATE {
 
 var current_mainstate: MAINSTATE = MAINSTATE.ENTER_BOOT
 var previous_mainstate: MAINSTATE = MAINSTATE.ENTER_BOOT
+
+#This needs to have a better way to update
 static var popup_mainstate: MAINSTATE = MAINSTATE.ENTER_TITLE
 
 func _ready() -> void:
@@ -54,6 +64,10 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 		)
 	
 	else:
+		inst_game_cam.position = inst_game_cam.spawn_pos
+		inst_game_cam.zoom = inst_game_cam.zoom_default
+		inst_game.visible = false
+		
 		match next_mainstate:
 			MAINSTATE.ENTER_BOOT:
 				print("\nENTER_BOOT")
@@ -87,10 +101,14 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				inst_menu_manager.goto_menu(MenuData.troop_selection_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
 				
+			MAINSTATE.PLAY_GAME:
+				print("\nPLAY_GAME")
+				inst_menu_manager.clean_menus()
+				inst_game.visible = true
+				
 			MAINSTATE.EXIT_GAME:
 				#What to do when the game is exited, to menu or full exit
 				print("\nEXIT_GAME")
-				inst_menu_manager._goto_menu(MenuData.are_you_sure_popup_menu)
 				#Need to pass in the next mainstate (In this case could be ENTER_TITLE or EXIT)
 				
 			MAINSTATE.CONFIG_USER:

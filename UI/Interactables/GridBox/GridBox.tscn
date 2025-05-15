@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bp6c3weginj63" path="res://UI/Interactables/GridBox/gridBox.gd" id="1_yshp0"]
 
 [node name="GridBox" type="TextureRect"]
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(200, 200)
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_gjrih")

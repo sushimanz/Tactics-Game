@@ -1,15 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfhr5bi2e1i7i"]
+[gd_scene load_steps=4 format=3 uid="uid://cfhr5bi2e1i7i"]
 
 [ext_resource type="Script" uid="uid://85meb83impqo" path="res://UI/Menus/TroopSelectionMenu/troopSelectionMenu.gd" id="1_45yvr"]
 [ext_resource type="PackedScene" uid="uid://m76bxq2flovj" path="res://UI/Interactables/GridBox/TroopCard.tscn" id="2_b7me2"]
+[ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKButton/PKMenuButton.tscn" id="3_evrpn"]
 
 [node name="TroopSelectionMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_45yvr")
@@ -17,26 +16,23 @@ is_root_ui = true
 
 [node name="MenuLabel" type="RichTextLabel" parent="."]
 visible = false
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
 offset_left = -220.0
-offset_top = -180.0
 offset_right = 220.0
-offset_bottom = -80.0
+offset_bottom = 100.0
+grow_horizontal = 2
 text = "TROOP SELECTION MENU"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Squad" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -180.0
-offset_bottom = -180.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="SquadLabel" type="RichTextLabel" parent="Squad"]
 layout_mode = 1
@@ -80,15 +76,12 @@ layout_mode = 2
 
 [node name="Army" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -76.0
-offset_bottom = -76.0
+anchor_bottom = 0.093
+offset_top = 100.0
+offset_bottom = -100.44
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ArmyLabel" type="RichTextLabel" parent="Army"]
 layout_mode = 1
@@ -170,3 +163,33 @@ layout_mode = 2
 
 [node name="TroopCard5" parent="Army/ArmyVBox/Army3" instance=ExtResource("2_b7me2")]
 layout_mode = 2
+
+[node name="NextButton" parent="." instance=ExtResource("3_evrpn")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -46.0
+offset_right = 100.0
+offset_bottom = 0.0
+grow_vertical = 0
+text = "Next"
+
+[node name="BackButton" parent="." instance=ExtResource("3_evrpn")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -46.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back
+"
+
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
