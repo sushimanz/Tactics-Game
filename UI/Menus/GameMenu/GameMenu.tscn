@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvme16csi6jl4"]
+[gd_scene load_steps=5 format=3 uid="uid://cvme16csi6jl4"]
 
 [ext_resource type="Script" uid="uid://css488vnm6yfr" path="res://UI/Menus/GameMenu/gameMenu.gd" id="1_kxotb"]
 [ext_resource type="Script" uid="uid://cdstw086tml7t" path="res://UI/Menus/GameMenu/selectedGameMode.gd" id="2_ewow0"]
 [ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKButton/PKMenuButton.tscn" id="2_wqp38"]
+[ext_resource type="PackedScene" uid="uid://b08382a74r8vf" path="res://UI/Interactables/IntLine/IntLine.tscn" id="4_ewow0"]
 
 [node name="GameMenu" type="Control"]
 layout_mode = 3
@@ -76,13 +77,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="GridSizeX" type="TextEdit" parent="OtherSettings"]
-custom_minimum_size = Vector2(80, 40)
+[node name="Height" parent="OtherSettings" instance=ExtResource("4_ewow0")]
 layout_mode = 2
 placeholder_text = "Height"
 
-[node name="GridSizeY" type="TextEdit" parent="OtherSettings"]
-custom_minimum_size = Vector2(80, 40)
+[node name="Width" parent="OtherSettings" instance=ExtResource("4_ewow0")]
 layout_mode = 2
 placeholder_text = "Width"
 
@@ -116,5 +115,7 @@ text = "Back
 [connection signal="pressed" from="GamemodeButtons/DMButton" to="GamemodeButtons" method="_on_dm_button_pressed"]
 [connection signal="pressed" from="GamemodeButtons/KothButton" to="GamemodeButtons" method="_on_koth_button_pressed"]
 [connection signal="pressed" from="GamemodeButtons/NexusButton" to="GamemodeButtons" method="_on_nexus_button_pressed"]
+[connection signal="new_valid_input" from="OtherSettings/Height" to="." method="_on_height_new_valid_input"]
+[connection signal="new_valid_input" from="OtherSettings/Width" to="." method="_on_width_new_valid_input"]
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

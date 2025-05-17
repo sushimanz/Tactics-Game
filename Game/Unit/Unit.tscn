@@ -111,6 +111,7 @@ animation = &"idle"
 
 [node name="DebugBG" type="ColorRect" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -100.0
 offset_top = -190.0
 offset_right = 100.0

@@ -100,6 +100,7 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				inst_menu_manager.clean_menus()
 				inst_menu_manager.goto_menu(MenuData.troop_selection_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
+				inst_game._start_game()
 				
 			MAINSTATE.PLAY_GAME:
 				print("\nPLAY_GAME")
