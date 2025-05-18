@@ -1,6 +1,9 @@
 class_name GridData
 extends Resource
 
+static var gridbox: PackedScene = preload("res://UI/Interactables/GridBox/GridBox.tscn")
+
+##NOTE: This does not currently affect the grid size
 @export var grid_size: int = 200
 
 @export var min_height: int = 5

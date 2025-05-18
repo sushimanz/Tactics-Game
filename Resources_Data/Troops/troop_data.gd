@@ -1,18 +1,21 @@
+##Extends out to all troops, listing their max and current stats
 class_name TroopData
 extends Resource
 
-#NOTE: TroopData Class extends out to all troops, listing their max and current stats
+enum NAME {ARCHER, KNIGHT, BAITER, ETC}
+enum TYPE {TANK, DPS, ETC}
 
 @export var max_health: int = 100
-var current_health = max_health
 @export var max_actions: int = 5
-var current_actions = max_actions
 @export var max_attacks: int = 2
-var current_attacks = max_attacks
 @export var max_moves: int = 3
+
+var current_health = max_health
+var current_actions = max_actions
+var current_attacks = max_attacks
 var current_moves = max_moves
 
-#NOTE: move_speed = max tiles moved per move
+##NOTE: move_speed = max tiles moved per move
 @export var move_speed: int = 2
 
 @export var reinforce_turns: int

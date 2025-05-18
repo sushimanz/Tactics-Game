@@ -9,9 +9,9 @@ var menu_arr: Array[Menu]
 var in_mainstate: Main.MAINSTATE
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		#Maybe do something when left button pressed? Idk
-		print("Menu Array: ", menu_arr)
+		#print("Menu Stack: ", menu_arr)
 		#print(name, " left mouse click effect!")
 		pass
 	

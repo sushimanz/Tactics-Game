@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="TroopData" load_steps=2 format=3 uid="uid://c4hl0piupt4ef"]
+
+[ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/Troops/troop_data.gd" id="1_8fi42"]
+
+[resource]
+script = ExtResource("1_8fi42")
+max_health = 100
+max_actions = 5
+max_attacks = 2
+max_moves = 3
+move_speed = 2
+reinforce_turns = 0
+max_reinforcements = 5
+dmg = 25
+atk_range = 0
+max_troops_hit = 0
+troop_type = "default"
+attack_types = "default"
+extra_info = "default"
+metadata/_custom_type_script = "uid://bibmr7b7130da"

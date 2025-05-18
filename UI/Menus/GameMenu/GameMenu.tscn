@@ -62,7 +62,7 @@ layout_mode = 2
 text = "Nexus"
 is_selection_button = true
 
-[node name="OtherSettings" type="BoxContainer" parent="."]
+[node name="GridSettings" type="BoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -77,11 +77,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Height" parent="OtherSettings" instance=ExtResource("4_ewow0")]
+[node name="Height" parent="GridSettings" instance=ExtResource("4_ewow0")]
 layout_mode = 2
 placeholder_text = "Height"
 
-[node name="Width" parent="OtherSettings" instance=ExtResource("4_ewow0")]
+[node name="Width" parent="GridSettings" instance=ExtResource("4_ewow0")]
 layout_mode = 2
 placeholder_text = "Width"
 
@@ -115,7 +115,7 @@ text = "Back
 [connection signal="pressed" from="GamemodeButtons/DMButton" to="GamemodeButtons" method="_on_dm_button_pressed"]
 [connection signal="pressed" from="GamemodeButtons/KothButton" to="GamemodeButtons" method="_on_koth_button_pressed"]
 [connection signal="pressed" from="GamemodeButtons/NexusButton" to="GamemodeButtons" method="_on_nexus_button_pressed"]
-[connection signal="new_valid_input" from="OtherSettings/Height" to="." method="_on_height_new_valid_input"]
-[connection signal="new_valid_input" from="OtherSettings/Width" to="." method="_on_width_new_valid_input"]
+[connection signal="new_valid_input" from="GridSettings/Height" to="." method="_on_height_new_valid_input"]
+[connection signal="new_valid_input" from="GridSettings/Width" to="." method="_on_width_new_valid_input"]
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

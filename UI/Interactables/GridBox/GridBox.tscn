@@ -10,3 +10,5 @@ offset_bottom = 40.0
 texture = ExtResource("1_gjrih")
 expand_mode = 1
 script = ExtResource("1_yshp0")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
