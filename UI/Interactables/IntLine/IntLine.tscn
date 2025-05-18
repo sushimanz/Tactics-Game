@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b08382a74r8vf"]
+
+[ext_resource type="Script" uid="uid://dhn74r6mmij1f" path="res://UI/Interactables/IntLine/intLine.gd" id="1_m717m"]
+
+[node name="IntLine" type="LineEdit"]
+custom_minimum_size = Vector2(80, 40)
+placeholder_text = "Input"
+alignment = 1
+script = ExtResource("1_m717m")
+
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="text_changed" from="." to="." method="_on_text_changed"]
+[connection signal="text_submitted" from="." to="." method="_on_text_submitted"]
