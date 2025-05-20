@@ -14,7 +14,14 @@ var atk_node: Node
 
 ##The below is just temporary stuff, not sure if it is gonna be used. You're welcome to rewrite!
 
-func attack(atk_pos: Vector2i, atk_size: int = 1, dmg_falloff_per_tile_pct: float = 100.0):
+func attack(atk_pos: Vector2i, dmg: int = 0, atk_size: int = 1, dmg_falloff_per_tile_pct: float = 100.0):
+	if dmg >= 0:
+		#do damage to enemy ONLY
+		pass
+	elif dmg < 0:
+		#do negative damage (healing) to friendly ONLY
+		pass
+	
 	atk_pos -= Vector2i(grid_data.grid_size, grid_data.grid_size)/2
 	#Attack originates from attack position
 	#For something like a ranged attack like an arrow, might be different
@@ -47,7 +54,7 @@ func attack(atk_pos: Vector2i, atk_size: int = 1, dmg_falloff_per_tile_pct: floa
 	atk_node.name = "AttackNode"
 	add_child(atk_node)
 	
-	var test = GridData.gridbox.instantiate()
+	var test = GridData.tile.instantiate()
 	test.position = atk_pos
 	test.name = "Attack at (0, 0)"
 	atk_node.add_child(test)
@@ -55,18 +62,18 @@ func attack(atk_pos: Vector2i, atk_size: int = 1, dmg_falloff_per_tile_pct: floa
 	for w in range(atk_square):
 		var x_pos_offset = (w - atk_offset) * grid_data.grid_size
 		for h in range(atk_square):
-			test = GridData.gridbox.instantiate()
+			test = GridData.tile.instantiate()
 			var y_pos_offset = (h - atk_offset) * grid_data.grid_size
 			test.position = Vector2((atk_pos.x + x_pos_offset), (atk_pos.y + y_pos_offset))
-			test.name = "Attack at (" + str(w - atk_offset) + "," + str(h - atk_offset) + ")"
+			test.name = "Attack at (" + str(w - atk_offset) + ", " + str(h - atk_offset) + ")"
 			atk_node.add_child(test)
 			#print("(", new_w, ", ", new_h, ")")
 	
 	print(atk_square, "x", atk_square)
-	
-	pass
 
 func move(move_pos: Vector2i):
+	#Heavy Medium Light
+	#Rock Paper Scissors
 	pass
 
 func _input(event: InputEvent) -> void:

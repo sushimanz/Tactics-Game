@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TroopData" load_steps=2 format=3 uid="uid://c4hl0piupt4ef"]
 
-[ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/Troops/troop_data.gd" id="1_8fi42"]
+[ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="1_8fi42"]
 
 [resource]
 script = ExtResource("1_8fi42")

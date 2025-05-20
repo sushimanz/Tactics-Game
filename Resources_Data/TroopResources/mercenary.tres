@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="TroopData" load_steps=6 format=3 uid="uid://bhhyd80odoblj"]
+
+[ext_resource type="Texture2D" uid="uid://tvs3hbnpkh7a" path="res://Assets/Troops/Knight/KnightShadeBlueIdle.png" id="1_sldpr"]
+[ext_resource type="Texture2D" uid="uid://dauwkp7n2v2yd" path="res://Assets/Troops/Knight/KnightShadeBlueWeak.png" id="2_ske40"]
+[ext_resource type="Texture2D" uid="uid://dxv2nw4onpfhw" path="res://Assets/Troops/Knight/KnightShadeBlueHurt.png" id="3_h53s3"]
+[ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="4_8y41m"]
+[ext_resource type="Texture2D" uid="uid://t24ncrhcnt3o" path="res://Assets/Troops/Knight/Knight2DBlue-Sheet.png" id="5_g5bxc"]
+
+[resource]
+script = ExtResource("4_8y41m")
+name = 0
+type = 0
+weight = 0
+max_health = 100.0
+max_attacks = 2
+max_moves = 3
+move_speed = 2
+reinforce_rounds = 1
+max_reinforcements = 5
+atk_range = 1
+dmg = 25
+crit_dmg = 0
+sprite_sheet = Dictionary[int, CompressedTexture2D]({
+0: ExtResource("5_g5bxc"),
+1: ExtResource("5_g5bxc"),
+2: ExtResource("5_g5bxc")
+})
+portrait = Dictionary[int, CompressedTexture2D]({
+0: ExtResource("1_sldpr"),
+1: ExtResource("1_sldpr"),
+2: ExtResource("2_ske40"),
+3: ExtResource("3_h53s3")
+})
+attack_types = Dictionary[String, String]({})
+extra_info = "None"
+metadata/_custom_type_script = "uid://bibmr7b7130da"

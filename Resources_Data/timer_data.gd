@@ -6,6 +6,7 @@ extends Resource
 
 ##The time it takes for a troop to make an action
 @export var tick_time: float = 0.1
+@export var turn_time: float = 1.0
 @export var deploy_time: float = 30.0
 @export var plan_time: float = 20.0
 

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_7psfj")
-grid_size = 200
+tile_size = 200
 min_height = 5
 min_width = 8
 max_height = 10
