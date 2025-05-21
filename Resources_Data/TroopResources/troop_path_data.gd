@@ -11,3 +11,5 @@ static var mercenary: Resource = load("res://Resources_Data/TroopResources/merce
 static var sniperbird: Resource = load("res://Resources_Data/TroopResources/sniperbird.tres")
 static var cannon: Resource = load("res://Resources_Data/TroopResources/cannon.tres")
 static var chronos: Resource = load("res://Resources_Data/TroopResources/chronos.tres")
+#static var scrapyard_girl: Resource = load()
+#static var lighthouse_guardian: Resource = load()

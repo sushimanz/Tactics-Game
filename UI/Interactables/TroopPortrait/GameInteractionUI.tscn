@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7koxp8s2xl62"]
+
+[ext_resource type="PackedScene" uid="uid://djugfm2qg8m5n" path="res://UI/Interactables/TroopPortrait/Portrait.tscn" id="1_omkoa"]
+
+[node name="GameInteractionUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 1000.0
+
+[node name="TroopPortrait1" parent="VBoxContainer" instance=ExtResource("1_omkoa")]
+layout_mode = 2
+
+[node name="TroopPortrait2" parent="VBoxContainer" instance=ExtResource("1_omkoa")]
+layout_mode = 2
+
+[node name="TroopPortrait3" parent="VBoxContainer" instance=ExtResource("1_omkoa")]
+layout_mode = 2
+
+[node name="TroopPortrait4" parent="VBoxContainer" instance=ExtResource("1_omkoa")]
+layout_mode = 2
+
+[node name="TroopPortrait5" parent="VBoxContainer" instance=ExtResource("1_omkoa")]
+layout_mode = 2

@@ -1,10 +1,7 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=6 format=3 uid="uid://cvxjeq1ybw3iw"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=3 format=3 uid="uid://cvxjeq1ybw3iw"]
 
-[ext_resource type="Texture2D" uid="uid://tvs3hbnpkh7a" path="res://Assets/Troops/Knight/KnightShadeBlueIdle.png" id="1_fhvqg"]
-[ext_resource type="Texture2D" uid="uid://dauwkp7n2v2yd" path="res://Assets/Troops/Knight/KnightShadeBlueWeak.png" id="2_21gjn"]
-[ext_resource type="Texture2D" uid="uid://dxv2nw4onpfhw" path="res://Assets/Troops/Knight/KnightShadeBlueHurt.png" id="3_gvo4q"]
+[ext_resource type="SpriteFrames" uid="uid://1js7qrgyhrsc" path="res://Assets/Troops/Baiter/baiter_frames.tres" id="2_e4gn5"]
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="4_jmm5n"]
-[ext_resource type="Texture2D" uid="uid://t24ncrhcnt3o" path="res://Assets/Troops/Knight/Knight2DBlue-Sheet.png" id="5_cq2rr"]
 
 [resource]
 script = ExtResource("4_jmm5n")
@@ -20,20 +17,7 @@ max_reinforcements = 5
 atk_range = 6
 dmg = 11
 crit_dmg = 0
-sprite_sheet = Dictionary[int, CompressedTexture2D]({
-0: ExtResource("5_cq2rr"),
-1: ExtResource("5_cq2rr"),
-2: ExtResource("5_cq2rr")
-})
-portrait = Dictionary[int, CompressedTexture2D]({
-0: ExtResource("1_fhvqg"),
-1: ExtResource("1_fhvqg"),
-2: ExtResource("2_21gjn"),
-3: ExtResource("3_gvo4q")
-})
-attack_types = Dictionary[String, String]({
-"Hook": "Grabs an enemy troop; on successful hook, melee twice on troop that is grabbed",
-"Melee": "Hits any adjacent tile for X damage"
-})
+sprite_sheet = ExtResource("2_e4gn5")
+attack_types = Dictionary[String, int]({})
 extra_info = "Arrows can hit 2 troops, can ncharge a shot to deal crit damage"
 metadata/_custom_type_script = "uid://bibmr7b7130da"

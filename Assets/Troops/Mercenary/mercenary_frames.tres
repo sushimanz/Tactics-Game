@@ -1,0 +1,75 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://8qk4ko3j2mya"]
+
+[ext_resource type="Texture2D" uid="uid://cgcdtffqq73j1" path="res://Assets/Troops/Mercenary/Mercenary2DBlue-IdleSheet.png" id="1_l2f3b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bv81t"]
+atlas = ExtResource("1_l2f3b")
+region = Rect2(0, 0, 200, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggead"]
+atlas = ExtResource("1_l2f3b")
+region = Rect2(200, 0, 200, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5y6m"]
+atlas = ExtResource("1_l2f3b")
+region = Rect2(400, 0, 200, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfj5x"]
+atlas = ExtResource("1_l2f3b")
+region = Rect2(600, 0, 200, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nocj"]
+atlas = ExtResource("1_l2f3b")
+region = Rect2(800, 0, 200, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5b2gg"]
+atlas = ExtResource("1_l2f3b")
+region = Rect2(1000, 0, 200, 270)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wqls"]
+atlas = ExtResource("1_l2f3b")
+region = Rect2(1200, 0, 200, 270)
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bv81t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggead")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5y6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfj5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5nocj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5b2gg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wqls")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]

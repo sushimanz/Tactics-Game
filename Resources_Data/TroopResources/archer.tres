@@ -1,10 +1,7 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=6 format=3 uid="uid://ddaanvij0trp2"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=3 format=3 uid="uid://ddaanvij0trp2"]
 
-[ext_resource type="Texture2D" uid="uid://tvs3hbnpkh7a" path="res://Assets/Troops/Knight/KnightShadeBlueIdle.png" id="1_d2j4y"]
-[ext_resource type="Texture2D" uid="uid://dauwkp7n2v2yd" path="res://Assets/Troops/Knight/KnightShadeBlueWeak.png" id="2_r07kx"]
-[ext_resource type="Texture2D" uid="uid://dxv2nw4onpfhw" path="res://Assets/Troops/Knight/KnightShadeBlueHurt.png" id="3_13wb8"]
+[ext_resource type="SpriteFrames" uid="uid://bdm0uidx3ojgu" path="res://Assets/Troops/Archer/archer_frames.tres" id="1_duv5a"]
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="4_r13ni"]
-[ext_resource type="Texture2D" uid="uid://t24ncrhcnt3o" path="res://Assets/Troops/Knight/Knight2DBlue-Sheet.png" id="5_e0n1x"]
 
 [resource]
 script = ExtResource("4_r13ni")
@@ -20,20 +17,7 @@ max_reinforcements = 5
 atk_range = 6
 dmg = 13
 crit_dmg = 30
-sprite_sheet = Dictionary[int, CompressedTexture2D]({
-0: ExtResource("5_e0n1x"),
-1: ExtResource("5_e0n1x"),
-2: ExtResource("5_e0n1x")
-})
-portrait = Dictionary[int, CompressedTexture2D]({
-0: ExtResource("1_d2j4y"),
-1: ExtResource("1_d2j4y"),
-2: ExtResource("2_r07kx"),
-3: ExtResource("3_13wb8")
-})
-attack_types = Dictionary[String, String]({
-"Charged Shot": "Take 2 turns to shoot a target for 30 damage",
-"Shot": "Shoot a target for 13 damage"
-})
+sprite_sheet = ExtResource("1_duv5a")
+attack_types = Dictionary[String, int]({})
 extra_info = "None"
 metadata/_custom_type_script = "uid://bibmr7b7130da"

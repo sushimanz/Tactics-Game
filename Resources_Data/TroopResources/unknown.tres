@@ -1,39 +1,21 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=6 format=3 uid="uid://dsreru815hq2h"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=2 format=3 uid="uid://dsreru815hq2h"]
 
-[ext_resource type="Texture2D" uid="uid://tvs3hbnpkh7a" path="res://Assets/Troops/Knight/KnightShadeBlueIdle.png" id="1_hries"]
-[ext_resource type="Texture2D" uid="uid://dauwkp7n2v2yd" path="res://Assets/Troops/Knight/KnightShadeBlueWeak.png" id="2_ver8o"]
-[ext_resource type="Texture2D" uid="uid://dxv2nw4onpfhw" path="res://Assets/Troops/Knight/KnightShadeBlueHurt.png" id="3_yula2"]
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="4_87oa8"]
-[ext_resource type="Texture2D" uid="uid://t24ncrhcnt3o" path="res://Assets/Troops/Knight/Knight2DBlue-Sheet.png" id="5_j2uwh"]
 
 [resource]
 script = ExtResource("4_87oa8")
-name = 3
-type = 1
-weight = 2
-max_health = 110.0
-max_attacks = 1
-max_moves = 2
-move_speed = 3
+troop_name = 0
+troop_type = 0
+troop_weight = 0
+max_health = 100.0
+max_attacks = 2
+max_moves = 3
+move_speed = 2
 reinforce_rounds = 1
 max_reinforcements = 5
-atk_range = 6
-dmg = 13
-crit_dmg = 30
-sprite_sheet = Dictionary[int, CompressedTexture2D]({
-0: ExtResource("5_j2uwh"),
-1: ExtResource("5_j2uwh"),
-2: ExtResource("5_j2uwh")
-})
-portrait = Dictionary[int, CompressedTexture2D]({
-0: ExtResource("1_hries"),
-1: ExtResource("1_hries"),
-2: ExtResource("2_ver8o"),
-3: ExtResource("3_yula2")
-})
-attack_types = Dictionary[String, String]({
-"Charged Shot": "Take 2 turns to shoot a target for 30 damage",
-"Shot": "Shoot a target for 13 damage"
-})
+atk_range = 1
+dmg = 25
+crit_dmg = 0
+attack_types = Dictionary[String, int]({})
 extra_info = "None"
 metadata/_custom_type_script = "uid://bibmr7b7130da"

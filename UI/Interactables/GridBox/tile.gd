@@ -14,7 +14,7 @@ func _input(event: InputEvent) -> void:
 			if traversable:
 				print("This is tested from gridBox.gd, and needs to be removed when there is an actual system in place")
 				held_unit = UnitData.unit.instantiate()
-				held_unit.position -= Vector2(0, held_unit.size.y)/2
+				held_unit.position -= Vector2(0, held_unit.size.y)/4
 				add_child(held_unit)
 				troop_entered.emit(name, held_unit)
 				traversable = false

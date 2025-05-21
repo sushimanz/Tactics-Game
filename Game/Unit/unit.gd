@@ -1,29 +1,39 @@
 class_name Unit
 extends Control
 
-@onready var sprite = $Sprite2D
+@onready var sprite = $Sprite
 
 ##Just a test value, unless it becomes a feature in the future
 @export var spawn_loss: int = 1
 
 var friendly: bool = false
 var troop: TroopData
+var cur_troop: TroopData.NAME
 var names := TroopData.NAME.keys()
 var troop_name: String
 var feet: Vector2 = position + Vector2((size.x / 2), size.y)
 
-var onTroop: bool = false
+var mouse_hovered: bool = false
 
 func _ready() -> void:
-	troop = set_troop(TroopPathData.knight)
+	update_troop()
+
+func update_troop(in_troop: TroopData.NAME = TroopData.NAME.UNKNOWN):
+	print("Updating Troop to ", names[in_troop])
+	
+	cur_troop = in_troop
+	troop = set_troop(UnitData.get_troop(in_troop))
 	troop_name = str(names[troop.troop_name])
+	sprite.sprite_frames = troop.sprite_sheet
+	sprite.play("idle")
 	
 	if friendly:
 		name = "Friendly " + troop_name
+		#Do troop name and sprite to actual stuff
 	else:
 		name = "Enemy " + troop_name
+		#Do troop name and sprite to UNKNOWN stuff
 	
-	sprite.play("idle")
 	tooltip_text = troop_name + "\nHealth: " + str(troop.current_health) + "\nReinforcements: " + str(troop.current_reinforcements)
 
 func set_troop(in_troop: TroopData) -> TroopData:
@@ -72,15 +82,19 @@ func take_damage(dmg: int = 0):
 
 func _input(event: InputEvent) -> void:
 	if troop != null:
-		if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-			if onTroop:
-				take_damage(999)
-				print("This has been done in unit.gd _input() call, and is ONLY for testing purposes (Remove when done with testing)")
+		if event is InputEventMouseButton and event.is_pressed():
+			if mouse_hovered:
+				if event.button_index == MOUSE_BUTTON_LEFT:
+					take_damage(999)
+					print("This has been done in unit.gd _input() call, and is ONLY for testing purposes (Remove when done with testing)")
+				if event.button_index == MOUSE_BUTTON_RIGHT:
+					if cur_troop + 1 < len(names):
+						update_troop(cur_troop + 1)
+					else:
+						update_troop()
 
 func _on_mouse_entered() -> void:
-	if !onTroop:
-		onTroop = true
+	mouse_hovered = true
 
 func _on_mouse_exited() -> void:
-	if onTroop:
-		onTroop = false
+	mouse_hovered = false

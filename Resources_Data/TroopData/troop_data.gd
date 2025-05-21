@@ -31,23 +31,14 @@ var max_actions: int = 5
 @export var crit_dmg: int = 0
 #@export var max_troops_hit: int
 
-#The dictionaries may need to be updated so that they can be changed more easily, or maybe it's fine, idk.
-#Will change to Unknown Troop sprites by default when that is available as an option
-@export var sprite_sheet: Dictionary[STATE, CompressedTexture2D] = {
-	STATE.IDLE : preload("res://Assets/Troops/Knight/Knight2DBlue-Sheet.png"),
-	STATE.MOVE : preload("res://Assets/Troops/Knight/Knight2DBlue-Sheet.png"),
-	STATE.ATTACK : preload("res://Assets/Troops/Knight/Knight2DBlue-Sheet.png"),
-	STATE.HIT : preload("res://Assets/Troops/Knight/Knight2DBlue-Sheet.png")
-}
-@export var portrait: Dictionary[HEALTH_STATE, CompressedTexture2D] = {
-	HEALTH_STATE.HIGH : preload("res://Assets/Troops/Knight/KnightShadeBlueIdle.png"),
-	HEALTH_STATE.MED : preload("res://Assets/Troops/Knight/KnightShadeBlueIdle.png"),
-	HEALTH_STATE.LOW : preload("res://Assets/Troops/Knight/KnightShadeBlueWeak.png"),
-	HEALTH_STATE.HIT : preload("res://Assets/Troops/Knight/KnightShadeBlueHurt.png")
-}
+@export var sprite_sheet: SpriteFrames
+##This is used in any case that a sprite has an alternative sprite sheet
+@export var alternative_sprite_sheet: SpriteFrames
+@export var portrait: SpriteFrames
 
-##v Not sure if any of this will be used, might end up in unitData or something v
-@export var attack_types: Dictionary[String, String]
+##Attack types and their relative damage (Need to add buff/debuff somehow...)
+@export var attack_types: Dictionary[String, int]
+##Just special troop info basically
 @export var extra_info: String = "None"
 
 var current_health: float

@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://77yiucj74yhm"]
 
-[ext_resource type="Texture2D" uid="uid://t24ncrhcnt3o" path="res://Assets/Troops/Knight/Knight2DBlue-Sheet.png" id="1_c1dga"]
+[ext_resource type="Texture2D" uid="uid://t24ncrhcnt3o" path="res://Assets/Troops/Knight/Knight2DBlue-IdleSheet.png" id="1_c1dga"]
 [ext_resource type="Script" uid="uid://70xr55b3fxk7" path="res://Game/Unit/unit.gd" id="1_tw8l4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tw8l4"]
@@ -97,7 +97,7 @@ offset_right = 200.0
 offset_bottom = 200.0
 script = ExtResource("1_tw8l4")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(100, 100)
 sprite_frames = SubResource("SpriteFrames_g41ll")
 animation = &"idle"

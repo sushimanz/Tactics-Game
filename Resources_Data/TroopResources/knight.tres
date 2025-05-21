@@ -1,10 +1,7 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=6 format=3 uid="uid://ccwff1b4ds5wv"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=3 format=3 uid="uid://ccwff1b4ds5wv"]
 
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="1_bi03j"]
-[ext_resource type="Texture2D" uid="uid://tvs3hbnpkh7a" path="res://Assets/Troops/Knight/KnightShadeBlueIdle.png" id="1_ly5b0"]
-[ext_resource type="Texture2D" uid="uid://dauwkp7n2v2yd" path="res://Assets/Troops/Knight/KnightShadeBlueWeak.png" id="2_j0ync"]
-[ext_resource type="Texture2D" uid="uid://dxv2nw4onpfhw" path="res://Assets/Troops/Knight/KnightShadeBlueHurt.png" id="3_rt0cm"]
-[ext_resource type="Texture2D" uid="uid://t24ncrhcnt3o" path="res://Assets/Troops/Knight/Knight2DBlue-Sheet.png" id="5_clf3n"]
+[ext_resource type="SpriteFrames" uid="uid://c12geab8c22mu" path="res://Assets/Troops/Knight/knight_frames.tres" id="2_goail"]
 
 [resource]
 script = ExtResource("1_bi03j")
@@ -20,19 +17,7 @@ max_reinforcements = 5
 atk_range = 1
 dmg = 18
 crit_dmg = 0
-sprite_sheet = Dictionary[int, CompressedTexture2D]({
-0: ExtResource("5_clf3n"),
-1: ExtResource("5_clf3n"),
-2: ExtResource("5_clf3n")
-})
-portrait = Dictionary[int, CompressedTexture2D]({
-0: ExtResource("1_ly5b0"),
-1: ExtResource("1_ly5b0"),
-2: ExtResource("2_j0ync"),
-3: ExtResource("3_rt0cm")
-})
-attack_types = Dictionary[String, String]({
-"Melee": "Hits any adjacent tile for 18 damage"
-})
+sprite_sheet = ExtResource("2_goail")
+attack_types = Dictionary[String, int]({})
 extra_info = "None"
 metadata/_custom_type_script = "uid://bibmr7b7130da"
