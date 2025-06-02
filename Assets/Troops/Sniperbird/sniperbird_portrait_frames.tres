@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://cmwlwtf205qtj"]
+
+[ext_resource type="Texture2D" uid="uid://bgy4syxjf4qxn" path="res://Assets/Troops/Sniperbird/SniperBirdBlueIdle.png" id="1_gkg6c"]
+[ext_resource type="Texture2D" uid="uid://b7ijyfjwe2jfr" path="res://Assets/Troops/Sniperbird/SniperBirdBlueWeak.png" id="2_44yt0"]
+[ext_resource type="Texture2D" uid="uid://cwncc8f41xl6l" path="res://Assets/Troops/Sniperbird/SniperBirdBlueHurt.png" id="3_axi3d"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gkg6c")
+}],
+"loop": true,
+"name": &"high",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_44yt0")
+}],
+"loop": true,
+"name": &"low",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_axi3d")
+}],
+"loop": true,
+"name": &"med",
+"speed": 5.0
+}]

@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=3 format=3 uid="uid://dpt8uuhebjt6n"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=4 format=3 uid="uid://dpt8uuhebjt6n"]
 
+[ext_resource type="SpriteFrames" uid="uid://bfjvfpdqvroui" path="res://Assets/Troops/Snowdrop/snowdrop_portrait_frames.tres" id="1_db54g"]
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="4_mr5x3"]
 [ext_resource type="SpriteFrames" uid="uid://cs2i2qjolho6w" path="res://Assets/Troops/Snowdrop/snowdrop_frames.tres" id="5_ljakb"]
 
 [resource]
 script = ExtResource("4_mr5x3")
-troop_name = 5
+troop_name_desc = "Snowdrop"
+troop_name = 10
 troop_type = 0
 troop_weight = 0
 max_health = 100.0
@@ -17,7 +19,8 @@ max_reinforcements = 5
 atk_range = 1
 dmg = 25
 crit_dmg = 0
+portrait = ExtResource("1_db54g")
 sprite_sheet = ExtResource("5_ljakb")
-attack_types = Dictionary[String, int]({})
+attack_types = Dictionary[String, Array]({})
 extra_info = "None"
 metadata/_custom_type_script = "uid://bibmr7b7130da"

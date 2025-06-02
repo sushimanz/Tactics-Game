@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=3 format=3 uid="uid://ccwff1b4ds5wv"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=5 format=3 uid="uid://ccwff1b4ds5wv"]
 
+[ext_resource type="Texture2D" uid="uid://byjosqv1evda6" path="res://Assets/Troops/Knight/KNIGHT_ICON.png" id="1_3arhx"]
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="1_bi03j"]
+[ext_resource type="SpriteFrames" uid="uid://i0mcqyhth0y5" path="res://Assets/Troops/Knight/knight_portrait_frames.tres" id="2_3arhx"]
 [ext_resource type="SpriteFrames" uid="uid://c12geab8c22mu" path="res://Assets/Troops/Knight/knight_frames.tres" id="2_goail"]
 
 [resource]
 script = ExtResource("1_bi03j")
-troop_name = 1
+troop_name_desc = "Knight"
+troop_name = 5
 troop_type = 0
 troop_weight = 1
 max_health = 220.0
@@ -17,7 +20,9 @@ max_reinforcements = 5
 atk_range = 1
 dmg = 18
 crit_dmg = 0
+icon = ExtResource("1_3arhx")
+portrait = ExtResource("2_3arhx")
 sprite_sheet = ExtResource("2_goail")
-attack_types = Dictionary[String, int]({})
+attack_types = Dictionary[String, Array]({})
 extra_info = "None"
 metadata/_custom_type_script = "uid://bibmr7b7130da"

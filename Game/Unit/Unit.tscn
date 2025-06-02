@@ -1,92 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://77yiucj74yhm"]
+[gd_scene load_steps=3 format=3 uid="uid://77yiucj74yhm"]
 
-[ext_resource type="Texture2D" uid="uid://t24ncrhcnt3o" path="res://Assets/Troops/Knight/Knight2DBlue-IdleSheet.png" id="1_c1dga"]
 [ext_resource type="Script" uid="uid://70xr55b3fxk7" path="res://Game/Unit/unit.gd" id="1_tw8l4"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tw8l4"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(0, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jl500"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4e4n2"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(400, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_aiwul"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(600, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k27yb"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(800, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yjlnm"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(1000, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_40rrp"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(1200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wwrcv"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(1400, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q27xc"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(1600, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_62yoy"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(1800, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkui7"]
-atlas = ExtResource("1_c1dga")
-region = Rect2(2000, 0, 200, 200)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_g41ll"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tw8l4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jl500")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4e4n2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aiwul")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k27yb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yjlnm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_40rrp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wwrcv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q27xc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_62yoy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qkui7")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://c12geab8c22mu" path="res://Assets/Troops/Knight/knight_frames.tres" id="2_tw8l4"]
 
 [node name="Unit" type="Control"]
 z_index = 1
@@ -99,7 +14,7 @@ script = ExtResource("1_tw8l4")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(100, 100)
-sprite_frames = SubResource("SpriteFrames_g41ll")
+sprite_frames = ExtResource("2_tw8l4")
 animation = &"idle"
 
 [node name="StateMachine" type="Node" parent="."]

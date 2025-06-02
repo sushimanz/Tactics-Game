@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://m76bxq2flovj"]
+
+[ext_resource type="Script" uid="uid://dno4ql7de0bj8" path="res://UI/Interactables/TroopCard/troopCard.gd" id="1_rojlv"]
+[ext_resource type="SpriteFrames" uid="uid://c12geab8c22mu" path="res://Assets/Troops/Knight/knight_frames.tres" id="3_5wohd"]
+[ext_resource type="Texture2D" uid="uid://byjosqv1evda6" path="res://Assets/Troops/Knight/KNIGHT_ICON.png" id="3_qbf6b"]
+
+[node name="TroopCard" type="Control"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 120.0
+offset_bottom = 120.0
+script = ExtResource("1_rojlv")
+
+[node name="CardBG" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TroopIcon" type="TextureRect" parent="CardBG"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -97.0
+offset_right = -22.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("3_qbf6b")
+expand_mode = 1
+
+[node name="LabelBG" type="Panel" parent="CardBG"]
+custom_minimum_size = Vector2(80, 20)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = 2.0
+offset_right = 25.0
+offset_bottom = 17.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CardBG/LabelBG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "TroopType"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TroopCharacter" type="AnimatedSprite2D" parent="CardBG"]
+position = Vector2(71, 71)
+scale = Vector2(0.48, 0.48)
+sprite_frames = ExtResource("3_5wohd")
+animation = &"idle"

@@ -10,7 +10,6 @@ var friendly: bool = false
 var troop: TroopData
 var cur_troop: TroopData.NAME
 var names := TroopData.NAME.keys()
-var troop_name: String
 var feet: Vector2 = position + Vector2((size.x / 2), size.y)
 
 var mouse_hovered: bool = false
@@ -23,18 +22,17 @@ func update_troop(in_troop: TroopData.NAME = TroopData.NAME.UNKNOWN):
 	
 	cur_troop = in_troop
 	troop = set_troop(UnitData.get_troop(in_troop))
-	troop_name = str(names[troop.troop_name])
 	sprite.sprite_frames = troop.sprite_sheet
 	sprite.play("idle")
 	
 	if friendly:
-		name = "Friendly " + troop_name
+		name = "Friendly " + troop.troop_name_desc
 		#Do troop name and sprite to actual stuff
 	else:
-		name = "Enemy " + troop_name
+		name = "Enemy " + troop.troop_name_desc
 		#Do troop name and sprite to UNKNOWN stuff
 	
-	tooltip_text = troop_name + "\nHealth: " + str(troop.current_health) + "\nReinforcements: " + str(troop.current_reinforcements)
+	tooltip_text = troop.troop_name_desc + "\nHealth: " + str(troop.current_health) + "\nReinforcements: " + str(troop.current_reinforcements)
 
 func set_troop(in_troop: TroopData) -> TroopData:
 	var data = in_troop.duplicate()
@@ -78,7 +76,7 @@ func take_damage(dmg: int = 0):
 			print(name, " Has perished, and has no reinforcements")
 			#if feet leave a tile, maybe emit a signal?
 			queue_free()
-	tooltip_text = troop_name + "\nHealth: " + str(troop.current_health) + "\nReinforcements: " + str(troop.current_reinforcements)
+	tooltip_text = troop.troop_name_desc + "\nHealth: " + str(troop.current_health) + "\nReinforcements: " + str(troop.current_reinforcements)
 
 func _input(event: InputEvent) -> void:
 	if troop != null:

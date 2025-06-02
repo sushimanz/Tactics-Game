@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfhr5bi2e1i7i"]
+[gd_scene load_steps=6 format=3 uid="uid://cfhr5bi2e1i7i"]
 
 [ext_resource type="Script" uid="uid://85meb83impqo" path="res://UI/Menus/TroopSelectionMenu/troopSelectionMenu.gd" id="1_45yvr"]
-[ext_resource type="PackedScene" uid="uid://m76bxq2flovj" path="res://UI/Interactables/GridBox/TroopCard.tscn" id="2_b7me2"]
+[ext_resource type="PackedScene" uid="uid://m76bxq2flovj" path="res://UI/Interactables/TroopCard/TroopCard.tscn" id="2_b7me2"]
+[ext_resource type="Script" uid="uid://dbo8v7ens4dms" path="res://UI/Menus/TroopSelectionMenu/squad.gd" id="2_r8j76"]
 [ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKButton/PKMenuButton.tscn" id="3_evrpn"]
+[ext_resource type="Script" uid="uid://ds1o7mxmg7fqu" path="res://UI/Menus/TroopSelectionMenu/TSM_set_army.gd" id="3_wsary"]
 
 [node name="TroopSelectionMenu" type="Control"]
 layout_mode = 3
@@ -30,9 +32,11 @@ vertical_alignment = 1
 
 [node name="Squad" type="Control" parent="."]
 layout_mode = 1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
+script = ExtResource("2_r8j76")
 
 [node name="SquadLabel" type="RichTextLabel" parent="Squad"]
 layout_mode = 1
@@ -61,26 +65,31 @@ alignment = 1
 
 [node name="TroopCard" parent="Squad/SquadBox" instance=ExtResource("2_b7me2")]
 layout_mode = 2
+army = false
 
 [node name="TroopCard2" parent="Squad/SquadBox" instance=ExtResource("2_b7me2")]
 layout_mode = 2
+army = false
 
 [node name="TroopCard3" parent="Squad/SquadBox" instance=ExtResource("2_b7me2")]
 layout_mode = 2
+army = false
 
 [node name="TroopCard4" parent="Squad/SquadBox" instance=ExtResource("2_b7me2")]
 layout_mode = 2
+army = false
 
 [node name="TroopCard5" parent="Squad/SquadBox" instance=ExtResource("2_b7me2")]
 layout_mode = 2
+army = false
 
 [node name="Army" type="Control" parent="."]
 layout_mode = 1
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.093
-offset_top = 100.0
-offset_bottom = -100.44
+offset_top = 144.0
+offset_bottom = 43.56
 grow_horizontal = 2
 
 [node name="ArmyLabel" type="RichTextLabel" parent="Army"]
@@ -106,63 +115,7 @@ offset_top = 24.0
 offset_right = 128.0
 offset_bottom = 224.0
 grow_horizontal = 2
-
-[node name="Army1" type="HBoxContainer" parent="Army/ArmyVBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="TroopCard" parent="Army/ArmyVBox/Army1" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard2" parent="Army/ArmyVBox/Army1" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard3" parent="Army/ArmyVBox/Army1" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard4" parent="Army/ArmyVBox/Army1" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard5" parent="Army/ArmyVBox/Army1" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="Army2" type="HBoxContainer" parent="Army/ArmyVBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="TroopCard" parent="Army/ArmyVBox/Army2" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard2" parent="Army/ArmyVBox/Army2" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard3" parent="Army/ArmyVBox/Army2" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard4" parent="Army/ArmyVBox/Army2" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard5" parent="Army/ArmyVBox/Army2" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="Army3" type="HBoxContainer" parent="Army/ArmyVBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="TroopCard" parent="Army/ArmyVBox/Army3" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard2" parent="Army/ArmyVBox/Army3" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard3" parent="Army/ArmyVBox/Army3" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard4" parent="Army/ArmyVBox/Army3" instance=ExtResource("2_b7me2")]
-layout_mode = 2
-
-[node name="TroopCard5" parent="Army/ArmyVBox/Army3" instance=ExtResource("2_b7me2")]
-layout_mode = 2
+script = ExtResource("3_wsary")
 
 [node name="NextButton" parent="." instance=ExtResource("3_evrpn")]
 layout_mode = 1
@@ -191,5 +144,10 @@ grow_vertical = 0
 text = "Back
 "
 
+[connection signal="squad_troop_set" from="Squad/SquadBox/TroopCard" to="Squad" method="_on_troop_card_squad_troop_set"]
+[connection signal="squad_troop_set" from="Squad/SquadBox/TroopCard2" to="Squad" method="_on_troop_card_2_squad_troop_set"]
+[connection signal="squad_troop_set" from="Squad/SquadBox/TroopCard3" to="Squad" method="_on_troop_card_3_squad_troop_set"]
+[connection signal="squad_troop_set" from="Squad/SquadBox/TroopCard4" to="Squad" method="_on_troop_card_4_squad_troop_set"]
+[connection signal="squad_troop_set" from="Squad/SquadBox/TroopCard5" to="Squad" method="_on_troop_card_5_squad_troop_set"]
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=3 format=3 uid="uid://bhhyd80odoblj"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=4 format=3 uid="uid://bhhyd80odoblj"]
 
+[ext_resource type="SpriteFrames" uid="uid://wby63nj7puok" path="res://Assets/Troops/Mercenary/mercenary_portrait_frames.tres" id="1_l5y5d"]
 [ext_resource type="SpriteFrames" uid="uid://8qk4ko3j2mya" path="res://Assets/Troops/Mercenary/mercenary_frames.tres" id="2_ote0i"]
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="4_8y41m"]
 
 [resource]
 script = ExtResource("4_8y41m")
-troop_name = 6
+troop_name_desc = "Mercenary"
+troop_name = 7
 troop_type = 0
 troop_weight = 0
 max_health = 100.0
@@ -17,7 +19,8 @@ max_reinforcements = 5
 atk_range = 1
 dmg = 25
 crit_dmg = 0
+portrait = ExtResource("1_l5y5d")
 sprite_sheet = ExtResource("2_ote0i")
-attack_types = Dictionary[String, int]({})
+attack_types = Dictionary[String, Array]({})
 extra_info = "None"
 metadata/_custom_type_script = "uid://bibmr7b7130da"

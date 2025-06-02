@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=3 uid="uid://m76bxq2flovj"]
+
+[ext_resource type="Script" uid="uid://dno4ql7de0bj8" path="res://UI/Interactables/TroopCard/troopCard.gd" id="1_rojlv"]
+
+[node name="TroopCard" type="Control"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 120.0
+offset_bottom = 120.0
+script = ExtResource("1_rojlv")
+
+[node name="CardBG" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TroopIcon" type="TextureRect" parent="CardBG"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -97.0
+offset_right = -22.0
+offset_bottom = -61.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="LabelBG" type="Panel" parent="CardBG"]
+custom_minimum_size = Vector2(80, 20)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = 2.0
+offset_right = 25.0
+offset_bottom = 17.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CardBG/LabelBG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "???"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TroopCharacter" type="AnimatedSprite2D" parent="CardBG"]
+position = Vector2(71, 71)
+scale = Vector2(0.48, 0.48)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

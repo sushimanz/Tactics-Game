@@ -16,6 +16,7 @@ grow_vertical = 2
 script = ExtResource("1_glv2v")
 
 [node name="GameCamera" type="Camera2D" parent="."]
+visible = false
 position = Vector2(960, 540)
 script = ExtResource("2_fos0i")
 
@@ -26,4 +27,3 @@ layout_mode = 1
 [node name="MenuManager" parent="." instance=ExtResource("2_r0du0")]
 
 [node name="MusicManager" parent="." instance=ExtResource("3_cm0pq")]
-position = Vector2(960, 540)

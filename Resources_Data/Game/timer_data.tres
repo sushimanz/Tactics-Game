@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TimerData" load_steps=2 format=3 uid="uid://cxaniykfd5xkc"]
+
+[ext_resource type="Script" uid="uid://b1d1v6e33cnrv" path="res://Resources_Data/Game/timer_data.gd" id="1_ltfem"]
+
+[resource]
+script = ExtResource("1_ltfem")
+button_held_time = 0.1
+double_click_time = 0.1
+tick_time = 0.1
+turn_time = 1.0
+deploy_time = 30.0
+plan_time = 20.0
+survey_time = 5.0
+metadata/_custom_type_script = "uid://b1d1v6e33cnrv"

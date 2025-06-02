@@ -1,5 +1,5 @@
 class_name MusicManager
-extends AudioStreamPlayer2D
+extends AudioStreamPlayer
 
 @export var is_loop := true
 

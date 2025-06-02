@@ -1,0 +1,37 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://cdsoky1he7im0"]
+
+[ext_resource type="Texture2D" uid="uid://4calxgsdy7ao" path="res://Assets/Troops/TVHead/TVHEADBLUEidlePortrait.png" id="1_qx2ua"]
+[ext_resource type="Texture2D" uid="uid://janmbc5d7a17" path="res://Assets/Troops/TVHead/TVHEADBLUEweakPortrait.png" id="2_nklkf"]
+[ext_resource type="Texture2D" uid="uid://bswsq85tks2kk" path="res://Assets/Troops/TVHead/TVHEADBLUEhurtPortrait.png" id="3_t8in7"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qx2ua")
+}],
+"loop": true,
+"name": &"high",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nklkf")
+}],
+"loop": true,
+"name": &"low",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_t8in7")
+}],
+"loop": true,
+"name": &"med",
+"speed": 5.0
+}]

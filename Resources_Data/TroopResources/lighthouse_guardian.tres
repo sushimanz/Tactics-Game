@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="TroopData" load_steps=4 format=3 uid="uid://7lnr5e5evcly"]
+
+[ext_resource type="SpriteFrames" uid="uid://cpjgtq1j2g3rk" path="res://Assets/Troops/LighthouseGuardian/lighthouse_guardian_portrait_frames.tres" id="1_kgex3"]
+[ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="2_h2erb"]
+[ext_resource type="SpriteFrames" uid="uid://bf7mxj3sx1wtd" path="res://Assets/Troops/LighthouseGuardian/lighthouse_guardian.tres" id="3_h2erb"]
+
+[resource]
+script = ExtResource("2_h2erb")
+troop_name_desc = "Lighthouse Guardian"
+troop_name = 6
+troop_type = 0
+troop_weight = 0
+max_health = 100.0
+max_attacks = 2
+max_moves = 3
+move_speed = 2
+reinforce_rounds = 1
+max_reinforcements = 5
+atk_range = 1
+dmg = 25
+crit_dmg = 0
+portrait = ExtResource("1_kgex3")
+sprite_sheet = ExtResource("3_h2erb")
+attack_types = Dictionary[String, Array]({})
+extra_info = "None"
+metadata/_custom_type_script = "uid://bibmr7b7130da"

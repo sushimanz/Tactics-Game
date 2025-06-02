@@ -1,0 +1,33 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://f2m0ouvpawux"]
+
+[ext_resource type="Texture2D" uid="uid://dqj184uro0rdg" path="res://Assets/Troops/Archer/ArcherShadeBlueIdle.png" id="1_so5jr"]
+[ext_resource type="Texture2D" uid="uid://djqoiacv7gpv0" path="res://Assets/Troops/Archer/ArcherShadeBlueHurt.png" id="2_urqmm"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_so5jr")
+}],
+"loop": true,
+"name": &"high",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"low",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_urqmm")
+}],
+"loop": true,
+"name": &"med",
+"speed": 5.0
+}]

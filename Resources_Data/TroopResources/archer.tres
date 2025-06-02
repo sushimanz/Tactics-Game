@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=3 format=3 uid="uid://ddaanvij0trp2"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=5 format=3 uid="uid://ddaanvij0trp2"]
 
+[ext_resource type="Texture2D" uid="uid://crntvumqo1y2t" path="res://Assets/Troops/Archer/ARCHER_ICON.png" id="1_3owp0"]
 [ext_resource type="SpriteFrames" uid="uid://bdm0uidx3ojgu" path="res://Assets/Troops/Archer/archer_frames.tres" id="1_duv5a"]
+[ext_resource type="SpriteFrames" uid="uid://f2m0ouvpawux" path="res://Assets/Troops/Archer/archer_portrait_frames.tres" id="2_qdds1"]
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="4_r13ni"]
 
 [resource]
 script = ExtResource("4_r13ni")
-troop_name = 3
+troop_name_desc = "Archer"
+troop_name = 1
 troop_type = 1
 troop_weight = 2
 max_health = 110.0
@@ -17,7 +20,9 @@ max_reinforcements = 5
 atk_range = 6
 dmg = 13
 crit_dmg = 30
+icon = ExtResource("1_3owp0")
+portrait = ExtResource("2_qdds1")
 sprite_sheet = ExtResource("1_duv5a")
-attack_types = Dictionary[String, int]({})
-extra_info = "None"
+attack_types = Dictionary[String, Array]({})
+extra_info = "Arrows can hit 2 troops, can ncharge a shot to deal crit damage"
 metadata/_custom_type_script = "uid://bibmr7b7130da"

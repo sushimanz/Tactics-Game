@@ -1,0 +1,33 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://wby63nj7puok"]
+
+[ext_resource type="Texture2D" uid="uid://15udqpn0kerp" path="res://Assets/Troops/Mercenary/MercenaryIdleBlue.png" id="1_s7a57"]
+[ext_resource type="Texture2D" uid="uid://cjymlthliruff" path="res://Assets/Troops/Mercenary/MercenaryHurtBlue.png" id="2_0jp6o"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_s7a57")
+}],
+"loop": true,
+"name": &"high",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"low",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0jp6o")
+}],
+"loop": true,
+"name": &"med",
+"speed": 5.0
+}]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://swknm47xfevu" path="res://Game/actions.gd" id="1_f6bu4"]
 
-[node name="TestActions" type="Control"]
+[node name="TestAttacks" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_f6bu4")

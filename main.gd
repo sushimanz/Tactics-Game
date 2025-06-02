@@ -51,6 +51,7 @@ static var popup_mainstate: MAINSTATE = MAINSTATE.ENTER_TITLE
 func _ready() -> void:
 	#Go to menu since nothing to boot yet
 	update_mainstate(MAINSTATE.ENTER_TITLE)
+	inst_game._update_mainstate.connect(update_mainstate)
 	inst_menu_manager._update_mainstate.connect(update_mainstate)
 
 func update_mainstate(next_mainstate: MAINSTATE) -> void:
@@ -77,7 +78,10 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				
 			MAINSTATE.ENTER_TITLE:
 				print("\nENTER_TITLE")
+				
+				#FIXME Make sure to change this, it is a temporary workaround
 				popup_mainstate = MAINSTATE.EXIT
+				
 				inst_menu_manager.clean_menus()
 				inst_menu_manager.goto_menu(MenuData.main_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_intros)
@@ -90,26 +94,33 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				
 			MAINSTATE.ENTER_GAME:
 				print("\nENTER_GAME")
-				popup_mainstate = MAINSTATE.ENTER_TITLE
+				
+				#FIXME Make sure to change this, it is a temporary workaround
+				popup_mainstate = MAINSTATE.EXIT_GAME
+				
 				inst_menu_manager.clean_menus()
 				inst_menu_manager.goto_menu(MenuData.game_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
+				inst_game_cam.visible = true
 				
 			MAINSTATE.START_GAME:
 				print("\nSTART_GAME")
 				inst_menu_manager.clean_menus()
 				inst_menu_manager.goto_menu(MenuData.troop_selection_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
-				inst_game._start_game()
+				inst_game._init_game()
 				
 			MAINSTATE.PLAY_GAME:
 				print("\nPLAY_GAME")
 				inst_menu_manager.clean_menus()
 				inst_game.visible = true
+				inst_game._start_game()
 				
 			MAINSTATE.EXIT_GAME:
 				#What to do when the game is exited, to menu or full exit
 				print("\nEXIT_GAME")
+				inst_game._end_game()
+				inst_game_cam.visible = false
 				#Need to pass in the next mainstate (In this case could be ENTER_TITLE or EXIT)
 				
 			MAINSTATE.CONFIG_USER:

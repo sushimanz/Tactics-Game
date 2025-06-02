@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="TroopData" load_steps=5 format=3 uid="uid://cdtnjek2hoppq"]
+
+[ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="1_30t5v"]
+[ext_resource type="Texture2D" uid="uid://dxisajlvuxou1" path="res://Assets/Troops/ScrapyardGirl/SCRAPYARD_GIRL_ICON.png" id="1_cp6oi"]
+[ext_resource type="SpriteFrames" uid="uid://4b4smqslroib" path="res://Assets/Troops/ScrapyardGirl/scrapyard_girl_portrait_frames.tres" id="2_xvi1e"]
+[ext_resource type="SpriteFrames" uid="uid://d18mrwom5vusd" path="res://Assets/Troops/ScrapyardGirl/scrapyard_girl_frames.tres" id="3_xvi1e"]
+
+[resource]
+script = ExtResource("1_30t5v")
+troop_name_desc = "Scrapyard Girl"
+troop_name = 8
+troop_type = 0
+troop_weight = 0
+max_health = 100.0
+max_attacks = 2
+max_moves = 3
+move_speed = 2
+reinforce_rounds = 1
+max_reinforcements = 5
+atk_range = 1
+dmg = 25
+crit_dmg = 0
+icon = ExtResource("1_cp6oi")
+portrait = ExtResource("2_xvi1e")
+sprite_sheet = ExtResource("3_xvi1e")
+attack_types = Dictionary[String, Array]({})
+extra_info = "None"
+metadata/_custom_type_script = "uid://bibmr7b7130da"

@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=3 format=3 uid="uid://cvxjeq1ybw3iw"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=5 format=3 uid="uid://cvxjeq1ybw3iw"]
 
+[ext_resource type="Texture2D" uid="uid://deke6xxak5g7b" path="res://Assets/Troops/Baiter/BAITER_ICON.png" id="1_1ulcw"]
+[ext_resource type="SpriteFrames" uid="uid://6n32fsssfuf0" path="res://Assets/Troops/Baiter/baiter_portrait_frames.tres" id="2_1ulcw"]
 [ext_resource type="SpriteFrames" uid="uid://1js7qrgyhrsc" path="res://Assets/Troops/Baiter/baiter_frames.tres" id="2_e4gn5"]
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="4_jmm5n"]
 
 [resource]
 script = ExtResource("4_jmm5n")
+troop_name_desc = "Baiter"
 troop_name = 2
 troop_type = 2
 troop_weight = 2
@@ -17,7 +20,9 @@ max_reinforcements = 5
 atk_range = 6
 dmg = 11
 crit_dmg = 0
+icon = ExtResource("1_1ulcw")
+portrait = ExtResource("2_1ulcw")
 sprite_sheet = ExtResource("2_e4gn5")
-attack_types = Dictionary[String, int]({})
-extra_info = "Arrows can hit 2 troops, can ncharge a shot to deal crit damage"
+attack_types = Dictionary[String, Array]({})
+extra_info = "None"
 metadata/_custom_type_script = "uid://bibmr7b7130da"

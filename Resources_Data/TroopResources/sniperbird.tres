@@ -1,11 +1,16 @@
-[gd_resource type="Resource" script_class="TroopData" load_steps=3 format=3 uid="uid://bxu60lu0ehmlo"]
+[gd_resource type="Resource" script_class="TroopData" load_steps=7 format=3 uid="uid://bxu60lu0ehmlo"]
 
+[ext_resource type="SpriteFrames" uid="uid://cnuc75hjlykch" path="res://Assets/Troops/Sniperbird/sniperbird_birdless_frames.tres" id="1_ps244"]
+[ext_resource type="SpriteFrames" uid="uid://bschf5sndg5yq" path="res://Assets/Troops/Sniperbird/sniperbird_bird_frames.tres" id="2_1px4v"]
 [ext_resource type="SpriteFrames" uid="uid://dbybl8h8l08kv" path="res://Assets/Troops/Sniperbird/sniperbird_frames.tres" id="2_iqelr"]
+[ext_resource type="Texture2D" uid="uid://bnvlqm4pbhsx3" path="res://Assets/Troops/Sniperbird/SNIPER_ICON.png" id="3_1eige"]
+[ext_resource type="SpriteFrames" uid="uid://cmwlwtf205qtj" path="res://Assets/Troops/Sniperbird/sniperbird_portrait_frames.tres" id="4_1eige"]
 [ext_resource type="Script" uid="uid://bibmr7b7130da" path="res://Resources_Data/TroopData/troop_data.gd" id="4_stk5p"]
 
 [resource]
 script = ExtResource("4_stk5p")
-troop_name = 7
+troop_name_desc = "Sniperbird"
+troop_name = 9
 troop_type = 0
 troop_weight = 0
 max_health = 100.0
@@ -17,7 +22,11 @@ max_reinforcements = 5
 atk_range = 1
 dmg = 25
 crit_dmg = 0
+icon = ExtResource("3_1eige")
+portrait = ExtResource("4_1eige")
 sprite_sheet = ExtResource("2_iqelr")
-attack_types = Dictionary[String, int]({})
+alternative_sprite_sheet = ExtResource("1_ps244")
+extra_sprite_sheet = ExtResource("2_1px4v")
+attack_types = Dictionary[String, Array]({})
 extra_info = "None"
 metadata/_custom_type_script = "uid://bibmr7b7130da"

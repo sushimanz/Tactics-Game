@@ -1,0 +1,33 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bfjvfpdqvroui"]
+
+[ext_resource type="Texture2D" uid="uid://dta8ga7wxd8me" path="res://Assets/Troops/Snowdrop/SnowDropIdleBlue.png" id="1_ey61d"]
+[ext_resource type="Texture2D" uid="uid://b2r7y54qj6nky" path="res://Assets/Troops/Snowdrop/SnowdropHurtBlue.png" id="2_a71ao"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ey61d")
+}],
+"loop": true,
+"name": &"high",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"low",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a71ao")
+}],
+"loop": true,
+"name": &"med",
+"speed": 5.0
+}]

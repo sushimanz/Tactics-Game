@@ -1,0 +1,33 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://du7ykafa765s6"]
+
+[ext_resource type="Texture2D" uid="uid://g2yohu3fddox" path="res://Assets/Troops/Chronos/ChronosBlueIdle.png" id="1_e14ei"]
+[ext_resource type="Texture2D" uid="uid://bnchdvf1ny5kw" path="res://Assets/Troops/Chronos/ChronosBlueWeak.png" id="2_ncad2"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e14ei")
+}],
+"loop": true,
+"name": &"high",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ncad2")
+}],
+"loop": true,
+"name": &"low",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"med",
+"speed": 5.0
+}]
