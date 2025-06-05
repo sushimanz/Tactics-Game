@@ -1,10 +1,13 @@
 class_name PortraitUI
-extends Control
+extends UI
 
 @onready var portraits = $Portraits
 
 var troops_set: Dictionary[int, String]
 var troops_unset: Array[String]
+
+func _ready() -> void:
+	set_portraits()
 
 func set_portraits():
 	print("\n!!! Setting Portraits !!!\n")

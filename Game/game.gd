@@ -3,7 +3,6 @@ extends Control
 signal _update_mainstate(next_state: Main.MAINSTATE)
 
 @onready var grid = $Grid
-@onready var portrait_ui = $PortraitUI
 
 func _init() -> void:
 	pass
@@ -16,7 +15,6 @@ func _init_game(h: int = ResData.grid.cur_height, w: int = ResData.grid.cur_widt
 
 func _start_game() -> void:
 	print("Squad: ", SquadData.friendly_troops)
-	portrait_ui.set_portraits()
 
 func _end_game() -> void:
 	var tiles = grid.get_children()

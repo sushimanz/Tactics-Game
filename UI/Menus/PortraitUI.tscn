@@ -6,29 +6,37 @@
 [node name="PortraitUI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_k80og")
+is_root_ui = true
 
 [node name="Portraits" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 1080.0
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="TroopPortrait1" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 troop_name = 1
 
 [node name="TroopPortrait2" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 troop_name = 2
 
 [node name="TroopPortrait3" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 troop_name = 4
 
 [node name="TroopPortrait4" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="TroopPortrait5" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 troop_name = 7

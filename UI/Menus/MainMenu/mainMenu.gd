@@ -1,4 +1,4 @@
-extends Menu
+extends UI
 
 #Copies the OID or if multiplayer stuff changes, whatever input might be needed
 func _on_copy_button_pressed() -> void:
@@ -24,14 +24,14 @@ func _on_credits_button_pressed() -> void:
 	"\n\tArtists: Waffles",
 	"\n\tMusic: Moon",
 	"\n\tVoice Actors: Anexi, boredboi, MaskenVA, Jen",
-	"\n\tProgramming & Development: Jafoolery, Jakobre, JustAutoAttack, Snipershot, Sushimanz",
+	"\n\tProgramming & Development: Jakobre, JustAutoAttack, Snipershot, Sushimanz",
 	"\n"
 	)
 	
 	#menuManager._goto_menu(MenuData.credits_menu)
 
 func _on_settings_button_pressed() -> void:
-	_goto_menu(MenuData.settings_menu)
+	_goto_ui(UIData.settings_menu)
 
 func _on_quit_button_pressed() -> void:
 	_update_mainstate(Main.MAINSTATE.EXIT)

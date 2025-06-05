@@ -12,7 +12,7 @@ extends Control
 #Managers and their instance references
 @onready var inst_game_cam: Node = $GameCamera
 @onready var inst_game: Node = $Game
-@onready var inst_menu_manager: Node = $MenuManager
+@onready var inst_menu_manager: Node = $UIManager
 @onready var inst_music_manager: Node = $MusicManager
 
 ##NOTE: This stuff works for now but might want to change a couple names or something else, idk
@@ -83,13 +83,13 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				popup_mainstate = MAINSTATE.EXIT
 				
 				inst_menu_manager.clean_menus()
-				inst_menu_manager.goto_menu(MenuData.main_menu)
+				inst_menu_manager.goto_ui(UIData.main_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_intros)
 				
 			MAINSTATE.EXIT_TITLE:
 				#What to do when the title/main menu is exited (Not when going into the game)
 				print("\nEXIT_TITLE")
-				inst_menu_manager.goto_menu(MenuData.are_you_sure_popup_menu)
+				inst_menu_manager.goto_ui(UIData.are_you_sure_popup_menu)
 				#Need to pass in the next mainstate (In this case only EXIT)
 				
 			MAINSTATE.ENTER_GAME:
@@ -99,20 +99,21 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				popup_mainstate = MAINSTATE.EXIT_GAME
 				
 				inst_menu_manager.clean_menus()
-				inst_menu_manager.goto_menu(MenuData.game_menu)
+				inst_menu_manager.goto_ui(UIData.lobby_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
 				inst_game_cam.visible = true
 				
 			MAINSTATE.START_GAME:
 				print("\nSTART_GAME")
 				inst_menu_manager.clean_menus()
-				inst_menu_manager.goto_menu(MenuData.troop_selection_menu)
+				inst_menu_manager.goto_ui(UIData.troop_selection_menu)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
 				inst_game._init_game()
 				
 			MAINSTATE.PLAY_GAME:
 				print("\nPLAY_GAME")
 				inst_menu_manager.clean_menus()
+				inst_menu_manager.goto_ui(UIData.portrait_ui)
 				inst_game.visible = true
 				inst_game._start_game()
 				

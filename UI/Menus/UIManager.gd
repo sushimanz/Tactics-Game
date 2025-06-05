@@ -1,9 +1,9 @@
-class_name MenuManager
+class_name UIManager
 extends CanvasLayer
 
 signal _update_mainstate(next_state: Main.MAINSTATE)
 
-var menu_arr: Array[Menu]
+var ui_arr: Array[UI]
 
 #Not sure if it will be used, since there might be a better way to push what mainstate is going to happen next
 var in_mainstate: Main.MAINSTATE
@@ -11,7 +11,7 @@ var in_mainstate: Main.MAINSTATE
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		#Maybe do something when left button pressed? Idk
-		#print("Menu Stack: ", menu_arr)
+		#print("UI Stack: ", ui_arr)
 		#print(name, " left mouse click effect!")
 		pass
 	
@@ -19,20 +19,20 @@ func _input(event: InputEvent) -> void:
 		go_back()
 
 func go_back() -> void:
-	if !menu_arr.is_empty():
-		var cur_menu: Menu = menu_arr[-1]
+	if !ui_arr.is_empty():
+		var cur_ui: UI = ui_arr[-1]
 		
 		#Don't want to remove main menu, ever (Except when game starts/is exited)
-		if !cur_menu.is_root_ui:
-			menu_arr.remove_at(len(menu_arr)-1)
-			cur_menu.queue_free()
-			print(cur_menu.name, " has been freed")
+		if !cur_ui.is_root_ui:
+			ui_arr.remove_at(len(ui_arr)-1)
+			cur_ui.queue_free()
+			print(cur_ui.name, " has been freed")
 			
-			if !menu_arr.is_empty():
-				menu_arr[-1].visible = true
+			if !ui_arr.is_empty():
+				ui_arr[-1].visible = true
 				
-				if len(menu_arr) > 1:
-					var prev_menu: Menu = menu_arr[-2]
+				if len(ui_arr) > 1:
+					var prev_menu: UI = ui_arr[-2]
 					print(prev_menu.name, " is now in focus")
 			
 		#Will need to change this in the future but for now just goes to main menu by pressing ESC
@@ -40,49 +40,49 @@ func go_back() -> void:
 			#main.update_mainstate(Main.MAINSTATE.ENTER_TITLE)
 		
 		else:
-			goto_menu(MenuData.are_you_sure_popup_menu)
+			goto_ui(UIData.are_you_sure_popup_menu)
 			#print(
-				#"\n*** MenuManager _go_back() call ***",
-				#"\n\tInvalid ", cur_menu.name, " free attempt",
-				#"\n\tThis menu is a root UI!\n"
+				#"\n*** UIManager _go_back() call ***",
+				#"\n\tInvalid ", cur_ui.name, " free attempt",
+				#"\n\tThis ui is a root UI!\n"
 			#)
 	else:
-		goto_menu(MenuData.are_you_sure_popup_menu)
+		goto_ui(UIData.are_you_sure_popup_menu)
 		#If there are no open menus, open up the game menu
 		#This should show the options to quit game or go to desktop and such
 		#update_mainstate(Main.MAINSTATE.EXIT_GAME)
 
-func goto_menu(next_scene: PackedScene) -> void:
-	var next_menu = next_scene.instantiate()
+func goto_ui(next_scene: PackedScene) -> void:
+	var next_ui = next_scene.instantiate()
 	
-	if next_menu is Menu:
-		menu_arr.append(next_menu)
-		add_child(next_menu)
-		if len(menu_arr) > 1:
-			if next_menu is not PKPopupMenu:
-				menu_arr[-2].visible = false
-		#print("Menu Array (goto_menu): ", menu_arr)
+	if next_ui is UI:
+		ui_arr.append(next_ui)
+		add_child(next_ui)
+		if len(ui_arr) > 1:
+			if next_ui is not PKPopupMenu:
+				ui_arr[-2].visible = false
+		#print("UI Array (goto_ui): ", ui_arr)
 		
 		#Can figure out how to make this better later
-		next_menu.update_mainstate.connect(update_mainstate)
-		next_menu.go_back.connect(go_back)
-		next_menu.goto_menu.connect(goto_menu)
+		next_ui.update_mainstate.connect(update_mainstate)
+		next_ui.go_back.connect(go_back)
+		next_ui.goto_ui.connect(goto_ui)
 		
 	else:
 		print(
-			"\n*** MenuManager goto_menu() call ***",
-			"\n\tInvalid Menu: ", next_menu.name,
-			"\n\tCheck if it extends Menu!\n"
+			"\n*** UIManager goto_ui() call ***",
+			"\n\tInvalid UI: ", next_ui.name,
+			"\n\tCheck if it extends GUI!\n"
 		)
 		
-		next_menu = null
+		next_ui = null
 
 #Can figure out how to make this better later
 func update_mainstate(next_mainstate: Main.MAINSTATE):
 	_update_mainstate.emit(next_mainstate)
 
 func clean_menus() -> void:
-	menu_arr.clear()
+	ui_arr.clear()
 	for child in get_children():
 		child.queue_free()
 		

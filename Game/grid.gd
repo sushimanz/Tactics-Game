@@ -28,12 +28,13 @@ func set_grid(height: int = grid.min_height, width: int = grid.min_width) -> voi
 			add_child(new_tile)
 			new_tile.name = "(" + str(w + 1) + ", " + str(h + 1) + ")"
 			gridData[new_tile] = null
-			new_tile.troop_entered.connect(update_griddata)
+			new_tile._troop_entered.connect(update_griddata)
+			new_tile._troop_exited.connect(update_griddata)
 			#print("Add gridbox at H:",h, "W:", w)
 
 ##This needs to be called EVERY time a unit enters, and exits, a tile.
-func update_griddata(tile_id: Tile, unit_d: Unit) -> void:
-	gridData[tile_id] = unit_d
+func update_griddata(tile_id: Tile, unit_id: Unit) -> void:
+	gridData[tile_id] = unit_id
 	
 	#This is for testing purposes
 	var i: int = 1

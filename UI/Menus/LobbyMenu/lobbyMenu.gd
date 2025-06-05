@@ -1,4 +1,4 @@
-extends Menu
+extends UI
 
 func _on_back_button_pressed() -> void:
 	_go_back()
