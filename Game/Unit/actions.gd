@@ -2,17 +2,14 @@ class_name Actions
 extends Control
 
 enum ACTION {ATTACK, MOVE}
-#var position: Vector2
 var queued_action: Dictionary[ACTION, Vector2]
 
-var test_size: int = 1
-var test_btn_held: bool = false
 var grid_data = ResData.grid
 var atk_node: Node
 
-#@onready var test_scene_node: PackedScene = load()
-
-##The below is just temporary stuff, not sure if it is gonna be used. You're welcome to rewrite!
+#var attack = Attack.new()
+var test_size: int = 1
+var test_btn_held: bool = false
 
 func attack(atk_pos: Vector2i, dmg: int = 0, atk_size: int = 1, dmg_falloff_per_tile_pct: float = 100.0):
 	if dmg >= 0:

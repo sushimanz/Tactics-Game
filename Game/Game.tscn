@@ -8,16 +8,24 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_hqwdr")
 
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [node name="Grid" type="Control" parent="."]
+unique_name_in_owner = true
 anchors_preset = 0
 script = ExtResource("2_vrr3t")
 
 [node name="Friendlies" type="Control" parent="."]
+unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Enemies" type="Control" parent="."]
+unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

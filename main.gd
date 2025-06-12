@@ -52,7 +52,17 @@ func _ready() -> void:
 	#Go to menu since nothing to boot yet
 	update_mainstate(MAINSTATE.ENTER_TITLE)
 	inst_game._update_mainstate.connect(update_mainstate)
+	inst_game._open_menu.connect(update_ui)
 	inst_menu_manager._update_mainstate.connect(update_mainstate)
+
+func update_ui(new_ui: PackedScene = UIData.are_you_sure_popup_menu, is_popup: bool = true) -> void:
+	if !is_popup:
+		inst_menu_manager.clean_menus()
+	
+	inst_menu_manager.goto_ui(new_ui)
+
+func update_music(new_album: String) -> void:
+	pass
 
 func update_mainstate(next_mainstate: MAINSTATE) -> void:
 	if next_mainstate == current_mainstate:
@@ -82,14 +92,13 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				#FIXME Make sure to change this, it is a temporary workaround
 				popup_mainstate = MAINSTATE.EXIT
 				
-				inst_menu_manager.clean_menus()
-				inst_menu_manager.goto_ui(UIData.main_menu)
+				update_ui(UIData.main_menu, false)
 				inst_music_manager.play_random_track_from_album(MusicData.album_intros)
 				
 			MAINSTATE.EXIT_TITLE:
 				#What to do when the title/main menu is exited (Not when going into the game)
 				print("\nEXIT_TITLE")
-				inst_menu_manager.goto_ui(UIData.are_you_sure_popup_menu)
+				update_ui(UIData.are_you_sure_popup_menu, true)
 				#Need to pass in the next mainstate (In this case only EXIT)
 				
 			MAINSTATE.ENTER_GAME:
@@ -98,24 +107,21 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				#FIXME Make sure to change this, it is a temporary workaround
 				popup_mainstate = MAINSTATE.EXIT_GAME
 				
-				inst_menu_manager.clean_menus()
-				inst_menu_manager.goto_ui(UIData.lobby_menu)
+				update_ui(UIData.lobby_menu, false)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
 				inst_game_cam.visible = true
 				
 			MAINSTATE.START_GAME:
 				print("\nSTART_GAME")
-				inst_menu_manager.clean_menus()
-				inst_menu_manager.goto_ui(UIData.troop_selection_menu)
+				update_ui(UIData.troop_selection_menu, false)
 				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
 				inst_game._init_game()
 				
 			MAINSTATE.PLAY_GAME:
 				print("\nPLAY_GAME")
-				inst_menu_manager.clean_menus()
-				inst_menu_manager.goto_ui(UIData.portrait_ui)
+				update_ui(UIData.portrait_ui, false)
 				inst_game.visible = true
-				inst_game._start_game()
+				inst_game._init_game()
 				
 			MAINSTATE.EXIT_GAME:
 				#What to do when the game is exited, to menu or full exit

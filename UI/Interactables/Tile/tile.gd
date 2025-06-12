@@ -11,8 +11,9 @@ var held_unit: Unit
 
 var id = self
 
-func _spawn_troop(in_troop: TroopData.NAME) -> void:
+func _spawn_troop(in_troop: TroopData.NAME, is_friendly: bool = false) -> void:
 	held_unit = UnitData.unit.instantiate()
+	held_unit.friendly = is_friendly
 	held_unit.position -= Vector2(0, held_unit.size.y)/4
 	add_child(held_unit)
 	held_unit.update_troop(in_troop)
@@ -42,12 +43,15 @@ func troop_exited() -> void:
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	if traversable:
 		if data == null:
+			print("Null input for troop deployment")
 			return false
 		
 		#print(data, " Len: ", len(data))
-		if len(data) == 2:
+		if data is Array and len(data) == 2:
 			if data[1] is TroopData.NAME and data[1] != null:
 				return true
+	
+	print("Invalid input for troop deployment")
 	return false
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
@@ -57,7 +61,7 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 				if data[0] is TroopPortrait and data[1] is TroopData.NAME:
 					if data[0] != null and data[1] != null:
 						data[0].draggable = false
-						_spawn_troop(data[1])
+						_spawn_troop(data[1], true)
 
 ##Test with right click
 #func _input(event: InputEvent) -> void:

@@ -1,8 +1,10 @@
 extends Control
 
 var grid = ResData.grid
+
 var gridData: Dictionary[Tile, Unit]
 
+#This is just for printing stuff in the console
 var print_width: int
 
 func set_grid(height: int = grid.min_height, width: int = grid.min_width) -> void:
@@ -49,3 +51,9 @@ func update_griddata(tile_id: Tile, unit_id: Unit) -> void:
 		j += str(tile) + " : " + str(gridData[tile]) + " | "
 	
 	print(j)
+
+#%Friendlies
+#%Enemies
+
+func troop_moved() -> void:
+	pass
