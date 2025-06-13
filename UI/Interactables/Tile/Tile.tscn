@@ -5,8 +5,8 @@
 
 [node name="Tile" type="TextureRect"]
 custom_minimum_size = Vector2(200, 200)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 200.0
+offset_bottom = 200.0
 texture = ExtResource("1_q1m03")
 expand_mode = 1
 script = ExtResource("2_auic2")

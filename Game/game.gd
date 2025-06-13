@@ -14,6 +14,7 @@ var current_actions: int = 0
 
 func _init_game(h: int = ResData.grid.cur_height, w: int = ResData.grid.cur_width) -> void:
 	gameloop.reset_gamestates()
+	%Grid.clear_grid()
 	%Grid.set_grid(h, w)
 	%Timer.wait_time = timer.select_time
 	%Timer.start()
@@ -23,20 +24,24 @@ func _start_round() -> void:
 	print("Squad: ", SquadData.friendly_troops)
 
 func _end_game() -> void:
-	var tiles = %Grid.get_children()
-	for tile in tiles:
+	for tile in %Grid.get_children():
 		tile.queue_free()
+	for friendly in %Friendlies.get_children():
+		friendly.queue_free()
+	for enemy in %Enemies.get_children():
+		enemy.queue_free()
 	
 	%Timer.stop()
-	##FIXME Make sure to change this, it is a temporary workaround
-	#update_mainstate(Main.MAINSTATE.ENTER_TITLE)
+	#FIXME Make sure to change this, it is a temporary workaround
+	update_mainstate(Main.MAINSTATE.ENTER_TITLE)
 
 #Can figure out how to make this better later
 func update_mainstate(next_mainstate: Main.MAINSTATE):
 	_update_mainstate.emit(next_mainstate)
 
 func _physics_process(_delta: float) -> void:
-	print("Time left: ", %Timer.time_left)
+	#print("Time left: ", %Timer.time_left)
+	pass
 
 func _on_timer_timeout() -> void:
 	if gameloop.gamestate == GameloopData.GAMESTATE.ROUND:
@@ -91,3 +96,10 @@ func _on_timer_timeout() -> void:
 			pass
 	
 	%Timer.start()
+
+
+func _on_grid_add_unit(unit_id: Unit, is_friendly: bool) -> void:
+	if is_friendly:
+		%Friendlies.add_child(unit_id)
+	else:
+		%Enemies.add_child(unit_id)

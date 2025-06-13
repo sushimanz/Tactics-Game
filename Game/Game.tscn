@@ -29,3 +29,4 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="_add_unit" from="Grid" to="." method="_on_grid_add_unit"]

@@ -15,7 +15,7 @@ func set_portrait(in_troop_name: TroopData.NAME) -> void:
 	#texture = team.texture
 	troop = UnitData.get_troop(in_troop_name)
 	troop_name = troop.troop_name
-	print("Troop Portrait Initialized: ", troop.troop_name_desc)
+	#print("Troop Portrait Initialized: ", troop.troop_name_desc)
 	portrait.texture = troop.portrait.get_frame_texture("high", 0)#troop.team.texture
 	tooltip_text = str(troop.troop_name_desc)
 
@@ -37,5 +37,6 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 		set_drag_preview(control)
 		
 		return [self, troop_name]
+		
 	return null
 	

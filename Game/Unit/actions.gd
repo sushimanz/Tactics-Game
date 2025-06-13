@@ -68,10 +68,10 @@ func attack(atk_pos: Vector2i, dmg: int = 0, atk_size: int = 1, dmg_falloff_per_
 	
 	print(atk_square, "x", atk_square)
 
-func move(move_pos: Vector2i):
-	#Heavy Medium Light
-	#Rock Paper Scissors
-	pass
+func move(move_pos: Vector2i) -> Variant:
+	#if true:
+		#return Vector2i()
+	return null
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

@@ -61,8 +61,12 @@ func update_ui(new_ui: PackedScene = UIData.are_you_sure_popup_menu, is_popup: b
 	
 	inst_menu_manager.goto_ui(new_ui)
 
-func update_music(new_album: String) -> void:
-	pass
+func update_music(in_album: Array, track: int = -1) -> void:
+	if len(in_album) >= 1:
+		if track <= -1:
+			inst_music_manager.play_random_track_from_album(in_album)
+		elif track < len(in_album):
+			inst_music_manager.play_track(in_album[track])
 
 func update_mainstate(next_mainstate: MAINSTATE) -> void:
 	if next_mainstate == current_mainstate:
@@ -93,7 +97,7 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				popup_mainstate = MAINSTATE.EXIT
 				
 				update_ui(UIData.main_menu, false)
-				inst_music_manager.play_random_track_from_album(MusicData.album_intros)
+				update_music(MusicData.album_intros)
 				
 			MAINSTATE.EXIT_TITLE:
 				#What to do when the title/main menu is exited (Not when going into the game)
@@ -108,20 +112,21 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				popup_mainstate = MAINSTATE.EXIT_GAME
 				
 				update_ui(UIData.lobby_menu, false)
-				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
+				update_music(MusicData.album_selects)
 				inst_game_cam.visible = true
 				
+			
+			#Need to move START_GAME and PLAY_GAME stuff, somewhere revolving around gamestates, they are not really mainstates
 			MAINSTATE.START_GAME:
 				print("\nSTART_GAME")
 				update_ui(UIData.troop_selection_menu, false)
-				inst_music_manager.play_random_track_from_album(MusicData.album_selects)
+				update_music(MusicData.album_selects)
 				inst_game._init_game()
 				
 			MAINSTATE.PLAY_GAME:
 				print("\nPLAY_GAME")
 				update_ui(UIData.portrait_ui, false)
 				inst_game.visible = true
-				inst_game._init_game()
 				
 			MAINSTATE.EXIT_GAME:
 				#What to do when the game is exited, to menu or full exit

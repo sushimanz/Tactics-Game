@@ -10,12 +10,14 @@ var friendly: bool = false
 var troop: TroopData
 var cur_troop: TroopData.NAME
 var names := TroopData.NAME.keys()
-var feet: Vector2 = position + Vector2((size.x / 2), size.y)
 
 var mouse_hovered: bool = false
 
-func _ready() -> void:
-	update_troop()
+#This is to set the next tile to go to
+var goto_position: Vector2i
+
+var grid_position: Vector2i
+var tile_occupied: Tile = null
 
 func update_troop(in_troop: TroopData.NAME = TroopData.NAME.UNKNOWN):
 	print("Updating Troop to ", names[in_troop])
@@ -24,6 +26,14 @@ func update_troop(in_troop: TroopData.NAME = TroopData.NAME.UNKNOWN):
 	troop = set_troop(UnitData.get_troop(in_troop))
 	sprite.sprite_frames = troop.sprite_sheet
 	sprite.play("idle")
+	
+	if sprite.sprite_frames.get_frame_texture("idle", 0):
+		var sprite_size = sprite.sprite_frames.get_frame_texture("idle", 0).get_size()
+		
+		if sprite_size != size:
+			sprite.offset.y = (size.y - sprite_size.y)/2
+	else:
+		print("There are not sprite_frames textures for ", names[in_troop])
 	
 	if friendly:
 		name = "Friendly " + troop.troop_name_desc
@@ -85,14 +95,16 @@ func _input(event: InputEvent) -> void:
 				if event.button_index == MOUSE_BUTTON_LEFT:
 					take_damage(999)
 					print("This has been done in unit.gd _input() call, and is ONLY for testing purposes (Remove when done with testing)")
-				if event.button_index == MOUSE_BUTTON_RIGHT:
-					if cur_troop + 1 < len(names):
-						update_troop(cur_troop + 1)
-					else:
-						update_troop()
+				#if event.button_index == MOUSE_BUTTON_RIGHT:
+					#if cur_troop + 1 < len(names):
+						#update_troop(cur_troop + 1)
+					#else:
+						#update_troop()
 
 func _on_mouse_entered() -> void:
+	tile_occupied._on_mouse_entered()
 	mouse_hovered = true
 
 func _on_mouse_exited() -> void:
+	tile_occupied._on_mouse_exited()
 	mouse_hovered = false
