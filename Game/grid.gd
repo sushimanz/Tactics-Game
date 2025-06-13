@@ -53,7 +53,7 @@ func set_grid(height: int = grid.min_height, width: int = grid.min_width) -> voi
 			new_tile._spawn_troop.connect(spawn_troop)
 			new_tile._troop_passed.connect(update_griddata)
 			
-			gridData[new_tile.grid_position.x][new_tile.grid_position.y] = new_tile
+			gridData[w][h] = new_tile
 			#print("Add gridbox at H:",h, "W:", w)
 	
 	print("GridData instanced")
