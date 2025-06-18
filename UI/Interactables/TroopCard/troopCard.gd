@@ -57,11 +57,11 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 		mouse_filter = Control.MOUSE_FILTER_IGNORE
 		
 		var drag_card = duplicate()
-		drag_card.visible = true
 		drag_card.modulate.a = 0.7
+		drag_card.visible = true
 		var control = Control.new()
 		control.add_child(drag_card)
-		drag_card.position -= size/2
+		drag_card.position -= drag_card.size/2
 		drag_card.rotation_degrees += 5
 		
 		set_drag_preview(control)

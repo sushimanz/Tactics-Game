@@ -18,6 +18,13 @@ enum ROUNDSTATE {
 	END			##What happens at the end of a round
 }
 
+var gamestate: GAMESTATE = GAMESTATE.INIT
+var roundstate: ROUNDSTATE = ROUNDSTATE.START
+
+func reset_gamestates() -> void:
+	gamestate = GAMESTATE.INIT
+	roundstate = ROUNDSTATE.START
+
 func update_gamestate(state: GAMESTATE):
 	match state:
 		GAMESTATE.INIT:

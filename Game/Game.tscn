@@ -1,26 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://n2l10vvkwm8j"]
+[gd_scene load_steps=3 format=3 uid="uid://n2l10vvkwm8j"]
 
-[ext_resource type="Script" uid="uid://b3fgppef1o26c" path="res://Game/game.gd" id="1_hqwdr"]
-[ext_resource type="Script" uid="uid://c5ph5he514pcf" path="res://Game/grid.gd" id="2_vrr3t"]
-[ext_resource type="PackedScene" uid="uid://c7koxp8s2xl62" path="res://UI/Menus/PortraitUI.tscn" id="3_iv3md"]
+[ext_resource type="Script" uid="uid://cvqepx4gx853t" path="res://Game/game.gd" id="1_hqwdr"]
+[ext_resource type="Script" uid="uid://cebf34ledkls0" path="res://Game/grid.gd" id="2_vrr3t"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_hqwdr")
 
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [node name="Grid" type="Control" parent="."]
+unique_name_in_owner = true
 anchors_preset = 0
 script = ExtResource("2_vrr3t")
 
 [node name="Friendlies" type="Control" parent="."]
+unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Enemies" type="Control" parent="."]
+unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PortraitUI" parent="." instance=ExtResource("3_iv3md")]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="_add_unit" from="Grid" to="." method="_on_grid_add_unit"]

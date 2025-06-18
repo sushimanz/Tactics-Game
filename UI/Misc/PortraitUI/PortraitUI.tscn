@@ -1,34 +1,42 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7koxp8s2xl62"]
 
 [ext_resource type="PackedScene" uid="uid://djugfm2qg8m5n" path="res://UI/Interactables/TroopPortrait/TroopPortrait.tscn" id="1_gyjnt"]
-[ext_resource type="Script" uid="uid://b1kjs6qqypwaa" path="res://UI/Menus/portrait_ui.gd" id="1_k80og"]
+[ext_resource type="Script" uid="uid://b1kjs6qqypwaa" path="res://UI/Misc/PortraitUI/portraitUI.gd" id="1_k80og"]
 
 [node name="PortraitUI" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_k80og")
+is_root_ui = true
 
 [node name="Portraits" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 1080.0
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="TroopPortrait1" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 troop_name = 1
 
 [node name="TroopPortrait2" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 troop_name = 2
 
 [node name="TroopPortrait3" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 troop_name = 4
 
 [node name="TroopPortrait4" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 
 [node name="TroopPortrait5" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
+mouse_filter = 0
 troop_name = 7

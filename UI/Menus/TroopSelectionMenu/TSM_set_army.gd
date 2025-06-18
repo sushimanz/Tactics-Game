@@ -23,7 +23,7 @@ func _ready() -> void:
 		if h == (h_boxes - 1):
 			max_troops_in_box = troops_in_last_box
 		for w in range(max_troops_in_box):
-			var troop = PathData.troopCard.instantiate()
+			var troop = ScenePathData.troopCard.instantiate()
 			box.add_child(troop)
 			troop.set_troop(troop_index)
 			

@@ -1,10 +1,13 @@
 class_name PortraitUI
-extends Control
+extends UI
 
 @onready var portraits = $Portraits
 
 var troops_set: Dictionary[int, String]
 var troops_unset: Array[String]
+
+func _ready() -> void:
+	set_portraits()
 
 func set_portraits():
 	print("\n!!! Setting Portraits !!!\n")
@@ -17,23 +20,33 @@ func set_portraits():
 	
 	print("Initial Unset troops: ", troops_unset)
 	
+	for key in SquadData.friendly_troops:
+		var val = SquadData.friendly_troops[key]
+		if val != null:
+			#print("Unset ", TroopData.troop_names[val.troop_name])
+			troops_unset.erase(TroopData.troop_names[val.troop_name])
+	
+	print("Skimmed Unset troops: ", troops_unset)
+	
 	var i = 1
 	for portrait in portraits.get_children():
 		var friendly_troop: TroopData = SquadData.friendly_troops[i]
 		if friendly_troop != null:
 			portrait.set_portrait(friendly_troop.troop_name)
 			troops_set[i] = TroopData.troop_names[friendly_troop.troop_name]
-			print("Friendly troop set: ", friendly_troop.troop_name)
 		else:
 			var random_troop = randomize_troop()
 			portrait.set_portrait(random_troop)
 			troops_set[i] = TroopData.troop_names[random_troop]
 		
+		#print("Friendly troop set: ", TroopData.troop_names[friendly_troop.troop_name])
 		troops_unset.erase(troops_set[i])
 		i += 1
 	
-	print("Troops set: ", troops_set)
 	print("Remaining Unset troops: ", troops_unset)
+	print("Troops set: ", troops_set)
+	
+	print("\n!!! Portraits Set !!!\n")
 
 func randomize_troop() -> TroopData.NAME:
 	var rand_troop_name: String = troops_unset[randi_range(0, (len(troops_unset)-1))]

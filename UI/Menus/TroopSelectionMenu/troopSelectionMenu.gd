@@ -1,5 +1,5 @@
 class_name TroopSelectionMenu
-extends Menu
+extends UI
 
 func _ready() -> void:
 	pass

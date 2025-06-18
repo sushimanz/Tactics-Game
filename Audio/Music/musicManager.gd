@@ -1,7 +1,7 @@
 class_name MusicManager
 extends AudioStreamPlayer
 
-@export var is_loop := true
+@export var is_loop: bool = true
 
 var randomize_track: bool = false
 var loaded_track: String = ""
@@ -15,8 +15,7 @@ func _init() -> void:
 func set_music_volume(volume_pct: float) -> void:
 	volume_linear = volume_pct
 
-func play_track(track_url: String, rando: bool = false) -> void:
-	randomize_track = rando
+func play_track(track_url: String) -> void:
 	loaded_track = track_url
 	
 	var track = load(track_url)
@@ -25,23 +24,15 @@ func play_track(track_url: String, rando: bool = false) -> void:
 
 func play_track_from_album(album: Array, idx: int, rando: bool = false) -> void:
 	if idx <= (len(album) - 1):
+		randomize_track = rando
 		var track_url = album[idx]
-		play_track(track_url, rando)
+		play_track(track_url)
 		loaded_album = album
 	else:
 		print(
 			"\n*** MusicManager play_track_from_album() call ***",
 			"\n\tInvalid Album Index: ", idx
 		)
-
-#Need to make a function to check if there is an invalid album loaded
-#func check_album() -> void:
-#print(
-	#"\n*** MusicManager check_album() call ***",
-	#"\n\tInvalid Album Loaded: ", album
-#)
-
-#func play_next_track_from_album(album: Array, prev_track: String) -> void:
 
 func play_random_track_from_album(album: Array) -> void:
 	var rando = randi_range(0, (len(album) - 1))

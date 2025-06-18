@@ -30,9 +30,9 @@ func _init() -> void:
 	spawn_pos = position
 	zoom = zoom_default
 
-func _physics_process(_delta: float) -> void:
-	if pan_btn_held:
-		mouse_pan()
+#func _physics_process(_delta: float) -> void:
+	#if pan_btn_held:
+		#mouse_pan()
 
 func _input(event: InputEvent) -> void:
 	if visible:
