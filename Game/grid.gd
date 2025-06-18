@@ -1,45 +1,49 @@
+class_name Grid
 extends Control
 
 signal _add_unit(unit_id: Unit, is_friendly: bool)
 
-var grid = ResData.grid
+var gridData: GridData = ResData.grid
+var selected_unit: Unit
 
-var gridData: Array
+##
+#var grid2dArray: Array
 
 #This is just for printing stuff in the console
 var print_width: int
 
-func spawn_troop(tile: Tile, in_troop: TroopData.NAME, is_friendly: bool = false) -> void:
+func spawn_troop(grid_position: Vector2i, in_troop: TroopData.NAME, is_friendly: bool = false) -> void:
 	var new_unit = UnitData.unit.instantiate()
+	var tile: Tile = GridData.gridArray[grid_position.x][grid_position.y]
 	
+	new_unit.troop_name = in_troop
 	new_unit.friendly = is_friendly
-	#new_unit.position -= Vector2(0, tile.size.y)/4
+	#add_child(new_unit)
 	
-	_add_unit.emit(new_unit, is_friendly)
-	
-	new_unit.update_troop(in_troop)
 	tile.troop_entered(new_unit)
 	
-	new_unit.position = new_unit.tile_occupied.position
-	print("Spawned Unit Tile: ", new_unit.tile_occupied)
+	#new_unit.position = tile.position
+	print("Spawned Unit Tile: ", tile)
+	
+	_add_unit.emit(new_unit, is_friendly)
 
 func clear_grid() -> void:
 	for old_tile in get_children():
 		old_tile.queue_free()
 
-func set_grid(height: int = grid.min_height, width: int = grid.min_width) -> void:
+func set_grid(height: int = gridData.min_height, width: int = gridData.min_width) -> void:
 	#Keep height and width within certain boundary
-	if height < grid.min_height:
-		height = grid.min_height
-	elif height > grid.max_height:
-		height = grid.max_height
-	if width < grid.min_width:
-		width = grid.min_width
-	elif width > grid.max_width:
-		width = grid.max_width
+	if height < gridData.min_height:
+		height = gridData.min_height
+	elif height > gridData.max_height:
+		height = gridData.max_height
+	if width < gridData.min_width:
+		width = gridData.min_width
+	elif width > gridData.max_width:
+		width = gridData.max_width
 	
 	print_width = width
-	gridData = UtilityData.create_2d_array(width, height)
+	gridData.gridArray = UtilityData.create_2d_array(width, height)
 	
 	#Spawn in the tiles
 	for w in width:
@@ -52,19 +56,27 @@ func set_grid(height: int = grid.min_height, width: int = grid.min_width) -> voi
 			
 			new_tile._spawn_troop.connect(spawn_troop)
 			new_tile._troop_passed.connect(update_griddata)
+			new_tile._mouse_entered.connect(update_mouse_grid)
 			
-			gridData[w][h] = new_tile
+			gridData.gridArray[w][h] = new_tile
 			#print("Add gridbox at H:",h, "W:", w)
 	
 	print("GridData instanced")
-	print(gridData)
+	print(gridData.gridArray)
+
+
+func update_mouse_grid(in_grid_pos: Vector2i = Vector2i.ZERO) -> void:
+	print("Update Grid Location to: ", in_grid_pos)
+	
+	if selected_unit:
+		selected_unit.update_path(in_grid_pos)
 
 ##This needs to be called EVERY time a unit enters, and exits, a tile.
-func update_griddata(tile_id: Tile) -> void:
-	#gridData[tile_id.grid_position.x][tile_id.grid_position.y]
+func update_griddata(grid_position: Vector2i) -> void:
+	var tile: Tile = GridData.gridArray[grid_position.x][grid_position.y]
 	
-	print(tile_id, " Has been updated")
-	#print(gridData)
+	print(tile, " Has been updated")
+	#print(gridData.gridArray)
 
 #%Friendlies
 #%Enemies

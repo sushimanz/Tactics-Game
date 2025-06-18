@@ -1,6 +1,6 @@
-##Extends out to all troops, listing their max and current stats
 class_name TroopData
 extends Resource
+##Troop data. Lists all stats and sprites for the given troop
 
 enum NAME {UNKNOWN, ARCHER, BAITER, CANNON, CHRONOS, KNIGHT, LIGHTHOUSE, MERCENARY, SCRAPYARD, SNIPERBIRD, SNOWDROP, TVHEAD}
 enum TYPE {TANK, SCOUT, SPECIALIST, DPS}
@@ -11,7 +11,7 @@ enum HEALTH_STATE {HIGH, MED, LOW, HIT}
 ##Troop name for descriptions/info
 @export var troop_name_desc: String
 
-static var troop_names = NAME.keys()
+static var troop_names: Array = NAME.keys()
 @export var troop_name: NAME
 @export var troop_type: TYPE
 @export var troop_weight: WEIGHT

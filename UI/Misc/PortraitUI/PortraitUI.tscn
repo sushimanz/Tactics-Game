@@ -20,17 +20,14 @@ theme_override_constants/separation = 0
 [node name="TroopPortrait1" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
 mouse_filter = 0
-troop_name = 1
 
 [node name="TroopPortrait2" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
 mouse_filter = 0
-troop_name = 2
 
 [node name="TroopPortrait3" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
 mouse_filter = 0
-troop_name = 4
 
 [node name="TroopPortrait4" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
@@ -39,4 +36,33 @@ mouse_filter = 0
 [node name="TroopPortrait5" parent="Portraits" instance=ExtResource("1_gyjnt")]
 layout_mode = 2
 mouse_filter = 0
-troop_name = 7
+
+[node name="GamestateText" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 80)
+layout_mode = 0
+offset_left = 206.0
+offset_top = 2.0
+offset_right = 566.0
+offset_bottom = 82.0
+text = "Gamestate:"
+
+[node name="RoundstateText" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 80)
+layout_mode = 0
+offset_left = 206.0
+offset_top = 22.0
+offset_right = 566.0
+offset_bottom = 102.0
+text = "Roundstate:"
+
+[node name="TimeLeftText" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 80)
+layout_mode = 0
+offset_left = 206.0
+offset_top = 42.0
+offset_right = 566.0
+offset_bottom = 122.0
+text = "Time Left: "

@@ -10,8 +10,6 @@ extends Control
 ##If there is a problem with the input, check the calls in this script, or the data scripts
 
 #Managers and their instance references
-@onready var inst_game_cam: Node = $GameCamera
-@onready var inst_game: Node = $Game
 @onready var inst_menu_manager: Node = $UIManager
 @onready var inst_music_manager: Node = $MusicManager
 
@@ -51,15 +49,14 @@ static var popup_mainstate: MAINSTATE = MAINSTATE.ENTER_TITLE
 func _ready() -> void:
 	#Go to menu since nothing to boot yet
 	update_mainstate(MAINSTATE.ENTER_TITLE)
-	inst_game._update_mainstate.connect(update_mainstate)
-	inst_game._open_menu.connect(update_ui)
+	%Game._update_mainstate.connect(update_mainstate)
 	inst_menu_manager._update_mainstate.connect(update_mainstate)
 
-func update_ui(new_ui: PackedScene = UIData.are_you_sure_popup_menu, is_popup: bool = true) -> void:
-	if !is_popup:
+func update_ui(clear_menus: bool = true, new_ui: PackedScene = null) -> void:
+	if clear_menus:
 		inst_menu_manager.clean_menus()
-	
-	inst_menu_manager.goto_ui(new_ui)
+	if new_ui != null:
+		inst_menu_manager.goto_ui(new_ui)
 
 func update_music(in_album: Array, track: int = -1) -> void:
 	if len(in_album) >= 1:
@@ -79,9 +76,7 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 		)
 	
 	else:
-		inst_game_cam.position = inst_game_cam.spawn_pos
-		inst_game_cam.zoom = inst_game_cam.zoom_default
-		inst_game.visible = false
+		%Game.visible = false
 		
 		match next_mainstate:
 			MAINSTATE.ENTER_BOOT:
@@ -96,13 +91,13 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				#FIXME Make sure to change this, it is a temporary workaround
 				popup_mainstate = MAINSTATE.EXIT
 				
-				update_ui(UIData.main_menu, false)
+				update_ui(true, UIData.main_menu)
 				update_music(MusicData.album_intros)
 				
 			MAINSTATE.EXIT_TITLE:
 				#What to do when the title/main menu is exited (Not when going into the game)
 				print("\nEXIT_TITLE")
-				update_ui(UIData.are_you_sure_popup_menu, true)
+				update_ui(false, UIData.are_you_sure_popup_menu)
 				#Need to pass in the next mainstate (In this case only EXIT)
 				
 			MAINSTATE.ENTER_GAME:
@@ -111,28 +106,20 @@ func update_mainstate(next_mainstate: MAINSTATE) -> void:
 				#FIXME Make sure to change this, it is a temporary workaround
 				popup_mainstate = MAINSTATE.EXIT_GAME
 				
-				update_ui(UIData.lobby_menu, false)
+				update_ui(true, UIData.lobby_menu)
 				update_music(MusicData.album_selects)
-				inst_game_cam.visible = true
 				
-			
-			#Need to move START_GAME and PLAY_GAME stuff, somewhere revolving around gamestates, they are not really mainstates
 			MAINSTATE.START_GAME:
 				print("\nSTART_GAME")
-				update_ui(UIData.troop_selection_menu, false)
+				update_ui(true)
 				update_music(MusicData.album_selects)
-				inst_game._init_game()
-				
-			MAINSTATE.PLAY_GAME:
-				print("\nPLAY_GAME")
-				update_ui(UIData.portrait_ui, false)
-				inst_game.visible = true
+				%Game._init_game()
 				
 			MAINSTATE.EXIT_GAME:
 				#What to do when the game is exited, to menu or full exit
 				print("\nEXIT_GAME")
-				inst_game._end_game()
-				inst_game_cam.visible = false
+				%Game._exit_game()
+				%Game.visible = false
 				#Need to pass in the next mainstate (In this case could be ENTER_TITLE or EXIT)
 				
 			MAINSTATE.CONFIG_USER:

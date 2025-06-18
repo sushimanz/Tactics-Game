@@ -7,8 +7,10 @@ static var settings_menu: PackedScene = load("res://UI/Menus/SettingsMenu/Settin
 static var credits_menu: PackedScene
 
 static var lobby_menu: PackedScene = load("res://UI/Menus/LobbyMenu/LobbyMenu.tscn")
-static var portrait_ui: PackedScene = load("res://UI/Misc/PortraitUI/PortraitUI.tscn")
-static var troop_selection_menu: PackedScene = load("res://UI/Menus/TroopSelectionMenu/TroopSelectionMenu.tscn")
-static var scoreboard_menu: PackedScene
+
+#These go in the game itself, so don't need these here anymore (Probably)
+#static var portrait_ui: PackedScene = load("res://UI/Misc/PortraitUI/PortraitUI.tscn")
+#static var troop_selection_menu: PackedScene = load("res://UI/Menus/TroopSelectionMenu/TroopSelectionMenu.tscn")
+#static var scoreboard_menu: PackedScene
 
 static var are_you_sure_popup_menu: PackedScene = load("res://UI/Menus/PopupMenus/AreYouSurePopupMenu.tscn")

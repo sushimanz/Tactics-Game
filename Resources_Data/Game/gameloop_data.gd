@@ -18,14 +18,16 @@ enum ROUNDSTATE {
 	END			##What happens at the end of a round
 }
 
-var gamestate: GAMESTATE = GAMESTATE.INIT
-var roundstate: ROUNDSTATE = ROUNDSTATE.START
+static var gamestate: GAMESTATE = GAMESTATE.INIT
+static var roundstate: ROUNDSTATE = ROUNDSTATE.START
 
-func reset_gamestates() -> void:
+static func reset_gamestates() -> void:
 	gamestate = GAMESTATE.INIT
 	roundstate = ROUNDSTATE.START
 
-func update_gamestate(state: GAMESTATE):
+static func update_gamestate(state: GAMESTATE):
+	print("** Gamestate: ", GAMESTATE.keys()[state])
+	gamestate = state
 	match state:
 		GAMESTATE.INIT:
 			pass
@@ -40,7 +42,9 @@ func update_gamestate(state: GAMESTATE):
 		_:
 			print("No Valid GAMESTATE")
 
-func update_roundstate(state: ROUNDSTATE):
+static func update_roundstate(state: ROUNDSTATE):
+	print("** Roundstate: ", ROUNDSTATE.keys()[state])
+	roundstate = state
 	match state:
 		ROUNDSTATE.START:
 			pass

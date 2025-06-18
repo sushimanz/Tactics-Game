@@ -1,11 +1,10 @@
 [gd_resource type="Resource" script_class="GridData" load_steps=2 format=3 uid="uid://bmvbgbxepocbx"]
 
-[ext_resource type="Script" uid="uid://ghddwmb5tn6v" path="res://Resources_Data/Game/grid_data.gd" id="1_7psfj"]
+[ext_resource type="Script" uid="uid://53lhy3q0xa41" path="res://Resources_Data/Game/grid_data.gd" id="1_7psfj"]
 
 [resource]
 script = ExtResource("1_7psfj")
-tile_size = 200
 min_height = 5
 min_width = 8
-max_height = 10
-max_width = 24
+max_height = 12
+max_width = 28

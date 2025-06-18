@@ -1,15 +1,15 @@
 class_name Tile
 extends TextureRect
-#NOTE: This is to be used to hold data about troops and such
+##Tile. This is what the grid is made up of, and should be the measure of troop movement and locations in which attacks originate.
 
-signal _spawn_troop(id: Tile, unit_name: TroopData.NAME, is_friendly: bool)
-signal _troop_passed(id: Tile)
+signal _mouse_entered(grid_position: Vector2i)
+signal _spawn_troop(grid_position: Vector2i, unit_name: TroopData.NAME, is_friendly: bool)
+signal _troop_passed(grid_position: Vector2i)
 
 var traversable: bool = true
 var mouse_hover: bool = false
 var held_unit: Unit
 
-var id = self
 var grid_position: Vector2i
 
 func troop_entered(incoming_unit) -> void:
@@ -21,11 +21,10 @@ func troop_entered(incoming_unit) -> void:
 	if held_unit == null:
 		held_unit = incoming_unit
 		held_unit.grid_position = grid_position
-		held_unit.tile_occupied = self
 		traversable = false
-		_troop_passed.emit(id)
+		_troop_passed.emit(grid_position)
 		print("!!! Troop Entered Tile !!!")
-		print("Tile Ref: ", id, "Tile Grid Position: ", grid_position)
+		print("Tile Ref: ", self, "Tile Grid Position: ", grid_position)
 		print("Unit Name: ", held_unit.name, "Held Unit Ref: ", held_unit)
 	elif !held_unit.friendly:
 		#Tile occupied by enemy unit
@@ -53,37 +52,74 @@ func troop_exited() -> void:
 	#This should call no matter what when a troop leaves
 	held_unit = null
 	traversable = true
-	_troop_passed.emit(id)
+	_troop_passed.emit(grid_position)
 	print("!!! Troop Exited Tile !!!")
-	print("Tile Ref: ", id, "Tile Grid Position: ", grid_position)
+	print("Tile Ref: ", self, "Tile Grid Position: ", grid_position)
 	print("Unit Name: ", held_unit.name, "Held Unit Ref: ", held_unit)
 	print("-- Tile is now traversible! --")
+
+#Need to make new class/script for this, probably
+enum CHECKTYPE {ATTACK, MOVE, DEPLOY}
+var check: CHECKTYPE
+
+func unit_attack_check(data: Variant = null) -> bool:
+	#On a drag move
+	if data is Unit:
+		#print("Can attack with this troop")
+		return true
+	
+	#TODO On a click move
+	
+	return false
+
+func unit_move_check(data: Variant) -> bool:
+	#On a drag move
+	if data is Unit:
+		#print("Can move this troop")
+		return true
+	
+	#TODO On a click move
+	
+	return false
+
+func unit_deployment_check(data: Variant) -> bool:
+	#On a drag deployment
+	if data is TroopPortrait:
+		#print("Can deploy this troop")
+		return true
+	
+	#TODO On a click deployment
+	
+	return false
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	if traversable:
 		if data == null:
 			print("Null input for troop deployment")
 			return false
-		
-		#print(data, " Len: ", len(data))
-		if data is Array:
-			if len(data) == 2:
-				if data[0] != null and data[1] != null:
-					if data[0] is TroopPortrait and data[1] is TroopData.NAME:
-						return true
+		elif GameloopData.gamestate == GameloopData.GAMESTATE.ROUND:
+			if GameloopData.roundstate == GameloopData.ROUNDSTATE.PLANNING:
+				#if unit_attack_check():
+					#return true
+				if unit_move_check(data):
+					return true
+		elif GameloopData.gamestate == GameloopData.GAMESTATE.DEPLOY:
+			if unit_deployment_check(data):
+				return true
 	
-	print("Invalid input for troop deployment, but not null")
 	return false
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
-	#This should only happen once per portrait
-	data[0].draggable = false
-	_spawn_troop.emit(id, data[1], true)
+	if data is TroopPortrait:
+		data.draggable = false
+		_spawn_troop.emit(grid_position, data.troop_name, true)
+	elif data is Unit:
+		pass
 
 func _input(event: InputEvent) -> void:
 	if mouse_hover:
 		if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
-			print("Tile Name: ", id.name, "Tile Ref: ", id)
+			print("Tile Name: ", name, "Tile Ref: ", self)
 			var s: String = ""
 			if !traversable:
 				s = "not"
@@ -92,14 +128,14 @@ func _input(event: InputEvent) -> void:
 				print("Unit Name: ", held_unit.name, "Held Unit Ref: ", held_unit)
 			else:
 				print("There is no unit here!")
-
-#These don't work when a unit is spawned above a tile. I assume it is because the tile is below the unit?
-#Only part I'm confused with is that I propogate info in mouse settings for the unit
+		
+		#if event is InputEventMouseMotion:
 
 func _on_mouse_entered() -> void:
-	print("Mouse ENTERED the tile at ", grid_position)
+	_mouse_entered.emit(grid_position)
+	#print("Mouse ENTERED the tile at ", grid_position)
 	mouse_hover = true
 
 func _on_mouse_exited() -> void:
-	print("Mouse EXITED the tile at ", grid_position)
+	#print("Mouse EXITED the tile at ", grid_position)
 	mouse_hover = false

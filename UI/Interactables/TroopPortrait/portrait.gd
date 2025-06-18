@@ -1,10 +1,11 @@
 class_name TroopPortrait
 extends TextureRect
+##Troop Portrait. This is the UI that allows you to see the troop's portrait.
+##Has some interaction, such as seeing troop values and being able to deploy troops.
 
-@export var troop_name: TroopData.NAME = TroopData.NAME.KNIGHT
+var troop_name: TroopData.NAME = TroopData.NAME.UNKNOWN
 var troop: TroopData
 @onready var portrait = $Portrait
-var troop_frames: SpriteFrames
 var draggable = true
 
 func _ready() -> void:
@@ -36,7 +37,7 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 		
 		set_drag_preview(control)
 		
-		return [self, troop_name]
+		return self
 		
 	return null
 	

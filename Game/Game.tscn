@@ -1,12 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://n2l10vvkwm8j"]
+[gd_scene load_steps=7 format=3 uid="uid://n2l10vvkwm8j"]
 
 [ext_resource type="Script" uid="uid://cvqepx4gx853t" path="res://Game/game.gd" id="1_hqwdr"]
-[ext_resource type="Script" uid="uid://cebf34ledkls0" path="res://Game/grid.gd" id="2_vrr3t"]
+[ext_resource type="Script" uid="uid://c7kv0ongyvvui" path="res://Game/camera.gd" id="2_37esa"]
+[ext_resource type="Script" uid="uid://dybt37p75wtbu" path="res://Game/grid.gd" id="2_vrr3t"]
+[ext_resource type="PackedScene" uid="uid://c7koxp8s2xl62" path="res://UI/Misc/PortraitUI/PortraitUI.tscn" id="4_37esa"]
+[ext_resource type="Script" uid="uid://ccchymgkk0rmd" path="res://Game/friendlies.gd" id="4_jxerj"]
+[ext_resource type="PackedScene" uid="uid://cfhr5bi2e1i7i" path="res://UI/Menus/TroopSelectionMenu/TroopSelectionMenu.tscn" id="6_ghvq8"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_hqwdr")
+
+[node name="GameCamera" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+script = ExtResource("2_37esa")
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -21,6 +29,7 @@ unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("4_jxerj")
 
 [node name="Enemies" type="Control" parent="."]
 unique_name_in_owner = true
@@ -28,5 +37,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="GameUI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="PortraitUI" parent="GameUI" instance=ExtResource("4_37esa")]
+unique_name_in_owner = true
+
+[node name="TroopSelectionMenu" parent="GameUI" instance=ExtResource("6_ghvq8")]
+unique_name_in_owner = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="_add_unit" from="Grid" to="." method="_on_grid_add_unit"]
+[connection signal="child_entered_tree" from="Friendlies" to="Friendlies" method="_on_child_entered_tree"]
+[connection signal="child_order_changed" from="Friendlies" to="Friendlies" method="_on_child_order_changed"]
