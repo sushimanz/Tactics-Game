@@ -21,7 +21,7 @@ func troop_entered(incoming_unit) -> void:
 	if held_unit == null:
 		held_unit = incoming_unit
 		held_unit.grid_position = grid_position
-		held_unit.tile_occupied = self
+		#held_unit.tile_occupied = self
 		traversable = false
 		_troop_passed.emit(id)
 		print("!!! Troop Entered Tile !!!")
@@ -65,25 +65,25 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 			print("Null input for troop deployment")
 			return false
 		
-		#print(data, " Len: ", len(data))
-		if data is Array:
-			if len(data) == 2:
-				if data[0] != null and data[1] != null:
-					if data[0] is TroopPortrait and data[1] is TroopData.NAME:
-						return true
+		if data is Unit:
+			print("hovering on tile :", grid_position, " with: ", held_unit)
+			return true
+		if data is TroopPortrait:
+			return true
 	
-	print("Invalid input for troop deployment, but not null")
+	#print("Invalid input for troop deployment, but not null")
 	return false
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	#This should only happen once per portrait
-	data[0].draggable = false
-	_spawn_troop.emit(id, data[1], true)
+	if data is TroopPortrait:
+		data.draggable = false
+		_spawn_troop.emit(id, data.troop_name, true)
 
 func _input(event: InputEvent) -> void:
 	if mouse_hover:
 		if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
-			print("Tile Name: ", id.name, "Tile Ref: ", id)
+			print("Tile Name: ", name, "Tile Ref: ", id)
 			var s: String = ""
 			if !traversable:
 				s = "not"

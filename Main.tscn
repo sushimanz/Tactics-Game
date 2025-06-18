@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://c21q1tpjrcpo3"]
 
-[ext_resource type="Script" uid="uid://7t40yih1t3w" path="res://main.gd" id="1_glv2v"]
-[ext_resource type="Script" uid="uid://c7kv0ongyvvui" path="res://Game/camera.gd" id="2_fos0i"]
+[ext_resource type="Script" uid="uid://pb5mloxcu7l2" path="res://main.gd" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://c8jhpt850im05" path="res://Game/camera.gd" id="2_fos0i"]
 [ext_resource type="PackedScene" uid="uid://dh2u6o4ate253" path="res://UI/UIManager.tscn" id="2_r0du0"]
-[ext_resource type="PackedScene" uid="uid://duvdqc13evk5j" path="res://Audio/Music/MusicManager.tscn" id="3_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://duvdqc13evk5j" path="res://Audio/Music/musicManager.tscn" id="3_cm0pq"]
 [ext_resource type="PackedScene" uid="uid://n2l10vvkwm8j" path="res://Game/Game.tscn" id="4_cm0pq"]
 
 [node name="Main" type="Control"]

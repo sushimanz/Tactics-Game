@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxyouhivrnek1"]
 
-[ext_resource type="Texture2D" uid="uid://1bkuavvcquq8" path="res://Assets/tile.png" id="1_q1m03"]
-[ext_resource type="Script" uid="uid://bp6c3weginj63" path="res://UI/Interactables/Tile/tile.gd" id="2_auic2"]
+[ext_resource type="Texture2D" uid="uid://dxfx4j53vjsme" path="res://Assets/tile.png" id="1_q1m03"]
+[ext_resource type="Script" uid="uid://phd8qt1nnvue" path="res://UI/Interactables/Tile/tile.gd" id="2_auic2"]
 
 [node name="Tile" type="TextureRect"]
 custom_minimum_size = Vector2(200, 200)

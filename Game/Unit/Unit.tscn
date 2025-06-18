@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://77yiucj74yhm"]
 
-[ext_resource type="Script" uid="uid://70xr55b3fxk7" path="res://Game/Unit/unit.gd" id="1_tw8l4"]
+[ext_resource type="Script" uid="uid://dqvcjiip2m6np" path="res://Game/Unit/unit.gd" id="1_tw8l4"]
 [ext_resource type="SpriteFrames" uid="uid://c12geab8c22mu" path="res://Assets/Troops/Knight/knight_frames.tres" id="2_tw8l4"]
 
 [node name="Unit" type="Control"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cfhr5bi2e1i7i"]
 
-[ext_resource type="Script" uid="uid://85meb83impqo" path="res://UI/Menus/TroopSelectionMenu/troopSelectionMenu.gd" id="1_45yvr"]
+[ext_resource type="Script" uid="uid://dp7hmbej1o1j6" path="res://UI/Menus/TroopSelectionMenu/troopSelectionMenu.gd" id="1_45yvr"]
 [ext_resource type="PackedScene" uid="uid://m76bxq2flovj" path="res://UI/Interactables/TroopCard/TroopCard.tscn" id="2_b7me2"]
-[ext_resource type="Script" uid="uid://dbo8v7ens4dms" path="res://UI/Menus/TroopSelectionMenu/squad.gd" id="2_r8j76"]
+[ext_resource type="Script" uid="uid://bieki6g513gjc" path="res://UI/Menus/TroopSelectionMenu/squad.gd" id="2_r8j76"]
 [ext_resource type="PackedScene" uid="uid://dui1jxsyw8sok" path="res://UI/Interactables/PKButton/PKMenuButton.tscn" id="3_evrpn"]
-[ext_resource type="Script" uid="uid://ds1o7mxmg7fqu" path="res://UI/Menus/TroopSelectionMenu/TSM_set_army.gd" id="3_wsary"]
+[ext_resource type="Script" uid="uid://61hyr4pm4id7" path="res://UI/Menus/TroopSelectionMenu/TSM_set_army.gd" id="3_wsary"]
 
 [node name="TroopSelectionMenu" type="Control"]
 layout_mode = 3

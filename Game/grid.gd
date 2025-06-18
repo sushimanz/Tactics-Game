@@ -1,24 +1,21 @@
+class_name Grid
 extends Control
 
 var grid = ResData.grid
-#var gridData: Dictionary[Tile, Unit]
-var gridArray
 signal _add_unit(unit_id: Unit, is_friendly: bool)
 
-var grid = ResData.grid
-
-var gridData: Array
+static var gridArray: Array
 
 #This is just for printing stuff in the console
 var print_width: int
 
+##Returns a refrence to the tile at the given vector2i location
+static func getTile(inVal: Vector2i):
+	return gridArray[inVal.x][inVal.y]
 
-func set_grid(height: int = grid.min_height, width: int = grid.min_width) -> void:
-	gridArray = create_2d_array(width, height, null)
-	#gridData.clear()
+
 func spawn_troop(tile: Tile, in_troop: TroopData.NAME, is_friendly: bool = false) -> void:
 	var new_unit = UnitData.unit.instantiate()
-	
 	new_unit.friendly = is_friendly
 	#new_unit.position -= Vector2(0, tile.size.y)/4
 	
@@ -46,7 +43,7 @@ func set_grid(height: int = grid.min_height, width: int = grid.min_width) -> voi
 		width = grid.max_width
 	
 	print_width = width
-	gridData = UtilityData.create_2d_array(width, height)
+	gridArray = UtilityData.create_2d_array(width, height)
 	
 	#Spawn in the tiles
 	for w in width:
@@ -58,13 +55,13 @@ func set_grid(height: int = grid.min_height, width: int = grid.min_width) -> voi
 			new_tile.grid_position = Vector2i(w, h)
 			
 			new_tile._spawn_troop.connect(spawn_troop)
-			new_tile._troop_passed.connect(update_griddata)
+			#new_tile._troop_passed.connect(update_griddata)
 			
-			gridData[w][h] = new_tile
+			gridArray[w][h] = new_tile
 			#print("Add gridbox at H:",h, "W:", w)
 	
 	print("GridData instanced")
-	print(gridData)
+	print(gridArray)
 
 ##This needs to be called EVERY time a unit enters, and exits, a tile.
 #func update_griddata(tile_id: Tile, unit_d: Unit) -> void:
@@ -83,15 +80,3 @@ func set_grid(height: int = grid.min_height, width: int = grid.min_width) -> voi
 		#j += str(tile) + " : " + str(gridData[tile]) + " | "
 	#
 	#print(j)
-
-func create_2d_array(width, height, value):
-	var a = []
-
-	for y in range(height):
-		a.append([])
-		a[y].resize(width)
-
-		for x in range(width):
-			a[y][x] = value
-			
-	return a

@@ -10,6 +10,7 @@ var friendly: bool = false
 var troop: TroopData
 var cur_troop: TroopData.NAME
 var names := TroopData.NAME.keys()
+var draggable = true #true for just debugging
 
 var mouse_hovered: bool = false
 
@@ -100,6 +101,27 @@ func _input(event: InputEvent) -> void:
 						#update_troop(cur_troop + 1)
 					#else:
 						#update_troop()
+
+func _get_drag_data(_at_position: Vector2) -> Variant:
+	if draggable:
+		#print("Grabbed Portrait, Dragging...")
+		
+		var drag_card: TextureRect = TextureRect.new()
+		drag_card.texture = troop.icon
+		drag_card.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		drag_card.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+		drag_card.size = size * 4/5
+		drag_card.modulate.a = 0.7
+		drag_card.visible = true
+		var control = Control.new()
+		control.add_child(drag_card)
+		drag_card.position -= drag_card.size / 2
+		
+		set_drag_preview(control)
+		
+		return [self]
+		
+	return null
 
 func _on_mouse_entered() -> void:
 	tile_occupied._on_mouse_entered()

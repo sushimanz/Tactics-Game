@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c7koxp8s2xl62"]
 
 [ext_resource type="PackedScene" uid="uid://djugfm2qg8m5n" path="res://UI/Interactables/TroopPortrait/TroopPortrait.tscn" id="1_gyjnt"]
-[ext_resource type="Script" uid="uid://b1kjs6qqypwaa" path="res://UI/Misc/PortraitUI/portraitUI.gd" id="1_k80og"]
+[ext_resource type="Script" uid="uid://cbpd8becvajhr" path="res://UI/Misc/PortraitUI/portraitUI.gd" id="1_k80og"]
 
 [node name="PortraitUI" type="Control"]
 layout_mode = 3
