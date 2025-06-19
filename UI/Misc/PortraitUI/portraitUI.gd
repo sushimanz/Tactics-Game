@@ -34,6 +34,7 @@ func set_portraits():
 	
 	var i = 1
 	for portrait in portraits.get_children():
+		portrait.draggable = true
 		var friendly_troop: TroopData = SquadData.friendly_troops[i]
 		if friendly_troop != null:
 			portrait.set_portrait(friendly_troop.troop_name)

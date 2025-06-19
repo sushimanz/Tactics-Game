@@ -180,12 +180,12 @@ func update_path(in_pos: Vector2i = Vector2i.ZERO) -> void:
 			path_line.add_point(new_pos, goto_pos_array.size())
 			print("Add Path INIT")
 			
-	#elif goto_pos_array.size() >= 1:
-		#if in_pos == goto_pos_array[(goto_pos_array.size() - 2)]:
-			#path_line.remove_point(goto_pos_array.size())
-			#if goto_pos_array.size() >= 1:
-				#goto_pos_array.remove_at((goto_pos_array.size() - 1))
-				#print("Remove Recent Path")
+	elif goto_pos_array.size() >= 1:
+		if in_pos == goto_pos_array[(goto_pos_array.size() - 2)]:
+			path_line.remove_point(goto_pos_array.size())
+			if goto_pos_array.size() >= 1:
+				goto_pos_array.remove_at((goto_pos_array.size() - 1))
+				print("Remove Recent Path")
 
 ##NOTE FOR ALL DRAG DATA:
 ##Should send to a tile, or another troop (Which then transfers to its occupied tile)
